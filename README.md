@@ -15,8 +15,84 @@ Install the package using pip:
 pip install keepdelta
 ```
 
+## Usage
+1. Create Delta
+The *create* function generates a delta object that captures the differences between two data structures.
+
+Example:
+```
+import keepdelta as kd
+
+# Initial data
+old = {
+    "info": {
+        "name": "Alice",
+        "age": 30,
+        "is_student": True,
+        "preferences": (
+            "chocolate", 
+            {"sports": {"football", "tennis"}},
+        ),
+    }
+}
+
+# Updated data
+new = {
+    "info": {
+        "name": "Alice",
+        "age": 31,
+        "is_student": False,
+        "preferences": (
+            "coffee", 
+            {"sports": {"football", "bodybuilding"}},
+        ),
+    }
+}
+
+# Create delta
+delta = kd.create(old, new)
+print(delta)
+```
+
+Output:
+```
+{
+    "info": {
+        "is_student": False,
+        "age": 1,
+        "preferences": {
+            0: "coffee",
+            1: {"sports": {0:"football", 1: "bodybuilding"}}
+        }
+    }
+}
+```
+
+2. Apply Delta
+The *apply* function takes an original data structure and a delta, then applies the delta to recreate the updated structure.
+
+Example:
+```python
+# Apply delta
+updated = kd.apply(old, delta)
+
+# Verify the update
+print(updated == new)  # Output: True
+```
+
+## How It Work
+1.	create(old, new):
+* Compares the old and new data structures.
+* Produces a compact delta object containing only the differences.
+2.	apply(original, delta):
+* Applies the delta to the original data structure.
+* Produces the new data structure.
+
 ## Contributing
 Contributions are welcome! Feel free to:
 * Report issues.
 * Submit feature requests.
 * Create pull requests.
+
+## License
+Distributed under the MIT License. See `LICENSE.txt` for more information.
