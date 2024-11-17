@@ -1,67 +1,83 @@
 from copy import deepcopy
 
-from keepdelta.basic_variables import DeltaBool, DeltaFloat, DeltaInt, DeltaStr
+from keepdelta.basic_variables import DeltaBool, DeltaComplex, DeltaFloat, DeltaInt, DeltaStr
+from keepdelta.config import keys
 
 
 class Delta:
     """
     Handle deltas for all variables
     """
-
     def create(old, new):
         """
-        Create delta by comparing *old* and *new*
-        """        
+        Create delta for the variable
+        """
         if type(old) == type(new): # same type
             if old != new: # inequal and same type
-                if isinstance(new, bool): # is basic, inequal and same type
-                    delta = DeltaBool.create(old, new)
-                elif isinstance(new, str):
-                    delta = DeltaStr.create(old, new)
-                elif isinstance(new, float):
-                    delta = DeltaFloat.create(old, new)
-                elif isinstance(new, int):
-                    delta = DeltaInt.create(old, new)
-                elif isinstance(old, dict):
-                    delta = DeltaDict.create(old, new)
-                elif isinstance(old, list):
-                    delta = DeltaList.create(old, new)
-                elif isinstance(old, tuple):
-                    delta = DeltaList.create(old, new)
-                elif old is None:
+                if old is None: # none
                     delta = new
+                elif isinstance(new, bool): # bool
+                    delta = DeltaBool.create(old, new)
+                elif isinstance(new, complex): # complex
+                    delta = DeltaComplex.create(old, new)
+                elif isinstance(new, str): # str
+                    if new in keys: 
+                        print("variables simialar to keys are not possible to digest: ", new)
+                        raise ValueError
+                    elif old in keys:
+                        print("variables simialar to keys are not possible to digest: ", old)
+                        raise ValueError
+                    else:
+                        delta = DeltaStr.create(old, new)
+                elif isinstance(new, float): # float
+                    delta = DeltaFloat.create(old, new)
+                elif isinstance(new, int): # int
+                    delta = DeltaInt.create(old, new)
+                elif isinstance(old, dict): # dict
+                    delta = DeltaDict.create(old, new)
+                elif isinstance(old, list): # list
+                    delta = DeltaList.create(old, new)
+                elif isinstance(old, tuple): # tuple
+                    delta = DeltaTuple.create(old, new)
+                elif isinstance(old, set): # set
+                    delta = DeltaSet.create(old, new)
                 else:
-                    print("variable type not recognized: ", type(old))
+                    print("variable type not supported: ", type(old))
                     raise ValueError
             else: # equal and same type
-                delta = 'NOTHING'
+                delta = keys['nothing']
         else: # not same type
-            delta = new
+            delta = new # rewrite type
         return delta
     
     def apply(old, delta):
         """
-        Apply *delta* to *old* variable
+        Apply delta to the variable
         """
-        if delta == "NOTHING": # equal and same type
+        if delta == keys['nothing']: # equal and same type
             new = deepcopy(old)
         else:
             if type(old) == type(delta): # same type
-                if isinstance(old, bool):
+                if old is None: # none
                     new = deepcopy(delta)
-                elif isinstance(old, str):
-                    new = deepcopy(delta)
-                elif isinstance(old, int) or \
-                     isinstance(old, float):
-                    new = deepcopy(old) + deepcopy(delta)
-                elif isinstance(old, dict):
+                elif isinstance(old, bool): # bool
+                    new = DeltaBool.apply(old, delta)
+                elif isinstance(old, complex): # complex
+                    new = DeltaComplex.apply(old, delta)
+                elif isinstance(old, str): # str
+                    new = DeltaStr.apply(old, delta)
+                elif isinstance(old, float): # float
+                    new = DeltaFloat.apply(old, delta)
+                elif isinstance(old, int): # int
+                    new = DeltaInt.apply(old, delta)
+                elif isinstance(old, dict): # dict
                     new = DeltaDict.apply(old, delta)
-                elif isinstance(old, list):
+                elif isinstance(old, list): # list
                     new = DeltaList.apply(old, delta)
-                elif isinstance(old, tuple):
-                    new = DeltaList.apply(old, delta)
-                elif old is None:
-                    new = deepcopy(delta)
+                elif isinstance(old, tuple): # tuple
+                    new = DeltaTuple.apply(old, delta)
+                elif isinstance(old, set): # set
+                    new = DeltaSet.apply(old, delta)
                 else:
                     print("variable type not recognized: ", type(old))
                     raise ValueError
@@ -72,11 +88,11 @@ class Delta:
 
 class DeltaDict:
     """
-    Handle deltas for dictionaries
+    Handle deltas for dict variables
     """
     def create(old: dict, new: dict) -> dict:
         """
-        Create delta by comparing *old* and *new*
+        Create delta for dict variable
         """
         delta = {}
         old_keys = old.keys()
@@ -86,25 +102,25 @@ class DeltaDict:
         keys_in_new_not_in_old = list(set(new_keys) - set(old_keys))
         for key in keys_in_both:
             delta_value = Delta.create(old[key], new[key])
-            if delta_value != "NOTHING":
+            if delta_value != keys['nothing']:
                 delta[key] = delta_value
         for key in keys_in_old_not_in_new:
-            delta[key] = "DELETE"
+            delta[key] = keys['delete']
         for key in keys_in_new_not_in_old:
             delta_value = Delta.create(None, new[key])
-            if delta_value != "NOTHING":
+            if delta_value != keys['nothing']:
                 delta[key] = delta_value
         return delta
     
     def apply(old: dict, delta: dict) -> dict:
         """
-        Apply *delta* to *old* dictionary
+        Apply delta to the dict variable
         """
         new = deepcopy(old)
         for key in delta:
             delta_value = delta[key]
             if key in old:
-                if delta_value == "DELETE":
+                if delta_value == keys['delete']:
                     del new[key]
                 else:
                     new[key] = Delta.apply(old[key], delta_value)
@@ -115,11 +131,11 @@ class DeltaDict:
 
 class DeltaList:
     """
-    Handle deltas for lists
+    Handle deltas for list variables
     """
     def create(old: list, new: list) -> list:
         """
-        Create delta by comparing *old* and *new*
+        Create delta for list variable
         """
         old = DeltaList._list_to_dict(old)
         new = DeltaList._list_to_dict(new)
@@ -127,7 +143,7 @@ class DeltaList:
 
     def apply(var: list, delta: list) -> list:
         """
-        Apply *delta* to *old* list
+        Apply delta to the list variable
         """
         var = DeltaList._list_to_dict(var)
         new = DeltaDict.apply(var, delta[0])
@@ -153,15 +169,63 @@ class DeltaList:
                 if input[i] is not None:
                     result.append(input[i])
         return result
+    
+
+class DeltaTuple:
+    """
+    Handle deltas for tuple variables
+    """
+    def create(old: tuple, new: tuple) -> tuple:
+        """
+        Create delta for tuple variable
+        """
+        old_list = list(old)
+        new_list = list(new)
+        delta_list = DeltaList.create(old_list, new_list)
+        return tuple(delta_list)
+
+    def apply(var: tuple, delta: tuple) -> tuple:
+        """
+        Apply delta to the tuple variable
+        """
+        var_list = list(var)
+        delta_list = list(delta)
+        new_list = DeltaList.apply(var_list, delta_list)
+        return tuple(new_list)
+    
+
+class DeltaSet:
+    """
+    Handle deltas for set variables
+    """
+    def create(old: set, new: set) -> set:
+        """
+        Create delta for set variable
+        """
+        old_list = list(old)
+        new_list = list(new)
+        delta_list = DeltaList.create(old_list, new_list)
+        return set(delta_list)
+
+    def apply(var: set, delta: set) -> set:
+        """
+        Apply delta to the set variable
+        """
+        var_list = list(var)
+        delta_list = list(delta)
+        new_list = DeltaList.apply(var_list, delta_list)
+        return set(new_list)
 
 
 if __name__ == "__main__":
     old = {'a': 1, 'b': 2, 'c': {'d': 5, 'e': 2}}
     new = {'a': 3, 'c': {'d': 5, 'e': 3}}
-    expected_delta = {'a': 2, 'b': "DELETE", 'c': {'e': 1}}
+    expected_delta = {'a': 2, 'b': "D3L373", 'c': {'e': 1}}
 
     delta = Delta.create(old, new)
+    #print(delta)
     print("creation: ", delta == expected_delta)
 
     val = Delta.apply(old, delta)
+    #print(val)
     print("application: ", val == new)
