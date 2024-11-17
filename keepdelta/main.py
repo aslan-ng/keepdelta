@@ -1,9 +1,9 @@
-from keepdelta.delta import Delta
+from keepdelta.types.collections import Delta
 
 
 def create(old, new):
     return Delta.create(old, new)
 
 
-def apply(var, delta):
-    return Delta.apply(var, delta)
+def apply(old, delta):
+    return Delta.apply(old, delta)
