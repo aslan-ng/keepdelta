@@ -20,7 +20,7 @@ pip install keepdelta
 The *create* function generates a delta object that captures the differences between two data structures.
 
 Example:
-```
+```python
 import keepdelta as kd
 
 # Initial data
@@ -55,7 +55,7 @@ print(delta)
 ```
 
 Output:
-```
+```python
 {
     "info": {
         "is_student": False,
@@ -81,12 +81,31 @@ print(updated == new)  # Output: True
 ```
 
 ## How It Work
-1.	create(old, new):
+1.	*create*(old, new):
 * Compares the old and new data structures.
 * Produces a compact delta object containing only the differences.
-2.	apply(original, delta):
+2.	*apply*(original, delta):
 * Applies the delta to the original data structure.
 * Produces the new data structure.
+
+## Surpported Formats
+KeepDelta supports most of the native Python data structures, ensuring compatibility and flexibility when working with a wide variety of data types. The currently supported structures include:
+
+* Primitive Types:
+	* bool – e.g., True, False
+	* int – e.g., 42, -7
+	* float – e.g., 3.14, -0.001
+	* complex – e.g., 3 + 4j, -2j
+
+* Collections:
+    * dict – e.g., {"key": "value", "age": 30}
+    * list – e.g., [1, 2, 3, "hello"]
+    * tuple – e.g., (1, "a", 3.14)
+    * set – e.g., {1, 2, 3, "apple"}
+
+* Special Features:
+    * Nested Structures: Supports deeply nested combinations of these types, such as a dictionary containing lists, tuples, or sets.
+	* Mixed Types: Easily handles scenarios where different data types are combined in a single structure.
 
 ## Contributing
 Contributions are welcome! Feel free to:

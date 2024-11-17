@@ -1,6 +1,6 @@
 from copy import deepcopy
 
-from keepdelta.basic_variables import DeltaBool, DeltaComplex, DeltaFloat, DeltaInt, DeltaStr
+from keepdelta.types.primitives import DeltaBool, DeltaComplex, DeltaFloat, DeltaInt, DeltaStr
 from keepdelta.config import keys
 
 
@@ -137,13 +137,13 @@ class DeltaList:
         new = DeltaList._list_to_dict(new)
         return DeltaDict.create(old, new)
 
-    def apply(var: list, delta: dict) -> list:
+    def apply(old: list, delta: dict) -> list:
         """
         Apply delta to the list variable
         """
-        var = DeltaList._list_to_dict(var)
-        new = DeltaDict.apply(var, delta)
-        return DeltaList._dict_to_list(new)
+        old_dict = DeltaList._list_to_dict(old)
+        new_dict = DeltaDict.apply(old_dict, delta)
+        return DeltaList._dict_to_list(new_dict)
 
     def _list_to_dict(input: list) -> dict:
         """
@@ -179,12 +179,12 @@ class DeltaTuple:
         new_list = list(new)
         return DeltaList.create(old_list, new_list)
 
-    def apply(var: tuple, delta: dict) -> tuple:
+    def apply(old: tuple, delta: dict) -> tuple:
         """
         Apply delta to the tuple variable
         """
-        var_list = list(var)
-        new_list = DeltaList.apply(var_list, delta)
+        old_list = list(old)
+        new_list = DeltaList.apply(old_list, delta)
         return tuple(new_list)
     
 
@@ -200,12 +200,12 @@ class DeltaSet:
         new_list = list(new)
         return DeltaList.create(old_list, new_list)
 
-    def apply(var: set, delta: dict) -> set:
+    def apply(old: set, delta: dict) -> set:
         """
         Apply delta to the set variable
         """
-        var_list = list(var)
-        new_list = DeltaList.apply(var_list, delta)
+        old_list = list(old)
+        new_list = DeltaList.apply(old_list, delta)
         return set(new_list)
 
 
