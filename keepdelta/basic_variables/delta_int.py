@@ -5,14 +5,13 @@ class DeltaInt:
     """
     Handle deltas for int variables
     """
-
-    def create(old, new):
+    def create(old: int, new: int):
         """
         Create delta for int variable
         """
         return deepcopy(new) - deepcopy(old)
     
-    def apply(old, delta):
+    def apply(old: int, delta: int):
         """
         Apply delta to the int variable
         """
