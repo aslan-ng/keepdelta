@@ -93,6 +93,7 @@ KeepDelta supports most of the native Python data structures, ensuring compatibi
 
 * Primitive Types:
 	* bool – e.g., True, False
+    * str – e.g., "hello", "apple"
 	* int – e.g., 42, -7
 	* float – e.g., 3.14, -0.001
 	* complex – e.g., 3 + 4j, -2j

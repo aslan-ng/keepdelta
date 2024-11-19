@@ -5,12 +5,14 @@ class DeltaBool:
     """
     Handle deltas for bool variables
     """
+    @staticmethod
     def create(old: bool, new: bool):
         """
         Create delta for bool variable
         """
         return deepcopy(new)
     
+    @staticmethod
     def apply(old: bool, delta: bool):
         """
         Apply delta to the bool variable

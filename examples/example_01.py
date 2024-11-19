@@ -52,6 +52,6 @@ new = {
 }
 
 delta = kd.create(old, new)
-print(delta)
+#print(delta)
 var = kd.apply(old, delta)
 print(var == new)
