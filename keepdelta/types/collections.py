@@ -8,6 +8,7 @@ class Delta:
     """
     Handle deltas for all variables
     """
+    @staticmethod
     def create(old, new):
         """
         Create delta for the variable
@@ -50,6 +51,7 @@ class Delta:
             delta = new # rewrite type
         return delta
     
+    @staticmethod
     def apply(old, delta):
         """
         Apply delta to the variable
@@ -86,6 +88,7 @@ class DeltaDict:
     """
     Handle deltas for dict variables
     """
+    @staticmethod
     def create(old: dict, new: dict) -> dict:
         """
         Create delta for dict variable
@@ -108,6 +111,7 @@ class DeltaDict:
                 delta[key] = delta_value
         return delta
     
+    @staticmethod
     def apply(old: dict, delta: dict) -> dict:
         """
         Apply delta to the dict variable
@@ -129,6 +133,7 @@ class DeltaList:
     """
     Handle deltas for list variables
     """
+    @staticmethod
     def create(old: list, new: list) -> dict:
         """
         Create delta for list variable
@@ -137,6 +142,7 @@ class DeltaList:
         new = DeltaList._list_to_dict(new)
         return DeltaDict.create(old, new)
 
+    @staticmethod
     def apply(old: list, delta: dict) -> list:
         """
         Apply delta to the list variable
@@ -145,6 +151,7 @@ class DeltaList:
         new_dict = DeltaDict.apply(old_dict, delta)
         return DeltaList._dict_to_list(new_dict)
 
+    @staticmethod
     def _list_to_dict(input: list) -> dict:
         """
         Convert list to dictionary
@@ -154,6 +161,7 @@ class DeltaList:
             result[i] = item
         return result
 
+    @staticmethod
     def _dict_to_list(input: dict) -> list:
         """
         Convert dictionary to list
@@ -171,6 +179,7 @@ class DeltaTuple:
     """
     Handle deltas for tuple variables
     """
+    @staticmethod
     def create(old: tuple, new: tuple) -> dict:
         """
         Create delta for tuple variable
@@ -179,6 +188,7 @@ class DeltaTuple:
         new_list = list(new)
         return DeltaList.create(old_list, new_list)
 
+    @staticmethod
     def apply(old: tuple, delta: dict) -> tuple:
         """
         Apply delta to the tuple variable
@@ -192,21 +202,56 @@ class DeltaSet:
     """
     Handle deltas for set variables
     """
+    @staticmethod
     def create(old: set, new: set) -> dict:
         """
         Create delta for set variable
         """
-        old_list = list(old)
-        new_list = list(new)
-        return DeltaList.create(old_list, new_list)
-
+        delta = {}
+        # Add annotation
+        annotated_old = DeltaSet.add_annotation(old)
+        annotated_new = DeltaSet.add_annotation(new)
+        # Elements to add
+        elements_to_add = annotated_new - annotated_old
+        if len(elements_to_add) > 0:
+            elements_to_add = DeltaSet.remove_annotation(elements_to_add)
+            delta[keys['add to set']] = elements_to_add
+        # Elements to remove
+        elements_to_remove = annotated_old - annotated_new
+        if len(elements_to_remove) > 0:
+            elements_to_remove = DeltaSet.remove_annotation(elements_to_remove)
+            delta[keys['remove from set']] = elements_to_remove
+        return delta
+    
+    @staticmethod
     def apply(old: set, delta: dict) -> set:
         """
         Apply delta to the set variable
         """
-        old_list = list(old)
-        new_list = DeltaList.apply(old_list, delta)
-        return set(new_list)
+        # Distinguish between bool and other types
+        old_bools = {x for x in old if isinstance(x, bool)}
+        add_bools = {x for x in delta.get(keys['add to set'], set()) if isinstance(x, bool)}
+        remove_bools = {x for x in delta.get(keys['remove from set'], set()) if isinstance(x, bool)}
+        old_non_bools = old - old_bools
+        add_non_bools = delta.get(keys['add to set'], set()) - add_bools
+        remove_non_bools = delta.get(keys['remove from set'], set()) - remove_bools
+        updated_non_bools = (old_non_bools | add_non_bools) - remove_non_bools
+        updated_bools = (old_bools | add_bools) - remove_bools
+        return updated_non_bools | updated_bools
+
+    @staticmethod
+    def add_annotation(var: set) -> set:
+        """
+        Add type of each variable
+        """
+        return {(x, str(type(x))) for x in var}
+    
+    @staticmethod
+    def remove_annotation(var: set) -> set:
+        """
+        Remove type of each variable
+        """
+        return {x[0] for x in var}
 
 
 if __name__ == "__main__":
@@ -216,8 +261,8 @@ if __name__ == "__main__":
 
     delta = Delta.create(old, new)
     #print(delta)
-    print("creation: ", delta == expected_delta)
+    print("create: ", delta == expected_delta)
 
-    val = Delta.apply(old, delta)
-    #print(val)
-    print("application: ", val == new)
+    var = Delta.apply(old, delta)
+    #print(var)
+    print("apply: ", var == new)

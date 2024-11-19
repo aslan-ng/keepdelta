@@ -5,12 +5,14 @@ class DeltaComplex:
     """
     Handle deltas for complex variables
     """
+    @staticmethod
     def create(old: complex, new: complex):
         """
         Create delta for complex variable
         """
         return deepcopy(new) - deepcopy(old)
     
+    @staticmethod
     def apply(old: complex, delta: complex):
         """
         Apply delta to the complex variable

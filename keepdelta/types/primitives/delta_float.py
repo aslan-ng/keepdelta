@@ -5,12 +5,14 @@ class DeltaFloat:
     """
     Handle deltas for float variables
     """
+    @staticmethod
     def create(old: float, new: float):
         """
         Create delta for float variable
         """
         return deepcopy(new) - deepcopy(old)
     
+    @staticmethod
     def apply(old: float, delta: float):
         """
         Apply delta to the float variable
