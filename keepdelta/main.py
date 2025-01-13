@@ -9,8 +9,16 @@ def apply(old, delta):
 
 
 if __name__ == '__main__':
-    old = [1, 'hello', {'world': 2}]
-    new = [0, 'bye', {'world': 3}]
-    delta = create(old, new)
+    old_var = [1, 'hello', {'world': 2}]
+    new_var = [0, 'bye', {'world': 3}]
+    expected_delta = create(old_var, new_var)
+
+    # Create delta
+    delta = Delta.create(old_var, new_var)
     print('Delta:', delta)
-    print('Test is passing:', apply(old, delta) == new)
+    print('Test delta creation: ', delta == expected_delta)
+
+    # Apply delta
+    var = Delta.apply(old_var, delta)
+    print('Reconstructed variable:', var)
+    print('Test delta application: ', var == new_var)
