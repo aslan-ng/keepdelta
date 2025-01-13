@@ -3,7 +3,7 @@ from copy import deepcopy
 
 class DeltaInt:
     """
-    Handle deltas for int variables
+    Handle deltas for int (integer) variables
     """
     @staticmethod
     def create(old: int, new: int):
@@ -20,12 +20,17 @@ class DeltaInt:
         return deepcopy(old) + deepcopy(delta)
     
 
-if __name__ == "__main__":
+if __name__ == '__main__':
     old_var = 2
     new_var = 3
+    expected_delta = 1
 
+    # Create delta
     delta = DeltaInt.create(old_var, new_var)
-    print(delta) # expected: 1
+    print('Delta:', delta)
+    print('Test delta creation: ', delta == expected_delta)
 
+    # Apply delta
     var = DeltaInt.apply(old_var, delta)
-    print(var) # expected: 3
+    print('Reconstructed variable:', var)
+    print('Test delta application: ', var == new_var)

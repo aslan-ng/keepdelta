@@ -23,10 +23,10 @@ class Delta:
                     delta = DeltaComplex.create(old, new)
                 elif isinstance(new, str): # str
                     if new in keys: 
-                        print("variables simialar to keys are not possible to digest: ", new)
+                        print('variables simialar to keys are not possible to digest: ', new)
                         raise ValueError
                     elif old in keys:
-                        print("variables simialar to keys are not possible to digest: ", old)
+                        print('variables simialar to keys are not possible to digest: ', old)
                         raise ValueError
                     else:
                         delta = DeltaStr.create(old, new)
@@ -43,7 +43,7 @@ class Delta:
                 elif isinstance(old, set): # set
                     delta = DeltaSet.create(old, new)
                 else:
-                    print("variable type not supported: ", type(old))
+                    print('variable type not supported: ', type(old))
                     raise ValueError
             else: # equal and same type
                 delta = keys['nothing']
@@ -254,15 +254,17 @@ class DeltaSet:
         return {x[0] for x in var}
 
 
-if __name__ == "__main__":
-    old = {'a': 1, 'b': 2, 'c': {'d': 5, 'e': 2}}
-    new = {'a': 3, 'c': {'d': 5, 'e': 3}}
-    expected_delta = {'a': 2, 'b': "D3L373", 'c': {'e': 1}}
+if __name__ == '__main__':
+    old_var = {'a': 1, 'b': 2, 'c': {'d': 5, 'e': 2}}
+    new_var = {'a': 3, 'c': {'d': 5, 'e': 3}}
+    expected_delta = {'a': 2, 'b': 'D3L373', 'c': {'e': 1}}
 
-    delta = Delta.create(old, new)
-    #print(delta)
-    print("create: ", delta == expected_delta)
+    # Create delta
+    delta = Delta.create(old_var, new_var)
+    print('Delta:', delta)
+    print('Test delta creation: ', delta == expected_delta)
 
-    var = Delta.apply(old, delta)
-    #print(var)
-    print("apply: ", var == new)
+    # Apply delta
+    var = Delta.apply(old_var, delta)
+    print('Reconstructed variable:', var)
+    print('Test delta application: ', var == new_var)
