@@ -20,12 +20,17 @@ class DeltaComplex:
         return deepcopy(old) + deepcopy(delta)
 
 
-if __name__ == "__main__":
+if __name__ == '__main__':
     old_var = 2 + 2j
     new_var = 3 + 3j
+    expected_delta = 1 + 1j
 
+    # Create delta
     delta = DeltaComplex.create(old_var, new_var)
-    print(delta) # expected: 1 + 1j
+    print('Delta:', delta)
+    print('Test delta creation: ', delta == expected_delta)
 
+    # Apply delta
     var = DeltaComplex.apply(old_var, delta)
-    print(var) # expected: 3 + 3j
+    print('Reconstructed variable:', var)
+    print('Test delta application: ', var == new_var)

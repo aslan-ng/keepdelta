@@ -3,7 +3,7 @@ from copy import deepcopy
 
 class DeltaBool:
     """
-    Handle deltas for bool variables
+    Handle deltas for bool (boolean) variables
     """
     @staticmethod
     def create(old: bool, new: bool):
@@ -20,12 +20,17 @@ class DeltaBool:
         return deepcopy(delta)
     
 
-if __name__ == "__main__":
+if __name__ == '__main__':
     old_var = False
     new_var = True
+    expected_delta = True
 
+    # Create delta
     delta = DeltaBool.create(old_var, new_var)
-    print(delta) # expected: True
+    print('Delta:', delta)
+    print('Test delta creation: ', delta == expected_delta)
 
+    # Apply delta
     var = DeltaBool.apply(old_var, delta)
-    print(var) # expected: True
+    print('Reconstructed variable:', var)
+    print('Test delta application: ', var == new_var)
