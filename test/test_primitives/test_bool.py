@@ -34,5 +34,5 @@ class TestDeltaBool(unittest.TestCase):
         self.assertEqual(DeltaBool.apply(old, delta), new)
 
 
-if __name__ == "__main__":
+if __name__ == '__main__':
     unittest.main()

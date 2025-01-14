@@ -1,6 +1,7 @@
 """
 This example represents a simple simulation of some particles moving in a 2D space.
 The result of this simulation is saved in the form of deltas to reconstruct it afterwards.
+It showcases how this library can be used in simulations.
 """
 
 class Particle:
@@ -8,12 +9,10 @@ class Particle:
     def __init__(
         self,
         position: list = [0, 0],
-        velocity: list = [0, 0],
-        radius: float = 0,
+        velocity: list = [0, 0]
     ):
         self.position = position
         self.velocity = velocity
-        self.radius = radius
 
     def update(self, delta_t: float = 0):
         new_x = self.position[0] + self.velocity[0] * delta_t
@@ -27,7 +26,6 @@ class Particle:
         return {
             'position': self.position,
             'velocity': self.velocity,
-            'radius': self.radius,
         }
     
     def deserialize(self, data):
@@ -36,7 +34,6 @@ class Particle:
         """
         self.position = data['position']
         self.velocity = data['velocity']
-        self.radius = data['radius']
 
 
 class Model:
@@ -77,28 +74,28 @@ if __name__ == '__main__':
     steps = 10
     step_size = 1
     model = Model()
-    particle_1 = Particle(position=[1, 2], velocity=[0.1, 0.2], radius=0.3)
+    particle_1 = Particle(position=[1, 2], velocity=[0.1, 0.2])
     model.add(particle_1)
-    particle_2 = Particle(position=[4, -2], velocity=[0.1, 0.2], radius=0.5)
+    particle_2 = Particle(position=[4, -2], velocity=[0.1, 0.2])
     model.add(particle_2)
-    particle_3 = Particle(position=[1, 0], velocity=[0.1, 0.2], radius=0.1)
+    particle_3 = Particle(position=[1, 0], velocity=[0.1, 0.2])
     model.add(particle_3)
     
-    # Run simulation
+    # Run simulation and save deltas
     initial_state = model.serialize()  # Initial state of model before running simulation
-    result = []  # Simulation results in form of deltas
+    deltas = []  # Simulation results in form of deltas
     for _ in range(steps):
         # Create delta by comparing model before and after update
         old_var = model.serialize()
         model.update(step_size)  # Update model
         new_var = model.serialize()
         delta = kd.create(old_var, new_var)
-        result.append(delta)
+        deltas.append(delta)
 
     # Load simulation from deltas
     loaded_model = Model()
     loaded_model.deserialize(initial_state)  # Create the initial model before simulation
-    for delta in result:
+    for delta in deltas:
         # Apply the changes to the model using deltas instead of running simulation
         old_var = loaded_model.serialize()
         new_var = kd.apply(old_var, delta)  

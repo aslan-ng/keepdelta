@@ -50,5 +50,5 @@ class TestDeltaTuple(unittest.TestCase):
         self.assertTupleEqual(DeltaTuple.apply(old, delta), new)
 
 
-if __name__ == "__main__":
+if __name__ == '__main__':
     unittest.main()
