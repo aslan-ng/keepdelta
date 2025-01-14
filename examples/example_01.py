@@ -1,6 +1,6 @@
 import keepdelta as kd
 
-# profile of a person
+# Profile of a person
 profile = {
     'info': {
         'name': 'Alice',
@@ -25,7 +25,7 @@ profile = {
     }
 }
 
-# profile of that person one year later
+# Profile of that person one year later
 profile_new = {
     'info': {
         'name': 'Alice',
