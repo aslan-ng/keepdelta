@@ -1,7 +1,7 @@
 import keepdelta as kd
 
 # profile of a person
-old = {
+profile = {
     'info': {
         'name': 'Alice',
         'age': 30,
@@ -26,7 +26,7 @@ old = {
 }
 
 # profile of that person one year later
-new = {
+profile_new = {
     'info': {
         'name': 'Alice',
         'age': 31,
@@ -51,9 +51,9 @@ new = {
 }
 
 # Create delta
-delta = kd.create(old, new)
+delta = kd.create(profile, profile_new)
 print('Delta:', delta)
 
 # Apply delta
-var = kd.apply(old, delta)
-print('Test is passing:', var == new)
+profile_reconstructed = kd.apply(profile, delta)
+print('Reconstruction is successful:', profile_reconstructed == profile_new)
