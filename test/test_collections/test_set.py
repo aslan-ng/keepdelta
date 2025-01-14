@@ -116,5 +116,5 @@ class TestDeltaSet(unittest.TestCase):
         self.assertSetEqual(DeltaSet.apply(old, delta), new)
 
     
-if __name__ == "__main__":
+if __name__ == '__main__':
     unittest.main()

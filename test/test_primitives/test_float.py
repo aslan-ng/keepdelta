@@ -27,5 +27,5 @@ class TestDeltaFloat(unittest.TestCase):
         self.assertEqual(DeltaFloat.apply(old, delta), new)
 
 
-if __name__ == "__main__":
+if __name__ == '__main__':
     unittest.main()
