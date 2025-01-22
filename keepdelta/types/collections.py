@@ -56,30 +56,28 @@ class Delta:
         """
         Apply delta to the variable
         """
-        if delta == keys['nothing']: # equal and same type
+        if delta == keys['nothing']:  # Equal and same type
             new = deepcopy(old)
         else:
-            if old is None: # none
-                new = deepcopy(delta)
-            elif isinstance(old, bool): # bool
+            if type(old) is bool and type(delta) is bool:  # bool
                 new = DeltaBool.apply(old, delta)
-            elif isinstance(old, complex): # complex
+            elif type(old) is complex and type(delta) is complex:  # complex
                 new = DeltaComplex.apply(old, delta)
-            elif isinstance(old, str): # str
+            elif type(old) is str and type(delta) is str:  # str
                 new = DeltaStr.apply(old, delta)
-            elif isinstance(old, float): # float
+            elif type(old) is float and type(delta) is float:  # float
                 new = DeltaFloat.apply(old, delta)
-            elif isinstance(old, int): # int
+            elif type(old) is int and type(delta) is int:  # int
                 new = DeltaInt.apply(old, delta)
-            elif isinstance(old, dict): # dict
+            elif type(old) is dict and type(delta) is dict:  # dict
                 new = DeltaDict.apply(old, delta)
-            elif isinstance(old, list): # list
+            elif type(old) is list and type(delta) is dict:  # list
                 new = DeltaList.apply(old, delta)
-            elif isinstance(old, tuple): # tuple
+            elif type(old) is tuple and type(delta) is dict:  # tuple
                 new = DeltaTuple.apply(old, delta)
-            elif isinstance(old, set): # set
+            elif type(old) is set and type(delta) is dict:  # set
                 new = DeltaSet.apply(old, delta)
-            else: # variable type not recognized
+            else:  # Variable type not recognized or None
                 new = deepcopy(delta)
         return new
 
