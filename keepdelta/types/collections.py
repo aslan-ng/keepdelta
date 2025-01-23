@@ -1,7 +1,14 @@
 from copy import deepcopy
 
-from keepdelta.types.primitives import DeltaBool, DeltaComplex, DeltaFloat, DeltaInt, DeltaStr
+from keepdelta.types.primitives import (
+    DeltaBool,
+    DeltaComplex,
+    DeltaFloat,
+    DeltaInt,
+    DeltaStr
+)
 from keepdelta.config import keys
+from keepdelta.check import CheckConflict
 
 
 class Delta:
@@ -13,42 +20,51 @@ class Delta:
         """
         Create delta for the variable
         """
-        if type(old) == type(new): # same type
-            if old != new: # inequal and same type
-                if old is None: # none
+        type_new = type(new)
+        if type(old) == type(new):  # Same type
+            if old != new:  # Inequal and same type
+                if old is None:  # none
                     delta = new
-                elif isinstance(new, bool): # bool
+                elif type(new) is bool:  # bool
                     delta = DeltaBool.create(old, new)
-                elif isinstance(new, complex): # complex
+                elif type (new) is complex:  # complex
                     delta = DeltaComplex.create(old, new)
-                elif isinstance(new, str): # str
-                    if new in keys: 
-                        print('variables simialar to keys are not possible to digest: ', new)
-                        raise ValueError
-                    elif old in keys:
-                        print('variables simialar to keys are not possible to digest: ', old)
-                        raise ValueError
-                    else:
-                        delta = DeltaStr.create(old, new)
-                elif isinstance(new, float): # float
+                elif type (new) is float:  # float
                     delta = DeltaFloat.create(old, new)
-                elif isinstance(new, int): # int
+                elif type (new) is int:  # int
                     delta = DeltaInt.create(old, new)
-                elif isinstance(old, dict): # dict
+                elif type (new) is str:  # str
+                    CheckConflict.check_str(new)
+                    delta = DeltaStr.create(old, new)
+                elif type (new) is dict:  # dict
+                    CheckConflict.check_dict(new)
                     delta = DeltaDict.create(old, new)
-                elif isinstance(old, list): # list
+                elif type (new) is list:  # list
+                    CheckConflict.check_list(new)
                     delta = DeltaList.create(old, new)
-                elif isinstance(old, tuple): # tuple
-                    delta = DeltaTuple.create(old, new)
-                elif isinstance(old, set): # set
+                elif type (new) is set:  # set
+                    CheckConflict.check_set(new)
                     delta = DeltaSet.create(old, new)
+                elif type (new) is tuple:  # tuple
+                    CheckConflict.check_tuple(new)
+                    delta = DeltaTuple.create(old, new)
                 else:
-                    print('variable type not supported: ', type(old))
+                    print('Variable type not supported: ', type(old))
                     raise ValueError
-            else: # equal and same type
+            else:  # Equal and same type
                 delta = keys['nothing']
-        else: # not same type
-            delta = new # rewrite type
+        else:  # Not same type
+            if type(new) is str:
+                CheckConflict.check_str(new)
+            elif type(new) is dict:
+                CheckConflict.check_dict(new)
+            elif type(new) is list:
+                CheckConflict.check_list(new)
+            elif type(new) is set:
+                CheckConflict.check_set(new)
+            elif type(new) is tuple:
+                CheckConflict.check_tuple(new)
+            delta = new  # Rewrite type
         return delta
     
     @staticmethod
@@ -59,24 +75,33 @@ class Delta:
         if delta == keys['nothing']:  # Equal and same type
             new = deepcopy(old)
         else:
-            if type(old) is bool and type(delta) is bool:  # bool
+            if type(old) is bool and \
+                type(delta) is bool:  # bool
                 new = DeltaBool.apply(old, delta)
-            elif type(old) is complex and type(delta) is complex:  # complex
+            elif type(old) is complex and \
+                type(delta) is complex:  # complex
                 new = DeltaComplex.apply(old, delta)
-            elif type(old) is str and type(delta) is str:  # str
-                new = DeltaStr.apply(old, delta)
-            elif type(old) is float and type(delta) is float:  # float
+            elif type(old) is float and \
+                type(delta) is float:  # float
                 new = DeltaFloat.apply(old, delta)
-            elif type(old) is int and type(delta) is int:  # int
+            elif type(old) is int and \
+                type(delta) is int:  # int
                 new = DeltaInt.apply(old, delta)
-            elif type(old) is dict and type(delta) is dict:  # dict
+            elif type(old) is str and \
+                type(delta) is str:  # str
+                new = DeltaStr.apply(old, delta)
+            elif type(old) is dict and \
+                type(delta) is dict:  # dict
                 new = DeltaDict.apply(old, delta)
-            elif type(old) is list and type(delta) is dict:  # list
+            elif type(old) is list and \
+                type(delta) is dict:  # list
                 new = DeltaList.apply(old, delta)
-            elif type(old) is tuple and type(delta) is dict:  # tuple
-                new = DeltaTuple.apply(old, delta)
-            elif type(old) is set and type(delta) is dict:  # set
+            elif type(old) is set and \
+                type(delta) is dict:  # set
                 new = DeltaSet.apply(old, delta)
+            elif type(old) is tuple and \
+                type(delta) is dict:  # tuple
+                new = DeltaTuple.apply(old, delta)
             else:  # Variable type not recognized or None
                 new = deepcopy(delta)
         return new
@@ -227,9 +252,9 @@ class DeltaSet:
         Apply delta to the set variable
         """
         # Distinguish between bool and other types
-        old_bools = {x for x in old if isinstance(x, bool)}
-        add_bools = {x for x in delta.get(keys['add to set'], set()) if isinstance(x, bool)}
-        remove_bools = {x for x in delta.get(keys['remove from set'], set()) if isinstance(x, bool)}
+        old_bools = {x for x in old if type(x) is bool}
+        add_bools = {x for x in delta.get(keys['add to set'], set()) if type(x) is bool}
+        remove_bools = {x for x in delta.get(keys['remove from set'], set()) if type(x) is bool}
         old_non_bools = old - old_bools
         add_non_bools = delta.get(keys['add to set'], set()) - add_bools
         remove_non_bools = delta.get(keys['remove from set'], set()) - remove_bools
