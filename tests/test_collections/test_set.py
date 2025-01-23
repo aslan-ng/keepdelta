@@ -11,33 +11,33 @@ class TestDeltaSet(unittest.TestCase):
         All elements are changed
         """
         old = {
-            False, # bool
-            1, # int
-            1.1, # float
-            1 + 1j, # complex
-            'hello', # str
+            False,  # bool
+            1,  # int
+            1.1,  # float
+            1 + 1j,  # complex
+            'hello',  # str
         }
         new = {
-            True, # bool
-            3, # int
-            3.3, # float
-            3 + 3j, # complex
-            'world', # str
+            True,  # bool
+            3,  # int
+            3.3,  # float
+            3 + 3j,  # complex
+            'world',  # str
         }
         delta = {
             keys['add to set']: {
-                True, # bool
-                3, # int
-                3.3, # float
-                3 + 3j, # complex
-                'world' # str
+                True,  # bool
+                3,  # int
+                3.3,  # float
+                3 + 3j,  # complex
+                'world'  # str
             },
             keys['remove from set']: {
-                False, # bool
-                1, # int
-                1.1, # float
-                1 + 1j, # complex
-                'hello' # str
+                False,  # bool
+                1,  # int
+                1.1,  # float
+                1 + 1j,  # complex
+                'hello'  # str
             }
         }
         self.assertDictEqual(DeltaSet.create(old, new), delta)
@@ -48,18 +48,18 @@ class TestDeltaSet(unittest.TestCase):
         No elements are changed
         """
         old = {
-            False, # bool
-            1, # int
-            1.1, # float
-            1 + 1j, # complex
-            'hello', # str
+            False,  # bool
+            1,  # int
+            1.1,  # float
+            1 + 1j,  # complex
+            'hello',  # str
         }
         new = {
-            False, # bool
-            1, # int
-            1.1, # float
-            1 + 1j, # complex
-            'hello', # str
+            False,  # bool
+            1,  # int
+            1.1,  # float
+            1 + 1j,  # complex
+            'hello',  # str
         }
         delta = {}
         self.assertDictEqual(DeltaSet.create(old, new), delta)
@@ -70,21 +70,21 @@ class TestDeltaSet(unittest.TestCase):
         New element added
         """
         old = {
-            2, # int
-            2.2, # float
-            2 + 2j, # complex
-            'hello', # str
+            2,  # int
+            2.2,  # float
+            2 + 2j,  # complex
+            'hello',  # str
         }
         new = {
-            True, # bool
-            2, # int
-            2.2, # float
-            2 + 2j, # complex
-            'hello', # str
+            True,  # bool
+            2,  # int
+            2.2,  # float
+            2 + 2j,  # complex
+            'hello',  # str
         }
         delta = {
             keys['add to set']: {
-                True, # bool
+                True,  # bool
             },
         }
         self.assertDictEqual(DeltaSet.create(old, new), delta)
@@ -95,21 +95,21 @@ class TestDeltaSet(unittest.TestCase):
         Old element removed
         """
         old = {
-            False, # bool
-            2, # int
-            2.2, # float
-            2 + 2j, # complex
-            'hello', # str
+            False,  # bool
+            2,  # int
+            2.2,  # float
+            2 + 2j,  # complex
+            'hello',  # str
         }
         new = {
-            2, # int
-            2.2, # float
-            2 + 2j, # complex
-            'hello', # str
+            2,  # int
+            2.2,  # float
+            2 + 2j,  # complex
+            'hello',  # str
         }
         delta = {
             keys['remove from set']: {
-                False, # bool
+                False,  # bool
             },
         }
         self.assertDictEqual(DeltaSet.create(old, new), delta)
