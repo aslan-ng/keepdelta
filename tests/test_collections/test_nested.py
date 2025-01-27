@@ -1,10 +1,14 @@
 import unittest
 
+try:
+    from .assertEqual import TolerantTestCase
+except:
+    from assertEqual import TolerantTestCase
 from keepdelta.types.collections import Delta
 from keepdelta.config import keys
 
 
-class TestDeltaNested(unittest.TestCase):
+class TestDeltaNested(TolerantTestCase):
 
     def test_0(self):
         """
@@ -74,21 +78,21 @@ class TestDeltaNested(unittest.TestCase):
             'dict': {
                 'bool': True,
                 'int': 2,
-                'float': 2.1999999999999997,
+                'float': 2.2,
                 'complex': 2 + 2j,
                 'str': 'world',
             },
             'list': {
                 0: True,  # bool
                 1: 2,  # int
-                2: 2.1999999999999997,  # float
+                2: 2.2,  # float
                 3: (2+2j),  # complex
                 4: 'world',  # str
             },
             'tuple': {
                 0: True,  # bool
                 1: 2,  # int
-                2: 2.1999999999999997,  # float
+                2: 2.2,  # float
                 3: (2+2j),  # complex
                 4: 'world',  # str
             },
@@ -109,8 +113,8 @@ class TestDeltaNested(unittest.TestCase):
                 }
             },
         }
-        self.assertDictEqual(Delta.create(old, new), delta)
-        self.assertDictEqual(Delta.apply(old, delta), new)
+        self.assertDictAlmostEqual(Delta.create(old, new), delta)
+        self.assertDictAlmostEqual(Delta.apply(old, delta), new)
 
     def test_1(self):
         """
@@ -189,7 +193,7 @@ class TestDeltaNested(unittest.TestCase):
             0: {
                 'bool': True,
                 'int': 2,
-                'float': 2.1999999999999997,
+                'float': 2.2,
                 'complex': 2 + 2j,
                 'str': 'world',
             },
@@ -197,7 +201,7 @@ class TestDeltaNested(unittest.TestCase):
             1: {
                 0: True,  # bool
                 1: 2,  # int
-                2: 2.1999999999999997,  # float
+                2: 2.2,  # float
                 3: (2+2j),  # complex
                 4: 'world',  # str
             },
@@ -205,7 +209,7 @@ class TestDeltaNested(unittest.TestCase):
             2: {
                 0: True,  # bool
                 1: 2,  # int
-                2: 2.1999999999999997,  # float
+                2: 2.2,  # float
                 3: (2+2j),  # complex
                 4: 'world',  # str
             },
@@ -227,8 +231,8 @@ class TestDeltaNested(unittest.TestCase):
                 }
             },
         }
-        self.assertDictEqual(Delta.create(old, new), delta)
-        self.assertListEqual(Delta.apply(old, delta), new)
+        self.assertDictAlmostEqual(Delta.create(old, new), delta)
+        self.assertListAlmostEqual(Delta.apply(old, delta), new)
 
     def test_2(self):
         """
@@ -307,7 +311,7 @@ class TestDeltaNested(unittest.TestCase):
             0: {
                 'bool': True,
                 'int': 2,
-                'float': 2.1999999999999997,
+                'float': 2.2,
                 'complex': 2 + 2j,
                 'str': 'world',
             },
@@ -315,7 +319,7 @@ class TestDeltaNested(unittest.TestCase):
             1: {
                 0: True,  # bool
                 1: 2,  # int
-                2: 2.1999999999999997,  # float
+                2: 2.2,  # float
                 3: (2+2j),  # complex
                 4: 'world',  # str
             },
@@ -323,7 +327,7 @@ class TestDeltaNested(unittest.TestCase):
             2: {
                 0: True,  # bool
                 1: 2,  # int
-                2: 2.1999999999999997,  # float
+                2: 2.2,  # float
                 3: (2+2j),  # complex
                 4: 'world',  # str
             },
@@ -345,8 +349,8 @@ class TestDeltaNested(unittest.TestCase):
                 }
             },
         }
-        self.assertDictEqual(Delta.create(old, new), delta)
-        self.assertTupleEqual(Delta.apply(old, delta), new)
+        self.assertDictAlmostEqual(Delta.create(old, new), delta)
+        self.assertTupleAlmostEqual(Delta.apply(old, delta), new)
 
 
 if __name__ == '__main__':

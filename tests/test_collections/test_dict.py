@@ -1,9 +1,13 @@
 import unittest
 
+try:
+    from .assertEqual import TolerantTestCase
+except:
+    from assertEqual import TolerantTestCase
 from keepdelta.types.collections import DeltaDict
 
 
-class TestDeltaDict(unittest.TestCase):
+class TestDeltaDict(TolerantTestCase):
 
     def test_0(self):
         old = {
@@ -23,12 +27,12 @@ class TestDeltaDict(unittest.TestCase):
         delta = {
             'bool': True,  # bool
             'complex': 2 + 2j,  # complex
-            'float': 2.1999999999999997,  # float
+            'float': 2.2,  # float
             'int': 2,  # int
             'str': 'world',  # str
         }
-        self.assertDictEqual(DeltaDict.create(old, new), delta)
-        self.assertDictEqual(DeltaDict.apply(old, delta), new)
+        self.assertDictAlmostEqual(DeltaDict.create(old, new), delta)
+        self.assertDictAlmostEqual(DeltaDict.apply(old, delta), new)
 
     def test_1(self):
         old = {
