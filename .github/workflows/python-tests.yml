@@ -37,4 +37,4 @@ jobs:
       run: python --version
   
     - name: Run tests
-      run: python test/test.py
+      run: python tests/tests.py
