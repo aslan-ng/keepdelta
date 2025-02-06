@@ -35,7 +35,9 @@ In computational simulations, managing evolving data states efficiently is cruci
 
 Simulation is a widely used methodology across all Applied Science disciplines, offering a flexible, powerful, and intuitive tool for designing processes or systems and maximizing their efficiency [@SimulationExperiments]. These studies often take the form of computer experiments, where data is generated through pseudo-random sampling from known probability distributions. This approach serves as an invaluable resource for research, particularly in evaluating new methods and comparing alternative approaches [@SimulationStudies]. Computational simulations are invaluable tools for studying complex systems and their behaviors. [@ComplexSystemsSimulation]
 
-Simulations often require mechanisms to track and store evolving states of data structures across iterations. The naive approach of saving full snapshots is storage-heavy, while recalculating states from scratch can be computationally expensive. KeepDelta introduces a middle ground by saving only the deltas (changes) between states. This approach, also known as Delta Encoding, has been successful. Unlike existing libraries or binary delta tools like xdelta, KeepDelta is tailored for Python, operating directly on native Python data structures such as dictionaries, lists, tuples, and sets. The results are human-readable and designed for Python developers and researchers who need a simple yet powerful solution for change management.
+Simulations often require mechanisms to track and store evolving states of data structures across iterations. The naive approach of saving full snapshots is storage-heavy, while recalculating states from scratch can be computationally expensive. KeepDelta introduces a middle ground by saving only the deltas (changes) between states. This approach, also known as Delta Encoding, has been successful in various similar use cases where managing evolving data states is essential like web development [@DeltaEncodingInHTTP] software version management [@NaiveDifferencesOfExecutableCode].
+
+Human-readability is crucial for debugging and development in simulation projects, and KeepDelta is tailored specifically for this purpose. It is lightweight, supports native Python data structures, and generates results that are easy to understand. This makes it an ideal tool for Python developers and researchers seeking a simple yet powerful solution for change management. By providing clear, human-readable output, KeepDelta enhances both the development process and debugging efficiency, making it easier to track and manage changes in complex projects.
 
 ![caption](./images/comparison.png)
 
@@ -54,12 +56,12 @@ import keepdelta as kd
 
 `create` and `apply` are the two core functionalities of the library.
 
-To create the delta between `old` and `new` variables:
+To *create* the delta between `old` and `new` variables:
 ```python
 delta = kd.create(old, new)
 ```
 
-To apply the delta to `old` variable to recreate the `new` variable:
+To *apply* the delta to `old` variable to reconstruct `new` variable:
 ```python
 new = kd.apply(old, delta)
 ```
@@ -76,27 +78,3 @@ In the landscape of Python libraries designed for delta encoding, several notabl
 `detools` is a more recent addition, offering binary delta encoding capabilities within Python applications. It efficiently handles large binary files and is designed for ease of use. Nevertheless, like `xdelta3` and `xdelta`, `detools` operates at the binary level, producing non-human-readable outputs and not being specifically optimized for Python’s native data structures.
 `deepdiff` is a contemporary library that facilitates the identification of differences between complex Python data structures, including dictionaries, lists, and sets. It extends support to external libraries like NumPy, enhancing its versatility. However, this integration can lead to outputs that are less human-readable compared to `keepdelta`. Additionally, `deepdiff` introduces dependencies that may not be necessary for all projects.
 In contrast, `keepdelta` is a lightweight Python library optimized for simulations, focusing on efficient delta management for native Python data structures. It operates directly on Python’s native data types, producing human-readable outputs that facilitate debugging and research applications. Implemented in pure Python, `keepdelta` eliminates external dependencies, making it an ideal choice for Python-centric workflows, particularly in simulations and data analysis tasks.
-
-
-# Extra (TO BE REMOVED)
-Examples:
-
-https://www.theoj.org/joss-papers/joss.07157/10.21105.joss.07157.pdf
-https://github.com/openjournals/joss-reviews/issues/7698
-
-https://github.com/samuelcolvin/xdelta3-python
-
-
-Delta Encoding:
-
-[@DeltaEncodingInHTTP]
-[@NaiveDifferencesOfExecutableCode]
-
-Similar Libraries:
-
-[@deepdiff]
-[@xdelta3]
-[@xdelta]
-[@detools]
-
-`keepdelta`

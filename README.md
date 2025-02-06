@@ -1,13 +1,19 @@
 # KeepDelta
 Efficient Delta Management for Python Data Structures
 
-A lightweight Python library for creating and applying deltas (differences) between two native Python data structures. This is useful for tracking changes in nested data structures such as dictionaries, lists, tuples, sets, and more.
+*KeepDelta* is a lightweight Python library designed to efficiently track and manage changes (deltas) between Python variables. It is applicable to various scenarios involving dynamic data management, especially simulations. Unlike binary-level tools, KeepDelta emphasizes human-readable delta encoding, facilitating debugging and analysis for Python developers and researchers across multiple domains.
+
+## What is delta encoding?
+In many computational scenarios, efficiently managing evolving data states is crucial. Traditional methods that rely on complete snapshots at each step can be inefficient due to the large size of the snapshots. Delta encoding addresses this challenge by capturing and applying only the changes (deltas) between successive states of data structures, resulting in significantly smaller and more manageable data.
+
+<center><img src="assets/delta_encoding.png" alt="Comparison between traditional data management method and delta encoding." width="50%"></center>
 
 ## Features
-* Generate compact delta objects that describe differences between two Python data structures.
-* Apply a delta to an original data structure to reconstruct the updated version.
-* Supports native Python data structures: dict, list, tuple, set, int, float, bool, str, and more.
+* Generate compact and human-readable differences between two Python variables.
+* Apply delta to a variable to reconstruct the updated version.
+* Supports Python built-in data types.
 * Handles deeply nested and mixed data structures efficiently.
+* No external dependencies.
 
 ## Installation
 Install the package using pip:
@@ -16,97 +22,87 @@ pip install keepdelta
 ```
 
 ## Usage
-1. Create Delta
-The *create* function generates a delta object that captures the differences between two data structures.
+There are two core methods corresponding to the creation and application of delta encodings:
 
-Example:
+1. `create(old, new)`:
+The `create` function compares the `old` and `new` variables to generate `delta` that captures the differences between two data structures. It produces a compact delta containing only these differences, and its high human readability greatly aids debugging during development.
+#### Example:
 ```python
-import keepdelta as kd
+>>> import keepdelta as kd
 
-# Initial data
-old = {
-    "info": {
-        "name": "Alice",
-        "age": 30,
-        "is_student": True,
-        "preferences": (
-            "chocolate", 
-            {"sports": {"football", "tennis"}},
-        ),
-    }
-}
+>>> # Initial data
+>>> old = {
+...     "name": "Alice",
+...     "age": 20,
+...     "is_student": True
+... }
 
-# Updated data
-new = {
-    "info": {
-        "name": "Alice",
-        "age": 31,
-        "is_student": False,
-        "preferences": (
-            "coffee", 
-            {"sports": {"football", "bodybuilding"}},
-        ),
-    }
-}
+>>> # Updated data
+>>> new = {
+...     "name": "Alice",
+...     "age": 25,
+...     "is_student": False
+... }
 
-# Create delta
-delta = kd.create(old, new)
-print(delta)
-```
-
-Output:
-```python
+>>> # Create delta
+>>> delta = kd.create(old, new)
+>>> print(delta)
 {
-    "info": {
-        "is_student": False,
-        "age": 1,
-        "preferences": {
-            0: "coffee",
-            1: {"sports": {0:"football", 1: "bodybuilding"}}
-        }
-    }
+    "age": 5,
+    "is_student": False
 }
 ```
 
-2. Apply Delta
-The *apply* function takes an original data structure and a delta, then applies the delta to recreate the updated structure.
-
-Example:
+2. `apply(old, delta)`:
+The `apply` function takes the `old` variable and the `delta`, then applies the `delta` to recreate the updated, new variable.
+#### Example:
 ```python
-# Apply delta
-updated = kd.apply(old, delta)
+>>> import keepdelta as kd
 
-# Verify the update
-print(updated == new)  # Output: True
+>>> # Initial data
+>>> old = {
+...     "name": "Alice",
+...     "age": 20,
+...     "is_student": True
+... }
+
+>>> # Delta
+>>> delta = {
+...     "age": 5,
+...     "is_student": False
+... }
+
+>>> # Apply delta
+>>> new = kd.apply(old, delta)
+>>> print(new)
+{
+    "name": "Alice",
+    "age": 25,
+    "is_student": False
+}
 ```
-
-## How It Work
-1.	*create*(old, new):
-* Compares the old and new data structures.
-* Produces a compact delta object containing only the differences.
-2.	*apply*(original, delta):
-* Applies the delta to the original data structure.
-* Produces the new data structure.
+For more usage examples, refer to the [`examples`](https://github.com/aslan-ng/KeepDelta/tree/main/examples) folder in the project repository.
 
 ## Surpported Formats
-KeepDelta supports most of the native Python data structures, ensuring compatibility and flexibility when working with a wide variety of data types. The currently supported structures include:
+KeepDelta supports all native Python data structures, ensuring compatibility and flexibility when working with a wide variety of data types. The currently supported structures include:
 
 * Primitive Types:
 	* bool – e.g., True, False
     * str – e.g., "hello", "apple"
 	* int – e.g., 42, -7
 	* float – e.g., 3.14, -0.001
-	* complex – e.g., 3 + 4j, -2j
+	* complex – e.g., 3+4j, -2j
+    * None
 
 * Collections:
     * dict – e.g., {"key": "value", "age": 30}
-    * list – e.g., [1, 2, 3, "hello"]
-    * tuple – e.g., (1, "a", 3.14)
+    * list – e.g., [1, True, "hello"]
+    * tuple – e.g., (2, {"key": "value"}, 3.14)
     * set – e.g., {1, 2, 3, "apple"}
 
-* Special Features:
-    * Nested Structures: Supports deeply nested combinations of these types, such as a dictionary containing lists, tuples, or sets.
-	* Mixed Types: Easily handles scenarios where different data types are combined in a single structure.
+KeepDelta supports deeply nested combinations of variables, enabling structures like dictionaries of dictionaries, lists of sets, and other complex, interwoven data types.
+
+Additionally, changing variables types are also supported. For example, changing string (like "hello") to float (like 3.14).
 
 ## Contributing
 Contributions are welcome! Feel free to:
