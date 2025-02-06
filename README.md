@@ -106,6 +106,9 @@ KeepDelta supports deeply nested combinations of variables, enabling structures 
 
 Additionally, changing variables types are also supported. For example, changing string (like "hello") to float (like 3.14).
 
+## Supported Python Versions
+KeepDelta has been tested and verified to work with Python versions **3.7** to **3.13**. While it is expected to work with older versions, they have not been tested and are not officially supported.
+
 ## Contributing
 Contributions are welcome! Feel free to:
 * Report issues.
