@@ -6,7 +6,9 @@ Efficient Delta Management for Python Data Structures
 ## What is delta encoding?
 In many computational scenarios, efficiently managing evolving data states is crucial. Traditional methods that rely on complete snapshots at each step can be inefficient due to the large size of the snapshots. Delta encoding addresses this challenge by capturing and applying only the changes (deltas) between successive states of data structures, resulting in significantly smaller and more manageable data.
 
-<center><img src="assets/delta_encoding.png" alt="Comparison between traditional data management method and delta encoding." width="50%"></center>
+<div align="center">
+<img src="assets/delta_encoding.png" alt="Comparison between traditional data management method and delta encoding." width="50%">
+</div>
 
 ## Features
 * Generate compact and human-readable differences between two Python variables.
