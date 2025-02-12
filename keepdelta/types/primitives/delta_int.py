@@ -6,14 +6,14 @@ class DeltaInt:
     Handle deltas for int (integer) variables
     """
     @staticmethod
-    def create(old: int, new: int):
+    def create(old: int, new: int) -> int:
         """
-        Create delta for int variable
+        Create delta for int variables
         """
         return deepcopy(new) - deepcopy(old)
     
     @staticmethod
-    def apply(old: int, delta: int):
+    def apply(old: int, delta: int) -> int:
         """
         Apply delta to the int variable
         """

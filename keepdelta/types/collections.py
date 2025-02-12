@@ -18,34 +18,34 @@ class Delta:
     @staticmethod
     def create(old, new):
         """
-        Create delta for the variable
+        Create delta for the variables
         """
-        type_new = type(new)
-        if type(old) == type(new):  # Same type
+        type_new = type(new)  # Avoid multiple calls to type()
+        if type(old) == type_new:  # Same type
             if old != new:  # Inequal and same type
                 if old is None:  # none
                     delta = new
-                elif type(new) is bool:  # bool
+                elif type_new is bool:  # bool
                     delta = DeltaBool.create(old, new)
-                elif type (new) is complex:  # complex
+                elif type_new is complex:  # complex
                     delta = DeltaComplex.create(old, new)
-                elif type (new) is float:  # float
+                elif type_new is float:  # float
                     delta = DeltaFloat.create(old, new)
-                elif type (new) is int:  # int
+                elif type_new is int:  # int
                     delta = DeltaInt.create(old, new)
-                elif type (new) is str:  # str
+                elif type_new is str:  # str
                     CheckConflict.check_str(new)
                     delta = DeltaStr.create(old, new)
-                elif type (new) is dict:  # dict
+                elif type_new is dict:  # dict
                     CheckConflict.check_dict(new)
                     delta = DeltaDict.create(old, new)
-                elif type (new) is list:  # list
+                elif type_new is list:  # list
                     CheckConflict.check_list(new)
                     delta = DeltaList.create(old, new)
-                elif type (new) is set:  # set
+                elif type_new is set:  # set
                     CheckConflict.check_set(new)
                     delta = DeltaSet.create(old, new)
-                elif type (new) is tuple:  # tuple
+                elif type_new is tuple:  # tuple
                     CheckConflict.check_tuple(new)
                     delta = DeltaTuple.create(old, new)
                 else:
@@ -54,15 +54,15 @@ class Delta:
             else:  # Equal and same type
                 delta = keys['nothing']
         else:  # Not same type
-            if type(new) is str:
+            if type_new is str:
                 CheckConflict.check_str(new)
-            elif type(new) is dict:
+            elif type_new is dict:
                 CheckConflict.check_dict(new)
-            elif type(new) is list:
+            elif type_new is list:
                 CheckConflict.check_list(new)
-            elif type(new) is set:
+            elif type_new is set:
                 CheckConflict.check_set(new)
-            elif type(new) is tuple:
+            elif type_new is tuple:
                 CheckConflict.check_tuple(new)
             delta = new  # Rewrite type
         return delta
@@ -114,7 +114,7 @@ class DeltaDict:
     @staticmethod
     def create(old: dict, new: dict) -> dict:
         """
-        Create delta for dict variable
+        Create delta for dict variables
         """
         delta = {}
         old_keys = old.keys()
@@ -159,7 +159,7 @@ class DeltaList:
     @staticmethod
     def create(old: list, new: list) -> dict:
         """
-        Create delta for list variable
+        Create delta for list variables
         """
         old = DeltaList._list_to_dict(old)
         new = DeltaList._list_to_dict(new)
@@ -205,7 +205,7 @@ class DeltaTuple:
     @staticmethod
     def create(old: tuple, new: tuple) -> dict:
         """
-        Create delta for tuple variable
+        Create delta for tuple variables
         """
         old_list = list(old)
         new_list = list(new)
@@ -228,7 +228,7 @@ class DeltaSet:
     @staticmethod
     def create(old: set, new: set) -> dict:
         """
-        Create delta for set variable
+        Create delta for set variables
         """
         delta = {}
         # Add annotation

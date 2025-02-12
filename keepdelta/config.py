@@ -1,4 +1,7 @@
-# Commands reserved for data handling
+"""
+Commands (keys) reserved for internal data handling
+"""
+
 keys = {
     'nothing': 'N07H1NG',  # No changes are required
     'delete': 'D3L373', # Key to be removed from dict

@@ -1,19 +1,42 @@
-# KeepDelta
-Efficient Delta Management for Python Data Structures
+<!-- PROJECT LOGO -->
+<br />
+<div align="center">
+    <a href="https://github.com/aslan-ng/KeepDelta">
+        <img src="assets/logo.png" alt="Logo" width="90" height="90">
+    </a>
+    <p><strong><span style="font-size: 32px;">
+        KeepDelta
+    </span></strong></p>
+    <p align="center">
+        Efficient Delta Management for Python Data Structures
+        <br />
+        
+    </p>
+</div>
 
-*KeepDelta* is a lightweight Python library designed to efficiently track and manage changes (deltas) between Python variables. It is applicable to various scenarios involving dynamic data management, especially simulations. Unlike binary-level tools, KeepDelta emphasizes human-readable delta encoding, facilitating debugging and analysis for Python developers and researchers across multiple domains.
+![Header](assets/header.png)
+
+*KeepDelta* is a lightweight Python library designed to efficiently track and manage changes (deltas) between Python built-in types. It is applicable to various scenarios  that require dynamic data management, especially when incremental numerical changes are present, such as such as simulations and IoT remote sensing. Unlike binary-level tools, KeepDelta emphasizes human-readable delta encoding, facilitating debugging and analysis for Python developers and researchers across multiple domains.
 
 ## What is delta encoding?
-In many computational scenarios, efficiently managing evolving data states is crucial. Traditional methods that rely on complete snapshots at each step can be inefficient due to the large size of the snapshots. Delta encoding addresses this challenge by capturing and applying only the changes (deltas) between successive states of data structures, resulting in significantly smaller and more manageable data.
+In many computational scenarios, efficiently managing evolving data states is crucial. Traditional methods that rely on full-state encoding (complete snapshots at each step) can be inefficient due to the large size of the snapshots. Delta encoding addresses this challenge by capturing and applying only the changes (deltas) between successive states of data structures, resulting in significantly smaller and more manageable data.
 
 <div align="center">
-<img src="assets/delta_encoding.png" alt="Comparison between traditional data management method and delta encoding." width="50%">
+    <figure>
+    <img
+        src="assets/delta_encoding.png"
+        alt="Comparison between traditional data management method and delta encoding." width="350"
+    >
+    <figcaption>
+        Managing evolving data states by full-state encoding (left) vs. delta encoding (right).
+    </figcaption>
+    </figure>
 </div>
 
 ## Features
 * Generate compact and human-readable differences between two Python variables.
 * Apply delta to a variable to reconstruct the updated version.
-* Supports Python built-in data types.
+* Supports common Python built-in data types.
 * Handles deeply nested and mixed data structures efficiently.
 * No external dependencies.
 
@@ -27,7 +50,7 @@ pip install keepdelta
 There are two core methods corresponding to the creation and application of delta encodings:
 
 1. `create(old, new)`:
-The `create` function compares the `old` and `new` variables to generate `delta` that captures the differences between two data structures. It produces a compact delta containing only these differences, and its high human readability greatly aids debugging during development.
+The `create` function compares the `old` and `new` variables to generate `delta` that captures the differences between two data structures. It produces a compact data structure containing only these differences, and its high human readability greatly aids debugging during development.
 #### Example:
 ```python
 >>> import keepdelta as kd
@@ -86,21 +109,21 @@ The `apply` function takes the `old` variable and the `delta`, then applies the 
 For more usage examples, refer to the [`examples`](https://github.com/aslan-ng/KeepDelta/tree/main/examples) folder in the project repository.
 
 ## Surpported Formats
-KeepDelta supports all native Python data structures, ensuring compatibility and flexibility when working with a wide variety of data types. The currently supported structures include:
+KeepDelta supports common native Python data structures, ensuring compatibility and flexibility when working with a wide variety of data types. The currently supported structures include:
 
 * Primitive Types:
 	* bool – e.g., True, False
-    * str – e.g., "hello", "apple"
+    * str – e.g., "hello", "world"
 	* int – e.g., 42, -7
 	* float – e.g., 3.14, -0.001
 	* complex – e.g., 3+4j, -2j
     * None
 
 * Collections:
-    * dict – e.g., {"key": "value", "age": 30}
+    * dict – e.g., {"location": "world", "age": 30}
     * list – e.g., [1, True, "hello"]
-    * tuple – e.g., (2, {"key": "value"}, 3.14)
-    * set – e.g., {1, 2, 3, "apple"}
+    * tuple – e.g., (2, {"location": "world"}, 3.14)
+    * set – e.g., {1, 2, "apple"}
 
 KeepDelta supports deeply nested combinations of variables, enabling structures like dictionaries of dictionaries, lists of sets, and other complex, interwoven data types.
 

@@ -6,14 +6,14 @@ class DeltaStr:
     Handle deltas for str (string) variables
     """
     @staticmethod
-    def create(old: str, new: str):
+    def create(old: str, new: str) -> str:
         """
-        Create delta for str variable
+        Create delta for str variables
         """
         return deepcopy(new)
     
     @staticmethod
-    def apply(old: str, delta: str):
+    def apply(old: str, delta: str) -> str:
         """
         Apply delta to the str variable
         """
