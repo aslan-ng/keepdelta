@@ -1,16 +1,15 @@
-<!-- PROJECT LOGO -->
 <br />
 <div align="center">
     <a href="https://github.com/aslan-ng/KeepDelta">
         <img src="assets/logo.png" alt="Logo" width="90" height="90">
     </a>
-    <p><strong><span style="font-size: 32px;">
-        KeepDelta
-    </span></strong></p>
-    <p align="center">
+    <p>
+        <strong><span style="font-size: 32px;">
+            KeepDelta
+        </span></strong>
+        <br>
         Efficient Delta Management for Python Data Structures
-        <br />
-    </p>
+    </p>  
 </div>
 
 ![Header](assets/header.png)
@@ -21,7 +20,7 @@
 In many computational scenarios, efficiently managing evolving data states is crucial. Traditional methods that rely on full-state encoding (complete snapshots at each step) can be inefficient due to the large size of the snapshots. Delta encoding addresses this challenge by capturing and applying only the changes (deltas) between successive states of data structures, resulting in significantly smaller and more manageable data.
 
 <div align="center">
-    <img src="assets/delta_encoding.png" alt="Comparison between traditional data management method and delta encoding." width="350">
+    <img src="assets/delta_encoding.png" alt="Comparison between traditional data management method and delta encoding." width="400">
     </br>
     Managing evolving data states by full-state encoding (left) vs. delta encoding (right).
 </div>
