@@ -6,14 +6,14 @@ class DeltaBool:
     Handle deltas for bool (boolean) variables
     """
     @staticmethod
-    def create(old: bool, new: bool):
+    def create(old: bool, new: bool) -> bool:
         """
-        Create delta for bool variable
+        Create delta for bool variables
         """
         return deepcopy(new)
     
     @staticmethod
-    def apply(old: bool, delta: bool):
+    def apply(old: bool, delta: bool) -> bool:
         """
         Apply delta to the bool variable
         """
