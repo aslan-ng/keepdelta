@@ -4,12 +4,16 @@
         <img src="assets/logo.png" alt="Logo" width="90" height="90">
     </a>
     <p>
-        <strong><span style="font-size: 32px;">
-            KeepDelta
-        </span></strong>
-        <br>
-        Efficient Delta Management for Python Data Structures
-    </p>  
+        <strong>
+            <span style="font-size: 32px;">
+                KeepDelta
+            </span>
+            <div>
+                Efficient Delta Management for Python Data Structures
+            </div>
+        </strong>
+    </p>
+
 </div>
 
 ![Header](assets/header.png)
