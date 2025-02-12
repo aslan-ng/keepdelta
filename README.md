@@ -10,7 +10,6 @@
     <p align="center">
         Efficient Delta Management for Python Data Structures
         <br />
-        
     </p>
 </div>
 
