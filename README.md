@@ -5,7 +5,7 @@
     </a>
     <p>
         <strong>
-            <span style="font-size: 32px;">
+            <span style="font-size: 40px;">
                 KeepDelta
             </span>
         </strong>
