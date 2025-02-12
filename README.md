@@ -3,16 +3,8 @@
     <a href="https://github.com/aslan-ng/KeepDelta">
         <img src="assets/logo.png" alt="Logo" width="90" height="90">
     </a>
-    <p>
-        <strong>
-            <span style="font-size: 40px;">
-                KeepDelta
-            </span>
-        </strong>
-    </p>
-    <p>
-        Efficient Delta Management for Python Data Structures</
-    </p>
+    <h3>KeepDelta</h3>
+    <p>Efficient Delta Management for Python Data Structures</p>
 </div>
 
 ![Header](assets/header.png)
