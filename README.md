@@ -9,11 +9,10 @@
                 KeepDelta
             </span>
         </strong>
-        <div>
-            Efficient Delta Management for Python Data Structures
-        </div>
     </p>
-
+    <p><strong>
+    Efficient Delta Management for Python Data Structures</strong>
+    </p>
 </div>
 
 ![Header](assets/header.png)
