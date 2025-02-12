@@ -8,10 +8,10 @@
             <span style="font-size: 32px;">
                 KeepDelta
             </span>
-            <div>
-                Efficient Delta Management for Python Data Structures
-            </div>
         </strong>
+        <div>
+            Efficient Delta Management for Python Data Structures
+        </div>
     </p>
 
 </div>
