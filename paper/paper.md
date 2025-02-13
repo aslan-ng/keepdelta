@@ -1,9 +1,12 @@
 ---
-title: 'KeepDelta: A Python Library for Efficient Delta Management in Simulations' 
+title: 'KeepDelta: A Python Library for Human-Readable Delta Encoding' 
 
 tags:
   - python
   - simulation
+  - remote sensing
+  - iot
+  - internet of things
   - delta encoding
   - delta compression
   - data differencing
@@ -31,7 +34,8 @@ bibliography: paper.bib
 
 # Summary
 
-In computational simulations, managing evolving data states efficiently is crucial. Traditional methods of storing complete snapshots at each step can be storage-intensive, while recalculating states from scratch is computationally expensive. KeepDelta addresses this challenge by providing a lightweight Python library that captures and applies only the changes (deltas) between successive states of complex, nested Python data structures. Designed for clarity and ease of use, KeepDelta produces human-readable outputs, facilitating debugging and analysis in research applications.
+Efficiently managing evolving data states is crucial in cases like computational simulations and IoT remote sensing, where dynamic data tracking and processing are essential. In simulations, traditional methods of storing complete snapshots (full-state encoding) at each step can be highly storage-intensive, while recalculating states from scratch is computationally expensive. Similarly, in IoT remote sensing, continuously transmitting full data snapshots is inefficient, leading to increased bandwidth consumption and latency.
+KeepDelta addresses this challenge by providing a lightweight Python library that captures and applies only the changes (deltas) between successive states of complex, nested Python data structures. Designed for clarity and ease of use, KeepDelta produces human-readable outputs, facilitating debugging and analysis in research applications.
 
 
 # Statement of need
