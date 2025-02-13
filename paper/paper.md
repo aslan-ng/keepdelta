@@ -2,9 +2,12 @@
 title: 'KeepDelta: A Python Library for Efficient Delta Management in Simulations' 
 
 tags:
+  - python
   - simulation
   - delta encoding
-  - python
+  - delta compression
+  - data differencing
+  - differential compression
 
 authors:
   - name: Aslan Noorghasemi 
@@ -44,7 +47,7 @@ Human-readability is crucial for debugging and development in simulation project
 
 # In practice
 
-To install the current version of the deident package, run the command:
+To install the current version of the KeepDelta package, run the command:
 ```
 pip install keepdelta
 ```
@@ -66,7 +69,7 @@ To *apply* the delta to `old` variable to reconstruct `new` variable:
 new = kd.apply(old, delta)
 ```
 
-`keepdelta` supports nested and mixed native Python data structures. Native Python varibales types are:
+KeepDelta supports nested and mixed native Python data structures. Native Python varibales types are:
 - Primitives: integer (`int`), float (`float`), string (`str`), boolean (`bool`), complex (`complex`), none (`None`)
 - Collections: list (`list`), tuple (`tuple`), dictionary (`dict`), set(`set`)
 
@@ -74,7 +77,9 @@ new = kd.apply(old, delta)
 # Comparison to Existing Tools
 
 In the landscape of Python libraries designed for delta encoding, several notable tools have emerged, each with distinct features and applications.
-`xdelta3` [@xdelta3] and its predecessor, `xdelta` [@xdelta], are tools that perform delta encoding at the binary level. These utilities are particularly effective for binary file differencing and are widely used in version control systems and data synchronization tasks. However, both are considered outdated and are no longer actively maintained. Their operation at the binary level results in outputs that are not human-readable, and they are not tailored for Python data structures, limiting their applicability in Python-centric workflows.
-`detools` [@detools] is a more recent addition, offering binary delta encoding capabilities within Python applications. It efficiently handles large binary files and is designed for ease of use. Nevertheless, like `xdelta3` and `xdelta`, `detools` operates at the binary level, producing non-human-readable outputs and not being specifically optimized for Python’s native data structures.
-`deepdiff` [@deepdiff] is a contemporary library that facilitates the identification of differences between complex Python data structures, including dictionaries, lists, and sets. It extends support to external libraries like NumPy [@numpy], enhancing its versatility. However, this integration can lead to outputs that are less human-readable compared to `keepdelta`. Additionally, `deepdiff` introduces dependencies that may not be necessary for all projects.
-In contrast, `keepdelta` is a lightweight Python library optimized for simulations, focusing on efficient delta management for native Python data structures. It operates directly on Python’s native data types, producing human-readable outputs that facilitate debugging and research applications. Implemented in pure Python, `keepdelta` eliminates external dependencies, making it an ideal choice for Python-centric workflows, particularly in simulations and data analysis tasks.
+xdelta3 [@xdelta3] and its predecessor, xdelta [@xdelta], are tools that perform delta encoding at the binary level. These utilities are particularly effective for binary file differencing and are widely used in version control systems and data synchronization tasks. However, both are considered outdated and are no longer actively maintained. Their operation at the binary level results in outputs that are not human-readable, and they are not tailored for Python data structures, limiting their applicability in Python-centric workflows.
+detools [@detools] is a more recent addition, offering binary delta encoding capabilities within Python applications. It efficiently handles large binary files and is designed for ease of use. Nevertheless, like xdelta3 and xdelta, detools operates at the binary level, producing non-human-readable outputs and not being specifically optimized for Python’s native data structures.
+deepdiff [@deepdiff] is a contemporary library that facilitates the identification of differences between complex Python data structures, including dictionaries, lists, and sets. It extends support to external libraries like NumPy [@numpy], enhancing its versatility. However, this integration can lead to outputs that are less human-readable compared to KeepDelta. Additionally, deepdiff introduces dependencies that may not be necessary for all projects.
+In contrast, KeepDelta is a lightweight Python library optimized for simulations, focusing on efficient delta management for native Python data structures. It operates directly on Python’s native data types, producing human-readable outputs that facilitate debugging and research applications. Implemented in pure Python, KeepDelta eliminates external dependencies, making it an ideal choice for Python-centric workflows, particularly in simulations and data analysis tasks.
+
+# References
