@@ -1,5 +1,5 @@
 ---
-title: 'KeepDelta: A Python Library for Human-Readable Delta Encoding' 
+title: 'KeepDelta: A Python Library for Human-Readable Data Differencing'
 
 tags:
   - python
@@ -40,11 +40,15 @@ KeepDelta addresses this challenge by providing a lightweight Python library tha
 
 # Statement of need
 
-Simulation is a widely used methodology across all Applied Science disciplines, offering a flexible, powerful, and intuitive tool for designing processes or systems and maximizing their efficiency [@SimulationExperiments]. These studies often take the form of computer experiments, where data is generated through pseudo-random sampling from known probability distributions. This approach serves as an invaluable resource for research, particularly in evaluating new methods and comparing alternative approaches [@SimulationStudies]. Computational simulations are invaluable tools for studying complex systems and their behaviors. [@ComplexSystemsSimulation]
+High-frequency data sampling is fundamental in both scientific simulations and real-world sensing applications, where large volumes of evolving data must be efficiently managed. Both domains, whether generating synthetic data through computational models or collecting real-time measurements from physical sensors, face a common challenge: storing, transmitting, and processing dynamic data without excessive redundancy.
 
-Simulations often require mechanisms to track and store evolving states of data structures across iterations. The naive approach of saving full snapshots is storage-heavy, while recalculating states from scratch can be computationally expensive. KeepDelta introduces a middle ground by saving only the deltas (changes) between states. This approach, also known as Delta Encoding, has been successful in various similar use cases where managing evolving data states is essential like web development [@DeltaEncodingInHTTP] software version management [@NaiveDifferencesOfExecutableCode].
+Simulation is a widely used methodology across all applied science disciplines, offering a flexible, powerful, and intuitive tool for designing processes or systems and maximizing their efficiency [@SimulationExperiments]. These studies often take the form of computer experiments, where data is generated through pseudo-random sampling from known probability distributions. This approach serves as an invaluable resource for research, particularly in evaluating new methods and comparing alternative approaches [@SimulationStudies]. Computational simulations are invaluable tools for studying complex systems and their behaviors. [@ComplexSystemsSimulation]
 
-Human-readability is crucial for debugging and development in simulation projects, and KeepDelta is tailored specifically for this purpose. It is lightweight, supports native Python data structures, and generates results that are easy to understand. This makes it an ideal tool for Python developers and researchers seeking a simple yet powerful solution for change management. By providing clear, human-readable output, KeepDelta enhances both the development process and debugging efficiency, making it easier to track and manage changes in complex projects.
+Sensing technologies are also employed across diverse scientific and engineering domains, enabling continuous monitoring and analysis of dynamic environments. It is common for these systems utilize an array of sensors to capture real-time data, which is essential for studying systems behaviors, informed decision-making, and system optimization [@RemotePhysiologicalandEnvironmentalMonitoring] [@agricultureIoT].
+
+Both simulations and sensing require mechanisms to track and store evolving states of data structures over time. In simulations, the naive approach of saving full snapshots at every timestep leads to excessive storage demands, while recalculating states from scratch is computationally expensive. Similarly, in sensing applications, continuously storing or transmitting full data snapshots is impractical, particularly in bandwidth-limited and remote environments. Instead of relying on inefficient methods, KeepDelta introduces an optimized middle ground by saving only the deltas (changes) between states, significantly reducing storage and computation overhead. This Delta Encoding technique has been successfully applied in other domains where managing evolving data efficiently is critical, such as web development [@DeltaEncodingInHTTP] and software version management [@NaiveDifferencesOfExecutableCode].
+
+Human-readability is crucial for debugging and development in both simulation and sensing projects, and KeepDelta is tailored specifically for this purpose. It is lightweight and has no dependecies, supports native Python data structures, and generates results that are easy to interpret. This makes it an ideal tool for Python developers and researchers seeking a simple yet powerful solution for change management. By providing clear, human-readable output, KeepDelta enhances both the development process and debugging efficiency, making it easier to track and manage changes in complex projects involving both computational models and real-world sensing systems.
 
 ![caption](./images/comparison.png)
 
@@ -59,7 +63,7 @@ pip install keepdelta
 Then, import it into your project:
 ```python
 import keepdelta as kd
-```
+``F
 
 `create` and `apply` are the two core functionalities of the library.
 

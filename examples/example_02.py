@@ -1,30 +1,47 @@
 """
-The results of Random Walk is saved and loaded using deltas.
+In this example, we will add delta management as __add__ and __sub__ methods to the class.
 """
 
-import random
 import keepdelta as kd
-from copy import deepcopy
 
 
-#random.seed(42)  # Set the seed for reproducibility
-position = 0  # Initial value
-steps = 100
+class Profile:
 
-# Save the result by deltas
-deltas = []
-for _ in range(steps):
-    old_position = deepcopy(position)
+    def __init__(self, name, age, is_student, grades, preferences, attributes, settings):
+        self.name = name
+        self.age = age
+        self.is_student = is_student
+        self.grades = grades
+        self.preferences = preferences
+        self.attributes = attributes
+        self.settings = settings
 
-    # Move one step randomly +1 or -1
-    position += random.choice([-1, 1])
+    def __sub__(self, other):
+        return kd.create(self.__dict__, other.__dict__)
 
-    delta = kd.create(old_position, position)
-    deltas.append(delta)
-print(f'>>> Position after {steps} steps: {position}')
+    def __add__(self, delta):
+        return Profile(**kd.apply(self.__dict__, delta))
 
-# Reconstruct the result
-position = 0  # Initial value
-for delta in deltas:
-    position = kd.apply(position, delta)
-print(f'>>> Position after loading deltas: {position}')
+
+if __name__ == '__main__':
+    profile_old = Profile(
+        name='Alice',
+        age=30,
+        is_student=True,
+        grades=[85.5, 90.0, 78],
+        preferences=('chocolate', {'sports': {'football', 'tennis'}}),
+        attributes=[{'id': 1, 'value': 'active'}, {'id': 2, 'value': 'inactive'}],
+        settings={'dark_mode': True, 'font_size': 14, 'scale': 1.25},
+    )
+    profile_new = Profile(
+        name='Alice',
+        age=31,
+        is_student=False,
+        grades=[85.5, 90.0, 78],
+        preferences=('coffee', {'sports': {'football', 'bodybuilding'}}),
+        attributes=[{'id': 1, 'value': 'inactive'}, {'id': 2, 'value': 'inactive'}],
+        settings={'dark_mode': True, 'font_size': 14, 'scale': 1.25}
+    )
+    delta = profile_old - profile_new  # Create delta
+    profile_reconstructed = profile_old + delta  # Apply delta
+    print('Reconstruction is successful:', profile_reconstructed.__dict__ == profile_new.__dict__)
