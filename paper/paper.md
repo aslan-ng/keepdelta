@@ -53,35 +53,6 @@ Human-readability is crucial for debugging and development in both simulation an
 ![caption](./images/comparison.png)
 
 
-# In practice
-
-To install the current version of the KeepDelta package, run the command:
-```
-pip install keepdelta
-```
-
-Then, import it into your project:
-```python
-import keepdelta as kd
-``F
-
-`create` and `apply` are the two core functionalities of the library.
-
-To *create* the delta between `old` and `new` variables:
-```python
-delta = kd.create(old, new)
-```
-
-To *apply* the delta to `old` variable to reconstruct `new` variable:
-```python
-new = kd.apply(old, delta)
-```
-
-KeepDelta supports nested and mixed native Python data structures. Native Python varibales types are:
-- Primitives: integer (`int`), float (`float`), string (`str`), boolean (`bool`), complex (`complex`), none (`None`)
-- Collections: list (`list`), tuple (`tuple`), dictionary (`dict`), set(`set`)
-
-
 # Comparison to Existing Tools
 
 In the landscape of Python libraries designed for delta encoding, several notable tools have emerged, each with distinct features and applications.
