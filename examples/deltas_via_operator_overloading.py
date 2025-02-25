@@ -7,7 +7,9 @@ import keepdelta as kd
 
 class Profile:
 
-    def __init__(self, name, age, is_student, grades, preferences, attributes, settings):
+    def __init__(
+        self, name, age, is_student, grades, preferences, attributes, settings
+    ):
         self.name = name
         self.age = age
         self.is_student = is_student
@@ -23,25 +25,28 @@ class Profile:
         return Profile(**kd.apply(self.__dict__, delta))
 
 
-if __name__ == '__main__':
+if __name__ == "__main__":
     profile_old = Profile(
-        name='Alice',
+        name="Alice",
         age=30,
         is_student=True,
         grades=[85.5, 90.0, 78],
-        preferences=('chocolate', {'sports': {'football', 'tennis'}}),
-        attributes=[{'id': 1, 'value': 'active'}, {'id': 2, 'value': 'inactive'}],
-        settings={'dark_mode': True, 'font_size': 14, 'scale': 1.25},
+        preferences=("chocolate", {"sports": {"football", "tennis"}}),
+        attributes=[{"id": 1, "value": "active"}, {"id": 2, "value": "inactive"}],
+        settings={"dark_mode": True, "font_size": 14, "scale": 1.25},
     )
     profile_new = Profile(
-        name='Alice',
+        name="Alice",
         age=31,
         is_student=False,
         grades=[85.5, 90.0, 78],
-        preferences=('coffee', {'sports': {'football', 'bodybuilding'}}),
-        attributes=[{'id': 1, 'value': 'inactive'}, {'id': 2, 'value': 'inactive'}],
-        settings={'dark_mode': True, 'font_size': 14, 'scale': 1.25}
+        preferences=("coffee", {"sports": {"football", "bodybuilding"}}),
+        attributes=[{"id": 1, "value": "inactive"}, {"id": 2, "value": "inactive"}],
+        settings={"dark_mode": True, "font_size": 14, "scale": 1.25},
     )
     delta = profile_old - profile_new  # Create delta
     profile_reconstructed = profile_old + delta  # Apply delta
-    print('Reconstruction is successful:', profile_reconstructed.__dict__ == profile_new.__dict__)
+    print(
+        "Reconstruction is successful:",
+        profile_reconstructed.__dict__ == profile_new.__dict__,
+    )

@@ -27,5 +27,5 @@ class TestDeltaInt(unittest.TestCase):
         self.assertEqual(DeltaInt.apply(old, delta), new)
 
 
-if __name__ == '__main__':
+if __name__ == "__main__":
     unittest.main()

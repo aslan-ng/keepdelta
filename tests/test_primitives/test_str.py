@@ -9,9 +9,9 @@ class TestDeltaStr(unittest.TestCase):
         """
         Normal change
         """
-        old = 'hello'
-        new = 'world'
-        delta = 'world'
+        old = "hello"
+        new = "world"
+        delta = "world"
         self.assertEqual(DeltaStr.create(old, new), delta)
         self.assertEqual(DeltaStr.apply(old, delta), new)
 
@@ -19,12 +19,12 @@ class TestDeltaStr(unittest.TestCase):
         """
         No changes
         """
-        old = 'hello'
-        new = 'hello'
-        delta = 'hello'
+        old = "hello"
+        new = "hello"
+        delta = "hello"
         self.assertEqual(DeltaStr.create(old, new), delta)
         self.assertEqual(DeltaStr.apply(old, delta), new)
 
 
-if __name__ == '__main__':
+if __name__ == "__main__":
     unittest.main()

@@ -1,7 +1,7 @@
 import unittest
 
-from keepdelta.types.collections import DeltaSet
 from keepdelta.config import keys
+from keepdelta.types.collections import DeltaSet
 
 
 class TestDeltaSet(unittest.TestCase):
@@ -15,34 +15,34 @@ class TestDeltaSet(unittest.TestCase):
             1,  # int
             1.1,  # float
             1 + 1j,  # complex
-            'hello',  # str
+            "hello",  # str
         }
         new = {
             True,  # bool
             3,  # int
             3.3,  # float
             3 + 3j,  # complex
-            'world',  # str
+            "world",  # str
         }
         delta = {
-            keys['add to set']: {
+            keys["add to set"]: {
                 True,  # bool
                 3,  # int
                 3.3,  # float
                 3 + 3j,  # complex
-                'world'  # str
+                "world",  # str
             },
-            keys['remove from set']: {
+            keys["remove from set"]: {
                 False,  # bool
                 1,  # int
                 1.1,  # float
                 1 + 1j,  # complex
-                'hello'  # str
-            }
+                "hello",  # str
+            },
         }
         self.assertDictEqual(DeltaSet.create(old, new), delta)
         self.assertSetEqual(DeltaSet.apply(old, delta), new)
-    
+
     def test_1(self):
         """
         No elements are changed
@@ -52,14 +52,14 @@ class TestDeltaSet(unittest.TestCase):
             1,  # int
             1.1,  # float
             1 + 1j,  # complex
-            'hello',  # str
+            "hello",  # str
         }
         new = {
             False,  # bool
             1,  # int
             1.1,  # float
             1 + 1j,  # complex
-            'hello',  # str
+            "hello",  # str
         }
         delta = {}
         self.assertDictEqual(DeltaSet.create(old, new), delta)
@@ -73,17 +73,17 @@ class TestDeltaSet(unittest.TestCase):
             2,  # int
             2.2,  # float
             2 + 2j,  # complex
-            'hello',  # str
+            "hello",  # str
         }
         new = {
             True,  # bool
             2,  # int
             2.2,  # float
             2 + 2j,  # complex
-            'hello',  # str
+            "hello",  # str
         }
         delta = {
-            keys['add to set']: {
+            keys["add to set"]: {
                 True,  # bool
             },
         }
@@ -99,22 +99,22 @@ class TestDeltaSet(unittest.TestCase):
             2,  # int
             2.2,  # float
             2 + 2j,  # complex
-            'hello',  # str
+            "hello",  # str
         }
         new = {
             2,  # int
             2.2,  # float
             2 + 2j,  # complex
-            'hello',  # str
+            "hello",  # str
         }
         delta = {
-            keys['remove from set']: {
+            keys["remove from set"]: {
                 False,  # bool
             },
         }
         self.assertDictEqual(DeltaSet.create(old, new), delta)
         self.assertSetEqual(DeltaSet.apply(old, delta), new)
 
-    
-if __name__ == '__main__':
+
+if __name__ == "__main__":
     unittest.main()
