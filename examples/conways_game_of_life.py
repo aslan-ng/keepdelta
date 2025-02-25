@@ -106,9 +106,6 @@ if __name__ == "__main__":
         "deltas": [],
     }
 
-    # print('Before Simulation:')
-    # model.show()
-
     # Run the simulation
     steps = 100
     for _ in range(steps):
@@ -117,9 +114,6 @@ if __name__ == "__main__":
         result_states.append(new_var)
         result_deltas["deltas"].append(kd.create(old_var, new_var))
         old_var = new_var
-
-    # print('After Simulation:')
-    # model.show()
 
     # Compare their sizes
     size_states = sys.getsizeof(result_states)
