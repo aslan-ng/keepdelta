@@ -1,5 +1,7 @@
 from copy import deepcopy
 
+from keepdelta.check import CheckConflict
+from keepdelta.config import keys
 from keepdelta.types.primitives import (
     DeltaBool,
     DeltaComplex,
@@ -7,8 +9,6 @@ from keepdelta.types.primitives import (
     DeltaInt,
     DeltaStr,
 )
-from keepdelta.config import keys
-from keepdelta.check import CheckConflict
 
 
 class Delta:

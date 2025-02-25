@@ -3,9 +3,9 @@ The results of Random Walk is saved and loaded using deltas.
 """
 
 import random
-import keepdelta as kd
 from copy import deepcopy
 
+import keepdelta as kd
 
 # random.seed(42)  # Set the seed for reproducibility
 position = 0  # Initial value
