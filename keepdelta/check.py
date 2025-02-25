@@ -6,7 +6,7 @@ class CheckConflict:
     To check conflicting keys with internal commands which may create issues.
     """
 
-    message = 'The following key is conflicting with internal command: '
+    message = "The following key is conflicting with internal command: "
 
     @staticmethod
     def check_str(input: str) -> None:
@@ -32,7 +32,7 @@ class CheckConflict:
         if conflicting_values:
             raise ValueError(CheckConflict.message + str(conflicting_values))
 
-    @staticmethod   
+    @staticmethod
     def check_set(input: set) -> None:
         """
         Check if set has conflicting keys
@@ -47,6 +47,6 @@ class CheckConflict:
         CheckConflict.check_list(list(input))
 
 
-if __name__ == '__main__':
-    variable = [keys['delete'], 'hello']
+if __name__ == "__main__":
+    variable = [keys["delete"], "hello"]
     CheckConflict.check_list(variable)  # This will raise an error

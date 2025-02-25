@@ -15,102 +15,102 @@ class TestDeltaNested(TolerantTestCase):
         Top level is dict
         """
         old = {
-            'dict': {
-                'bool': False,
-                'int': 1,
-                'float': 1.1,
-                'complex': 1 + 1j,
-                'str': 'hello',
+            "dict": {
+                "bool": False,
+                "int": 1,
+                "float": 1.1,
+                "complex": 1 + 1j,
+                "str": "hello",
             },
-            'list': [
+            "list": [
                 False,  # bool
                 1,  # int
                 1.1,  # float
                 1 + 1j,  # complex
-                'hello',  # str
+                "hello",  # str
             ],
-            'tuple': (
+            "tuple": (
                 False,  # bool
                 1,  # int
                 1.1,  # float
                 1 + 1j,  # complex
-                'hello',  # str
+                "hello",  # str
             ),
-            'set': {
+            "set": {
                 False,  # bool
                 1,  # int
                 1.1,  # float
                 1 + 1j,  # complex
-                'hello',  # str
+                "hello",  # str
             },
         }
         new = {
-            'dict': {
-                'bool': True,
-                'int': 3,
-                'float': 3.3,
-                'complex': 3 + 3j,
-                'str': 'world',
+            "dict": {
+                "bool": True,
+                "int": 3,
+                "float": 3.3,
+                "complex": 3 + 3j,
+                "str": "world",
             },
-            'list': [
+            "list": [
                 True,  # bool
                 3,  # int
                 3.3,  # float
                 3 + 3j,  # complex
-                'world',  # str
+                "world",  # str
             ],
-            'tuple': (
+            "tuple": (
                 True,  # bool
                 3,  # int
                 3.3,  # float
                 3 + 3j,  # complex
-                'world',  # str
+                "world",  # str
             ),
-            'set': {
+            "set": {
                 True,  # bool
                 3,  # int
                 3.3,  # float
                 3 + 3j,  # complex
-                'world',  # str
+                "world",  # str
             },
         }
         delta = {
-            'dict': {
-                'bool': True,
-                'int': 2,
-                'float': 2.2,
-                'complex': 2 + 2j,
-                'str': 'world',
+            "dict": {
+                "bool": True,
+                "int": 2,
+                "float": 2.2,
+                "complex": 2 + 2j,
+                "str": "world",
             },
-            'list': {
+            "list": {
                 0: True,  # bool
                 1: 2,  # int
                 2: 2.2,  # float
-                3: (2+2j),  # complex
-                4: 'world',  # str
+                3: (2 + 2j),  # complex
+                4: "world",  # str
             },
-            'tuple': {
+            "tuple": {
                 0: True,  # bool
                 1: 2,  # int
                 2: 2.2,  # float
-                3: (2+2j),  # complex
-                4: 'world',  # str
+                3: (2 + 2j),  # complex
+                4: "world",  # str
             },
-            'set': {
-                keys['add to set']: {
+            "set": {
+                keys["add to set"]: {
                     True,  # bool
                     3,  # int
                     3.3,  # float
                     3 + 3j,  # complex
-                    'world'  # str
+                    "world",  # str
                 },
-                keys['remove from set']: {
+                keys["remove from set"]: {
                     False,  # bool
                     1,  # int
                     1.1,  # float
                     1 + 1j,  # complex
-                    'hello'  # str
-                }
+                    "hello",  # str
+                },
             },
         }
         self.assertDictAlmostEqual(Delta.create(old, new), delta)
@@ -123,11 +123,11 @@ class TestDeltaNested(TolerantTestCase):
         old = [
             # dict
             {
-                'bool': False,
-                'int': 1,
-                'float': 1.1,
-                'complex': 1 + 1j,
-                'str': 'hello',
+                "bool": False,
+                "int": 1,
+                "float": 1.1,
+                "complex": 1 + 1j,
+                "str": "hello",
             },
             # list
             [
@@ -135,7 +135,7 @@ class TestDeltaNested(TolerantTestCase):
                 1,  # int
                 1.1,  # float
                 1 + 1j,  # complex
-                'hello',  # str
+                "hello",  # str
             ],
             # tuple
             (
@@ -143,7 +143,7 @@ class TestDeltaNested(TolerantTestCase):
                 1,  # int
                 1.1,  # float
                 1 + 1j,  # complex
-                'hello',  # str
+                "hello",  # str
             ),
             # set
             {
@@ -151,17 +151,17 @@ class TestDeltaNested(TolerantTestCase):
                 1,  # int
                 1.1,  # float
                 1 + 1j,  # complex
-                'hello',  # str
+                "hello",  # str
             },
         ]
         new = [
             # dict
             {
-                'bool': True,
-                'int': 3,
-                'float': 3.3,
-                'complex': 3 + 3j,
-                'str': 'world',
+                "bool": True,
+                "int": 3,
+                "float": 3.3,
+                "complex": 3 + 3j,
+                "str": "world",
             },
             # list
             [
@@ -169,7 +169,7 @@ class TestDeltaNested(TolerantTestCase):
                 3,  # int
                 3.3,  # float
                 3 + 3j,  # complex
-                'world',  # str
+                "world",  # str
             ],
             # tuple
             (
@@ -177,7 +177,7 @@ class TestDeltaNested(TolerantTestCase):
                 3,  # int
                 3.3,  # float
                 3 + 3j,  # complex
-                'world',  # str
+                "world",  # str
             ),
             # set
             {
@@ -185,50 +185,50 @@ class TestDeltaNested(TolerantTestCase):
                 3,  # int
                 3.3,  # float
                 3 + 3j,  # complex
-                'world',  # str
+                "world",  # str
             },
         ]
         delta = {
             # dict
             0: {
-                'bool': True,
-                'int': 2,
-                'float': 2.2,
-                'complex': 2 + 2j,
-                'str': 'world',
+                "bool": True,
+                "int": 2,
+                "float": 2.2,
+                "complex": 2 + 2j,
+                "str": "world",
             },
             # list
             1: {
                 0: True,  # bool
                 1: 2,  # int
                 2: 2.2,  # float
-                3: (2+2j),  # complex
-                4: 'world',  # str
+                3: (2 + 2j),  # complex
+                4: "world",  # str
             },
             # tuple
             2: {
                 0: True,  # bool
                 1: 2,  # int
                 2: 2.2,  # float
-                3: (2+2j),  # complex
-                4: 'world',  # str
+                3: (2 + 2j),  # complex
+                4: "world",  # str
             },
             # set
             3: {
-                keys['add to set']: {
+                keys["add to set"]: {
                     True,  # bool
                     3,  # int
                     3.3,  # float
                     3 + 3j,  # complex
-                    'world'  # str
+                    "world",  # str
                 },
-                keys['remove from set']: {
+                keys["remove from set"]: {
                     False,  # bool
                     1,  # int
                     1.1,  # float
                     1 + 1j,  # complex
-                    'hello'  # str
-                }
+                    "hello",  # str
+                },
             },
         }
         self.assertDictAlmostEqual(Delta.create(old, new), delta)
@@ -241,11 +241,11 @@ class TestDeltaNested(TolerantTestCase):
         old = (
             # dict
             {
-                'bool': False,
-                'int': 1,
-                'float': 1.1,
-                'complex': 1 + 1j,
-                'str': 'hello',
+                "bool": False,
+                "int": 1,
+                "float": 1.1,
+                "complex": 1 + 1j,
+                "str": "hello",
             },
             # list
             [
@@ -253,7 +253,7 @@ class TestDeltaNested(TolerantTestCase):
                 1,  # int
                 1.1,  # float
                 1 + 1j,  # complex
-                'hello',  # str
+                "hello",  # str
             ],
             # tuple
             (
@@ -261,7 +261,7 @@ class TestDeltaNested(TolerantTestCase):
                 1,  # int
                 1.1,  # float
                 1 + 1j,  # complex
-                'hello',  # str
+                "hello",  # str
             ),
             # set
             {
@@ -269,17 +269,17 @@ class TestDeltaNested(TolerantTestCase):
                 1,  # int
                 1.1,  # float
                 1 + 1j,  # complex
-                'hello',  # str
+                "hello",  # str
             },
         )
         new = (
             # dict
             {
-                'bool': True,
-                'int': 3,
-                'float': 3.3,
-                'complex': 3 + 3j,
-                'str': 'world',
+                "bool": True,
+                "int": 3,
+                "float": 3.3,
+                "complex": 3 + 3j,
+                "str": "world",
             },
             # list
             [
@@ -287,7 +287,7 @@ class TestDeltaNested(TolerantTestCase):
                 3,  # int
                 3.3,  # float
                 3 + 3j,  # complex
-                'world',  # str
+                "world",  # str
             ],
             # tuple
             (
@@ -295,7 +295,7 @@ class TestDeltaNested(TolerantTestCase):
                 3,  # int
                 3.3,  # float
                 3 + 3j,  # complex
-                'world',  # str
+                "world",  # str
             ),
             # set
             {
@@ -303,55 +303,55 @@ class TestDeltaNested(TolerantTestCase):
                 3,  # int
                 3.3,  # float
                 3 + 3j,  # complex
-                'world',  # str
+                "world",  # str
             },
         )
         delta = {
             # dict
             0: {
-                'bool': True,
-                'int': 2,
-                'float': 2.2,
-                'complex': 2 + 2j,
-                'str': 'world',
+                "bool": True,
+                "int": 2,
+                "float": 2.2,
+                "complex": 2 + 2j,
+                "str": "world",
             },
             # list
             1: {
                 0: True,  # bool
                 1: 2,  # int
                 2: 2.2,  # float
-                3: (2+2j),  # complex
-                4: 'world',  # str
+                3: (2 + 2j),  # complex
+                4: "world",  # str
             },
             # tuple
             2: {
                 0: True,  # bool
                 1: 2,  # int
                 2: 2.2,  # float
-                3: (2+2j),  # complex
-                4: 'world',  # str
+                3: (2 + 2j),  # complex
+                4: "world",  # str
             },
             # set
             3: {
-                keys['add to set']: {
+                keys["add to set"]: {
                     True,  # bool
                     3,  # int
                     3.3,  # float
                     3 + 3j,  # complex
-                    'world'  # str
+                    "world",  # str
                 },
-                keys['remove from set']: {
+                keys["remove from set"]: {
                     False,  # bool
                     1,  # int
                     1.1,  # float
                     1 + 1j,  # complex
-                    'hello'  # str
-                }
+                    "hello",  # str
+                },
             },
         }
         self.assertDictAlmostEqual(Delta.create(old, new), delta)
         self.assertTupleAlmostEqual(Delta.apply(old, delta), new)
 
 
-if __name__ == '__main__':
+if __name__ == "__main__":
     unittest.main()
