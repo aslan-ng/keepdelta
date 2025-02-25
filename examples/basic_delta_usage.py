@@ -1,3 +1,7 @@
+"""
+In this example, we will use dictionaries to demonstrate the basic usage of KeepDelta.
+"""
+
 import keepdelta as kd
 
 # Profile of a person
