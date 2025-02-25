@@ -5,7 +5,7 @@ from keepdelta.types.primitives import (
     DeltaComplex,
     DeltaFloat,
     DeltaInt,
-    DeltaStr
+    DeltaStr,
 )
 from keepdelta.config import keys
 from keepdelta.check import CheckConflict
@@ -15,6 +15,7 @@ class Delta:
     """
     Handle deltas for all variables
     """
+
     @staticmethod
     def create(old, new):
         """
@@ -49,10 +50,10 @@ class Delta:
                     CheckConflict.check_tuple(new)
                     delta = DeltaTuple.create(old, new)
                 else:
-                    print('Variable type not supported: ', type(old))
+                    print("Variable type not supported: ", type(old))
                     raise ValueError
             else:  # Equal and same type
-                delta = keys['nothing']
+                delta = keys["nothing"]
         else:  # Not same type
             if type_new is str:
                 CheckConflict.check_str(new)
@@ -66,41 +67,32 @@ class Delta:
                 CheckConflict.check_tuple(new)
             delta = new  # Rewrite type
         return delta
-    
+
     @staticmethod
     def apply(old, delta):
         """
         Apply delta to the variable
         """
-        if delta == keys['nothing']:  # Equal and same type
+        if delta == keys["nothing"]:  # Equal and same type
             new = deepcopy(old)
         else:
-            if type(old) is bool and \
-                type(delta) is bool:  # bool
+            if type(old) is bool and type(delta) is bool:  # bool
                 new = DeltaBool.apply(old, delta)
-            elif type(old) is complex and \
-                type(delta) is complex:  # complex
+            elif type(old) is complex and type(delta) is complex:  # complex
                 new = DeltaComplex.apply(old, delta)
-            elif type(old) is float and \
-                type(delta) is float:  # float
+            elif type(old) is float and type(delta) is float:  # float
                 new = DeltaFloat.apply(old, delta)
-            elif type(old) is int and \
-                type(delta) is int:  # int
+            elif type(old) is int and type(delta) is int:  # int
                 new = DeltaInt.apply(old, delta)
-            elif type(old) is str and \
-                type(delta) is str:  # str
+            elif type(old) is str and type(delta) is str:  # str
                 new = DeltaStr.apply(old, delta)
-            elif type(old) is dict and \
-                type(delta) is dict:  # dict
+            elif type(old) is dict and type(delta) is dict:  # dict
                 new = DeltaDict.apply(old, delta)
-            elif type(old) is list and \
-                type(delta) is dict:  # list
+            elif type(old) is list and type(delta) is dict:  # list
                 new = DeltaList.apply(old, delta)
-            elif type(old) is set and \
-                type(delta) is dict:  # set
+            elif type(old) is set and type(delta) is dict:  # set
                 new = DeltaSet.apply(old, delta)
-            elif type(old) is tuple and \
-                type(delta) is dict:  # tuple
+            elif type(old) is tuple and type(delta) is dict:  # tuple
                 new = DeltaTuple.apply(old, delta)
             else:  # Variable type not recognized or None
                 new = deepcopy(delta)
@@ -111,6 +103,7 @@ class DeltaDict:
     """
     Handle deltas for dict variables
     """
+
     @staticmethod
     def create(old: dict, new: dict) -> dict:
         """
@@ -124,16 +117,16 @@ class DeltaDict:
         keys_in_new_not_in_old = list(set(new_keys) - set(old_keys))
         for key in keys_in_both:
             delta_value = Delta.create(old[key], new[key])
-            if delta_value != keys['nothing']:
+            if delta_value != keys["nothing"]:
                 delta[key] = delta_value
         for key in keys_in_old_not_in_new:
-            delta[key] = keys['delete']
+            delta[key] = keys["delete"]
         for key in keys_in_new_not_in_old:
             delta_value = Delta.create(None, new[key])
-            if delta_value != keys['nothing']:
+            if delta_value != keys["nothing"]:
                 delta[key] = delta_value
         return delta
-    
+
     @staticmethod
     def apply(old: dict, delta: dict) -> dict:
         """
@@ -143,19 +136,20 @@ class DeltaDict:
         for key in delta:
             delta_value = delta[key]
             if key in old:
-                if delta_value == keys['delete']:
+                if delta_value == keys["delete"]:
                     del new[key]
                 else:
                     new[key] = Delta.apply(old[key], delta_value)
             else:
                 new[key] = delta_value
         return new
-    
+
 
 class DeltaList:
     """
     Handle deltas for list variables
     """
+
     @staticmethod
     def create(old: list, new: list) -> dict:
         """
@@ -196,12 +190,13 @@ class DeltaList:
                 if input[i] is not None:
                     result.append(input[i])
         return result
-    
+
 
 class DeltaTuple:
     """
     Handle deltas for tuple variables
     """
+
     @staticmethod
     def create(old: tuple, new: tuple) -> dict:
         """
@@ -219,12 +214,13 @@ class DeltaTuple:
         old_list = list(old)
         new_list = DeltaList.apply(old_list, delta)
         return tuple(new_list)
-    
+
 
 class DeltaSet:
     """
     Handle deltas for set variables
     """
+
     @staticmethod
     def create(old: set, new: set) -> dict:
         """
@@ -238,14 +234,14 @@ class DeltaSet:
         elements_to_add = annotated_new - annotated_old
         if len(elements_to_add) > 0:
             elements_to_add = DeltaSet.remove_annotation(elements_to_add)
-            delta[keys['add to set']] = elements_to_add
+            delta[keys["add to set"]] = elements_to_add
         # Elements to remove
         elements_to_remove = annotated_old - annotated_new
         if len(elements_to_remove) > 0:
             elements_to_remove = DeltaSet.remove_annotation(elements_to_remove)
-            delta[keys['remove from set']] = elements_to_remove
+            delta[keys["remove from set"]] = elements_to_remove
         return delta
-    
+
     @staticmethod
     def apply(old: set, delta: dict) -> set:
         """
@@ -253,11 +249,13 @@ class DeltaSet:
         """
         # Distinguish between bool and other types
         old_bools = {x for x in old if type(x) is bool}
-        add_bools = {x for x in delta.get(keys['add to set'], set()) if type(x) is bool}
-        remove_bools = {x for x in delta.get(keys['remove from set'], set()) if type(x) is bool}
+        add_bools = {x for x in delta.get(keys["add to set"], set()) if type(x) is bool}
+        remove_bools = {
+            x for x in delta.get(keys["remove from set"], set()) if type(x) is bool
+        }
         old_non_bools = old - old_bools
-        add_non_bools = delta.get(keys['add to set'], set()) - add_bools
-        remove_non_bools = delta.get(keys['remove from set'], set()) - remove_bools
+        add_non_bools = delta.get(keys["add to set"], set()) - add_bools
+        remove_non_bools = delta.get(keys["remove from set"], set()) - remove_bools
         updated_non_bools = (old_non_bools | add_non_bools) - remove_non_bools
         updated_bools = (old_bools | add_bools) - remove_bools
         return updated_non_bools | updated_bools
@@ -268,7 +266,7 @@ class DeltaSet:
         Add type of each variable
         """
         return {(x, str(type(x))) for x in var}
-    
+
     @staticmethod
     def remove_annotation(var: set) -> set:
         """
@@ -277,17 +275,17 @@ class DeltaSet:
         return {x[0] for x in var}
 
 
-if __name__ == '__main__':
-    old_var = {'a': 1, 'b': 2, 'c': {'d': 5, 'e': 2}}
-    new_var = {'a': 3, 'c': {'d': 5, 'e': 3}}
-    expected_delta = {'a': 2, 'b': 'D3L373', 'c': {'e': 1}}
+if __name__ == "__main__":
+    old_var = {"a": 1, "b": 2, "c": {"d": 5, "e": 2}}
+    new_var = {"a": 3, "c": {"d": 5, "e": 3}}
+    expected_delta = {"a": 2, "b": "D3L373", "c": {"e": 1}}
 
     # Create delta
     delta = Delta.create(old_var, new_var)
-    print('Delta:', delta)
-    print('Test delta creation: ', delta == expected_delta)
+    print("Delta:", delta)
+    print("Test delta creation: ", delta == expected_delta)
 
     # Apply delta
     var = Delta.apply(old_var, delta)
-    print('Reconstructed variable:', var)
-    print('Test delta application: ', var == new_var)
+    print("Reconstructed variable:", var)
+    print("Test delta application: ", var == new_var)

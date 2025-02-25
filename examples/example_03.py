@@ -7,7 +7,7 @@ import keepdelta as kd
 from copy import deepcopy
 
 
-#random.seed(42)  # Set the seed for reproducibility
+# random.seed(42)  # Set the seed for reproducibility
 position = 0  # Initial value
 steps = 100
 
@@ -21,10 +21,10 @@ for _ in range(steps):
 
     delta = kd.create(old_position, position)
     deltas.append(delta)
-print(f'>>> Position after {steps} steps: {position}')
+print(f">>> Position after {steps} steps: {position}")
 
 # Reconstruct the result
 position = 0  # Initial value
 for delta in deltas:
     position = kd.apply(position, delta)
-print(f'>>> Position after loading deltas: {position}')
+print(f">>> Position after loading deltas: {position}")
