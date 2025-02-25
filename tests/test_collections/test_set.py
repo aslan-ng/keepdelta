@@ -1,7 +1,7 @@
 import unittest
 
-from keepdelta.types.collections import DeltaSet
 from keepdelta.config import keys
+from keepdelta.types.collections import DeltaSet
 
 
 class TestDeltaSet(unittest.TestCase):
