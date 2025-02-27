@@ -7,7 +7,7 @@ from copy import deepcopy
 
 import keepdelta as kd
 
-# random.seed(42)  # Set the seed for reproducibility
+random.seed(30)  # Set the seed for reproducibility
 position = 0  # Initial value
 steps = 100
 

@@ -14,7 +14,7 @@ class Model:
 
     def add(self, i: int, j: int):
         """
-        Add live cell to the grid
+        Add live cell to the grid.
         """
         self.grid[i][j] = 1
 
@@ -67,7 +67,7 @@ class Model:
 
     def serialize(self) -> dict:
         """
-        Export the current state of the model
+        Export the current state of the model.
         """
         return {
             "grid": self.grid,
@@ -76,7 +76,7 @@ class Model:
 
     def deserialzie(self, data: dict):
         """
-        Load the state of model
+        Load the state of model.
         """
         self.grid = data["grid"]
         self.grid_size = data["grid_size"]

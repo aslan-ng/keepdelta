@@ -1,3 +1,8 @@
+"""
+Tests for the dictionary type handler.
+The result of type handler may differ from the KeepDelta's final result since it's not post-processed.
+"""
+
 import unittest
 
 try:
@@ -9,7 +14,7 @@ from keepdelta.types.collections import DeltaDict
 
 class TestDeltaDict(TolerantTestCase):
 
-    def test_0(self):
+    def test_change(self):
         old = {
             "bool": False,  # bool
             "complex": 1 + 1j,  # complex
@@ -34,7 +39,7 @@ class TestDeltaDict(TolerantTestCase):
         self.assertDictAlmostEqual(DeltaDict.create(old, new), delta)
         self.assertDictAlmostEqual(DeltaDict.apply(old, delta), new)
 
-    def test_1(self):
+    def test_no_change(self):
         old = {
             "bool": False,  # bool
             "complex": 1 + 1j,  # complex

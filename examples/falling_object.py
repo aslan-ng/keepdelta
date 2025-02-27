@@ -25,7 +25,7 @@ class Model:
     def update(self):
         self.position[0] += self.velocity[0] * self.dt  # Update x
         self.position[1] += self.velocity[1] * self.dt  # Update y
-        self.velocity[1] -= self.g * self.dt  #  Gravity accelerates the vy
+        self.velocity[1] -= self.g * self.dt  # Gravity accelerates the vy
 
         if self.position[1] <= 0:
             self.position[1] = (
