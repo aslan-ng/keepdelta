@@ -15,7 +15,7 @@
 In many computational scenarios, efficiently managing evolving data states is crucial. Traditional methods that rely on full-state encoding (complete snapshots at each step) can be inefficient due to the large size of the snapshots. Delta encoding addresses this challenge by capturing and applying only the changes (deltas) between successive states of data structures, resulting in significantly smaller and more manageable data.
 
 <div align="center">
-    <img src="assets/delta_encoding.png" alt="Comparison between traditional data management method and delta encoding." width="400">
+    <img src="assets/delta_encoding.png" alt="Comparison between traditional data management method and delta encoding." width="500">
     </br>
     Managing evolving data states by full-state encoding (left) vs. delta encoding (right).
 </div>
