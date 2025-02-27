@@ -22,7 +22,8 @@ class Delta:
         Create delta for the variables
         """
         type_new = type(new)  # Avoid multiple calls to type()
-        if type(old) == type_new:  # Same type
+        type_old = type(old)  # Avoid multiple calls to type()
+        if type_old == type_new:  # Same type
             if old != new:  # Inequal and same type
                 if old is None:  # none
                     delta = new
@@ -55,6 +56,18 @@ class Delta:
             else:  # Equal and same type
                 delta = keys["nothing"]
         else:  # Not same type
+            # Check `old`
+            if type_old is str:
+                CheckConflict.check_str(old)
+            elif type_old is dict:
+                CheckConflict.check_dict(old)
+            elif type_old is list:
+                CheckConflict.check_list(old)
+            elif type_old is set:
+                CheckConflict.check_set(old)
+            elif type_old is tuple:
+                CheckConflict.check_tuple(old)
+            # Check `new`
             if type_new is str:
                 CheckConflict.check_str(new)
             elif type_new is dict:

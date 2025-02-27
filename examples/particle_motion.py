@@ -13,7 +13,7 @@ class Particle:
 
     def update(self, delta_t: float = 0):
         """
-        Update the particle's position based on its velocity and the time step
+        Update the particle's position based on its velocity and the time step.
         """
         new_x = self.position[0] + self.velocity[0] * delta_t
         new_y = self.position[1] + self.velocity[1] * delta_t
@@ -21,7 +21,7 @@ class Particle:
 
     def serialize(self):
         """
-        Conver the data defining the particle into a Python data format
+        Convert the data defining the particle into a Python data format.
         """
         return {
             "position": self.position,
@@ -30,7 +30,7 @@ class Particle:
 
     def deserialize(self, data):
         """
-        Load the object from the proper Python data format
+        Load the object from the proper Python data format.
         """
         self.position = data["position"]
         self.velocity = data["velocity"]
@@ -43,27 +43,27 @@ class Model:
 
     def add(self, agent: Particle):
         """
-        Add new particle to the model
+        Add new particle to the model.
         """
         self.particles.append(agent)
 
     def update(self, delta_t):
         """
-        Update model for a given time step
+        Update model for a given time step.
         """
         for particle in self.particles:
             particle.update(delta_t)
 
     def run(self, step_size: float = 1, steps: int = 1):
         """
-        Run the simulation for a number of steps
+        Run the simulation for a number of steps.
         """
         for _ in range(steps):
             self.update(step_size)
 
     def serialize(self):
         """
-        Convert the model into a Python data format
+        Convert the model into a Python data format.
         """
         result = []
         for particle in self.particles:
@@ -72,7 +72,7 @@ class Model:
 
     def deserialize(self, data):
         """
-        Reconstruct the model from a Python data format
+        Reconstruct the model from a Python data format.
         """
         self.particles = []
         for particle_data in data:

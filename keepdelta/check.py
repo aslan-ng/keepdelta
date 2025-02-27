@@ -1,3 +1,10 @@
+"""
+There are a few string values that are reserved for internal use. These
+variables are used to store information about the changes that have been made
+to the object. The reserved variables can be found in the `keepdelta.config`
+module.
+"""
+
 from keepdelta.config import keys
 
 
@@ -7,13 +14,14 @@ class CheckConflict:
     """
 
     message = "The following key is conflicting with internal command: "
+    values = keys.values()
 
     @staticmethod
     def check_str(input: str) -> None:
         """
         Check if str has conflicting keys
         """
-        if input in keys.values():
+        if input in CheckConflict.values:
             raise ValueError(CheckConflict.message + str(input))
 
     @staticmethod
@@ -21,6 +29,7 @@ class CheckConflict:
         """
         Check if dict has conflicting keys
         """
+        CheckConflict.check_list(input.keys())
         CheckConflict.check_list(input.values())
 
     @staticmethod
@@ -28,7 +37,7 @@ class CheckConflict:
         """
         Check if list has conflicting keys
         """
-        conflicting_values = [value for value in input if value in keys.values()]
+        conflicting_values = [value for value in input if value in CheckConflict.values]
         if conflicting_values:
             raise ValueError(CheckConflict.message + str(conflicting_values))
 

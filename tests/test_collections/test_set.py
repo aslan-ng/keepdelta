@@ -1,3 +1,8 @@
+"""
+Tests for the set type handler.
+The result of type handler may differ from the KeepDelta's final result since it's not post-processed.
+"""
+
 import unittest
 
 from keepdelta.config import keys
@@ -6,7 +11,7 @@ from keepdelta.types.collections import DeltaSet
 
 class TestDeltaSet(unittest.TestCase):
 
-    def test_0(self):
+    def test_change(self):
         """
         All elements are changed
         """
@@ -43,7 +48,7 @@ class TestDeltaSet(unittest.TestCase):
         self.assertDictEqual(DeltaSet.create(old, new), delta)
         self.assertSetEqual(DeltaSet.apply(old, delta), new)
 
-    def test_1(self):
+    def test_no_change(self):
         """
         No elements are changed
         """
@@ -65,7 +70,7 @@ class TestDeltaSet(unittest.TestCase):
         self.assertDictEqual(DeltaSet.create(old, new), delta)
         self.assertSetEqual(DeltaSet.apply(old, delta), new)
 
-    def test_2(self):
+    def test_increase_size(self):
         """
         New element added
         """
@@ -90,7 +95,7 @@ class TestDeltaSet(unittest.TestCase):
         self.assertDictEqual(DeltaSet.create(old, new), delta)
         self.assertSetEqual(DeltaSet.apply(old, delta), new)
 
-    def test_3(self):
+    def test_decrease_size(self):
         """
         Old element removed
         """

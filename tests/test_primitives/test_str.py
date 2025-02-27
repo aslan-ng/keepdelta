@@ -1,3 +1,8 @@
+"""
+Tests for the string type handler.
+The result of type handler may differ from the KeepDelta's final result since it's not post-processed.
+"""
+
 import unittest
 
 from keepdelta.types.primitives import DeltaStr
@@ -5,9 +10,9 @@ from keepdelta.types.primitives import DeltaStr
 
 class TestDeltaStr(unittest.TestCase):
 
-    def test_0(self):
+    def test_change(self):
         """
-        Normal change
+        String variable is changed.
         """
         old = "hello"
         new = "world"
@@ -15,9 +20,9 @@ class TestDeltaStr(unittest.TestCase):
         self.assertEqual(DeltaStr.create(old, new), delta)
         self.assertEqual(DeltaStr.apply(old, delta), new)
 
-    def test_1(self):
+    def test_no_change(self):
         """
-        No changes
+        String variable has no changes.
         """
         old = "hello"
         new = "hello"

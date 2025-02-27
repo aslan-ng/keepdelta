@@ -1,30 +1,37 @@
+from typing import Union
+
 from keepdelta.types.collections import Delta
 
 
-def create(old, new):
+def create(
+        old: Union[None, bool, complex, float, int, str, dict, list, tuple, set],
+        new: Union[None, bool, complex, float, int, str, dict, list, tuple, set],
+    ) -> Union[None, bool, complex, float, int, str, dict]:
     """
     Generates a delta representing the differences between the 'old' and 'new' variables.
 
-    Parameters:
-    - old: The original data structure, restricted to supported types.
-    - new: The updated data structure of the same type as 'old'.
+    Args:
+        old (None | bool | complex | float | int | str | dict | list | tuple | set): The original data structure.
+        new (None | bool | complex | float | int | str | dict | list | tuple | set): The updated data structure.
 
     Returns:
-    - A delta object capturing the differences between 'old' and 'new'.
+        delta (None | bool | complex | float | int | str | dict): A delta object capturing the differences.
     """
     return Delta.create(old, new)
 
-
-def apply(old, delta):
+def apply(
+        old: Union[None, bool, complex, float, int, str, dict, list, tuple, set],
+        delta: Union[None, bool, complex, float, int, str, dict]
+    ) -> Union[None, bool, complex, float, int, str, dict, list, tuple, set]:
     """
     Applies a previously generated delta to the 'old' variable to recreate the updated version.
 
-    Parameters:
-    - old: The original data structure, restricted to supported types.
-    - delta: A delta object capturing the differences to be applied to 'old'.
+    Args:
+        old (None | bool | complex | float | int | str | dict | list | tuple | set): The original data structure.
+        delta (None | bool | complex | float | int | str | dict): A delta object to be applied to 'old'.
 
     Returns:
-    - The updated data structure after applying the delta.
+        new (None | bool | complex | float | int | str | dict | list | tuple | set): The updated data structure.
     """
     return Delta.apply(old, delta)
 

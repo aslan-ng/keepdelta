@@ -1,3 +1,7 @@
+"""
+Tests for the nested data structures.
+"""
+
 import unittest
 
 try:
@@ -10,7 +14,7 @@ from keepdelta.config import keys
 
 class TestDeltaNested(TolerantTestCase):
 
-    def test_0(self):
+    def test_dict_top(self):
         """
         Top level is dict
         """
@@ -116,7 +120,7 @@ class TestDeltaNested(TolerantTestCase):
         self.assertDictAlmostEqual(Delta.create(old, new), delta)
         self.assertDictAlmostEqual(Delta.apply(old, delta), new)
 
-    def test_1(self):
+    def test_list_top(self):
         """
         Top level is list
         """
@@ -234,7 +238,7 @@ class TestDeltaNested(TolerantTestCase):
         self.assertDictAlmostEqual(Delta.create(old, new), delta)
         self.assertListAlmostEqual(Delta.apply(old, delta), new)
 
-    def test_2(self):
+    def test_tuple_top(self):
         """
         Top level is tuple
         """

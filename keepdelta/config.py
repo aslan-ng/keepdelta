@@ -1,5 +1,7 @@
 """
-Commands (keys) reserved for internal data handling
+These are the internal variables that are reserved for internal use. These
+variables are used to store information about the changes that have been made
+to the object. It is possible to change them here based on specific requirements.
 """
 
 keys = {

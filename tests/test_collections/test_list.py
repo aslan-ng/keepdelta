@@ -1,3 +1,8 @@
+"""
+Tests for the list type handler.
+The result of type handler may differ from the KeepDelta's final result since it's not post-processed.
+"""
+
 import unittest
 
 try:
@@ -10,7 +15,7 @@ from keepdelta.config import keys
 
 class TestDeltaList(TolerantTestCase):
 
-    def test_0(self):
+    def test_change(self):
         """
         All elements change
         """
@@ -38,7 +43,7 @@ class TestDeltaList(TolerantTestCase):
         self.assertDictAlmostEqual(DeltaList.create(old, new), delta)
         self.assertListAlmostEqual(DeltaList.apply(old, delta), new)
 
-    def test_1(self):
+    def test_no_change(self):
         """
         No elements change
         """
@@ -60,7 +65,7 @@ class TestDeltaList(TolerantTestCase):
         self.assertDictEqual(DeltaList.create(old, new), delta)
         self.assertListEqual(DeltaList.apply(old, delta), new)
 
-    def test_2(self):
+    def test_size_change(self):
         """
         Change in size
         """

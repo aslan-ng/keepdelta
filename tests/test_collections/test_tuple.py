@@ -1,11 +1,20 @@
+"""
+Tests for the tuple type handler.
+The result of type handler may differ from the KeepDelta's final result since it's not post-processed.
+"""
+
 import unittest
 
+try:
+    from .assertEqual import TolerantTestCase
+except:
+    from assertEqual import TolerantTestCase
 from keepdelta.types.collections import DeltaTuple
 
 
-class TestDeltaTuple(unittest.TestCase):
+class TestDeltaTuple(TolerantTestCase):
 
-    def test_0(self):
+    def test_change(self):
         old = (
             False,  # bool
             1 + 1j,  # complex
@@ -23,14 +32,14 @@ class TestDeltaTuple(unittest.TestCase):
         delta = {
             0: True,  # bool
             1: (2 + 2j),  # complex
-            2: 2.1999999999999997,  # float
+            2: 2.2,  # float
             3: 2,  # int
             4: "world",  # str
         }
-        self.assertDictEqual(DeltaTuple.create(old, new), delta)
-        self.assertTupleEqual(DeltaTuple.apply(old, delta), new)
+        self.assertDictAlmostEqual(DeltaTuple.create(old, new), delta)
+        self.assertTupleAlmostEqual(DeltaTuple.apply(old, delta), new)
 
-    def test_1(self):
+    def test_no_change(self):
         old = (
             False,  # bool
             1 + 1j,  # complex
