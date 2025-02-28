@@ -4,7 +4,7 @@
         <img src="assets/logo.png" alt="Logo" width="90" height="90">
     </a>
     <h3>KeepDelta</h3>
-    <p>Efficient Delta Management for Python Data Structures</p>
+    <p>Efficient Data Differencing for Python Data Structures</p>
 </div>
 
 ![Header](assets/header.png)
