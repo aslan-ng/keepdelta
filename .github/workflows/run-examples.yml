@@ -45,6 +45,11 @@ jobs:
 
     - name: Display Python version
       run: python --version
+
+    - name: Install keepdelta
+      run: |
+        pip install --upgrade pip
+        pip install -e .
   
     - name: Run all example scripts
       run: |
