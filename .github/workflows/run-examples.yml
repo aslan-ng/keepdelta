@@ -1,4 +1,4 @@
-name: Run Tests
+name: Run Examples
 
 on:
   push:
@@ -6,20 +6,20 @@ on:
       - main
     paths:
       - keepdelta/**
-      - tests/**
+      - examples/**
       - setup.py
-      - .github/workflows/run-tests.yml
+      - .github/workflows/run-examples.yml
   pull_request:
     branches:
       - main
     paths:
       - keepdelta/**
-      - tests/**
+      - examples/**
       - setup.py
-      - .github/workflows/run-tests.yml
+      - .github/workflows/run-examples.yml
 
 jobs:
-  test:
+  run-examples:
     runs-on: ubuntu-22.04
 
     strategy:
@@ -46,5 +46,9 @@ jobs:
     - name: Display Python version
       run: python --version
   
-    - name: Run tests
-      run: python tests/tests.py
+    - name: Run all example scripts
+      run: |
+        for script in examples/*.py; do
+          echo "Running $script"
+          python "$script"
+        done
