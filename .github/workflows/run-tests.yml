@@ -1,12 +1,21 @@
-name: Python Tests
-
+name: Run Tests
 on:
   push:
     branches:
       - main
+    paths:
+      - '.github/run-tests.yml'
+      - 'keepdelta/**'
+      - 'tests/**'
+      - 'setup.py'
   pull_request:
     branches:
       - main
+    paths:
+      - '.github/run-tests.yml'
+      - 'keepdelta/**'
+      - 'tests/**'
+      - 'setup.py'
 
 jobs:
   test:
