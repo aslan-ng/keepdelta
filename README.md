@@ -17,7 +17,7 @@ In many computational scenarios, efficiently managing evolving data states is cr
 <div align="center">
     <img src="assets/delta_encoding.png" alt="Comparison between traditional data management method and delta encoding." width="500">
     </br>
-    Managing evolving data states by full-state encoding (left) vs. delta encoding (right).
+    Managing evolving data structures by full-state encoding (left) vs. delta encoding (right).
 </div>
 
 ## Features
