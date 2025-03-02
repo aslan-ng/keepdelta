@@ -66,7 +66,7 @@ The `create` function compares the `old` and `new` variables to generate `delta`
 ```
 
 2. `apply(old, delta)`:
-The `apply` function takes the `old` variable and the `delta`, then applies the `delta` to recreate the updated, new variable.
+The `apply` function takes the `old` variable and the `delta`, then applies the `delta` to recreate the updated, `new` variable.
 #### Example:
 ```python
 >>> import keepdelta as kd
