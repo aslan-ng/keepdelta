@@ -8,6 +8,7 @@ on:
       - keepdelta/**
       - examples/**
       - setup.py
+      - pyproject.toml
       - .github/workflows/run-examples.yml
   pull_request:
     branches:
@@ -16,6 +17,7 @@ on:
       - keepdelta/**
       - examples/**
       - setup.py
+      - pyproject.toml
       - .github/workflows/run-examples.yml
 
 jobs:
