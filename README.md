@@ -1,11 +1,24 @@
-<br />
-<div align="center">
-    <a href="https://github.com/aslan-ng/KeepDelta">
-        <img src="assets/logo.png" alt="Logo" width="90" height="90">
-    </a>
-    <h3>KeepDelta</h3>
-    <p>Efficient Data Differencing for Python Data Structures</p>
-</div>
+<h1 align="center">
+  <br>
+  <a href="https://github.com/aslan-ng/keepdelta">
+  <img src="assets/logo.png" alt="KeepDelta" width="120">
+  </a>
+  <br>
+  KeepDelta
+  <br>
+</h1>
+
+<h3 align="center">
+    Efficient Data Differencing for Python Data Structures
+</h3>
+
+<p align="center">
+  <a href="https://coveralls.io/github/your-username/KeepDelta?branch=main">
+    <img
+        src="https://coveralls.io/repos/github/your-username/KeepDelta/badge.svg?branch=main" alt="Coverage"
+    >
+  </a>
+</p>
 
 ![Header](assets/header.png)
 
