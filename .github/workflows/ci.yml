@@ -31,6 +31,14 @@ jobs:
         run: |
           coverage run --source=keepdelta -m unittest discover -s tests
           coverage xml
+          coverage html
+          coverage report  # Print summary to logs
+
+      - name: Upload coverage report (HTML)
+        uses: actions/upload-artifact@v3
+        with:
+          name: html-coverage-report
+          path: coverage/
 
       - name: Upload coverage to Coveralls
         env:
