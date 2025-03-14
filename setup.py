@@ -9,7 +9,7 @@ setup(
     long_description_content_type="text/markdown",
     author="Aslan Noorghasemi, Christopher McComb",
     author_email="aslann@cmu.edu, ccm@cmu.edu",
-    url="https://github.com/aslan-ng/KeepDelta",
+    url="https://github.com/aslan-ng/keepdelta",
     license="MIT",
     packages=find_packages(),
     install_requires=[],
