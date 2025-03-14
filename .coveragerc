@@ -1,2 +1,6 @@
 [run]
 relative_files = True
+
+[report]
+exclude_lines =
+    if __name__ == "__main__":
