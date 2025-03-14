@@ -4,13 +4,15 @@ on:
   push:
     branches: [main]
     paths:
-        - 'keepdelta/**'
-        - 'tests/**'
+        - keepdelta/**
+        - tests/**
+        - .github/workflows/ci.yml
   pull_request:
     branches: [main]
     paths:
-        - 'keepdelta/**'
-        - 'tests/**'
+        - keepdelta/**
+        - tests/**
+        - .github/workflows/ci.yml
 
 jobs:
   test:
