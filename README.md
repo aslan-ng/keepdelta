@@ -13,9 +13,7 @@
 </h3>
 
 <p align="center">
-    <a href='https://coveralls.io/github/aslan-ng/keepdelta?branch=main'>
-        <img src='https://coveralls.io/repos/github/aslan-ng/keepdelta/badge.svg?branch=main' alt='Coverage Status' />
-    </a>
+    <a href='https://coveralls.io/github/aslan-ng/keepdelta?branch=main'><img src='https://coveralls.io/repos/github/aslan-ng/keepdelta/badge.svg?branch=main' alt='Coverage Status' /></a>
 </p>
 
 ![Header](assets/header.png)
