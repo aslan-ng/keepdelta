@@ -1,3 +1,27 @@
 [build-system]
 requires = ["setuptools>=64", "wheel"]
 build-backend = "setuptools.build_meta"
+
+[tool.setuptools]
+packages = ["keepdelta"]
+
+[project]
+name = "keepdelta"
+version = "0.1.2"
+description = "Efficient Delta Management for Python Data Structures"
+readme = "README.md"
+license = {text = "MIT"}
+authors = [
+    { name = "Aslan Noorghasemi", email = "aslann@cmu.edu" },
+    { name = "Christopher McComb", email = "ccm@cmu.edu" }
+]
+dependencies = []
+requires-python = ">=3.7"
+classifiers = [
+    "Programming Language :: Python :: 3",
+    "License :: OSI Approved :: MIT License",
+    "Operating System :: OS Independent"
+]
+
+[project.urls]
+Homepage = "https://github.com/aslan-ng/keepdelta"
