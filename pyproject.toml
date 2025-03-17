@@ -25,3 +25,4 @@ classifiers = [
 
 [project.urls]
 Homepage = "https://github.com/aslan-ng/keepdelta"
+Issues = "https://github.com/aslan-ng/keepdelta/issues"
