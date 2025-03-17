@@ -51,8 +51,7 @@ class Delta:
                     CheckConflict.check_tuple(new)
                     delta = DeltaTuple.create(old, new)
                 else:
-                    print("Variable type not supported: ", type(old))
-                    raise ValueError
+                    raise ValueError("Variable type not supported: ", type(old))
             else:  # Equal and same type
                 delta = keys["nothing"]
         else:  # Not same type
