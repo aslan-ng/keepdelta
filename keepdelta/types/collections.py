@@ -24,7 +24,7 @@ class Delta:
         type_new = type(new)  # Avoid multiple calls to type()
         type_old = type(old)  # Avoid multiple calls to type()
         if type_old == type_new:  # Same type
-            if old != new:  # Inequal and same type
+            if old != new:  # Unequal and same type
                 if old is None:  # none
                     delta = new
                 elif type_new is bool:  # bool
