@@ -25,7 +25,6 @@ authors:
 affiliations:
   - index: 1
     name: Carnegie Mellon University, Pittsburgh, PA, USA
-   
 
 date: 1 January 2025
 bibliography: paper.bib
@@ -44,7 +43,7 @@ High-frequency data sampling is fundamental in both scientific simulations and r
 
 First and foremost, KeepDelta applies to simulation. Simulation is a widely used methodology across all applied science disciplines, offering a flexible, powerful, and intuitive tool for designing processes or systems and maximizing their efficiency [@SimulationExperiments]. Specifically, computational simulations are invaluable tools for studying complex systems and their behaviors [@ComplexSystemsSimulation]. These studies often take the form of computer experiments, where data is generated through pseudo-random sampling from known probability distributions. This approach serves as an invaluable resource for research, particularly in evaluating new methods and comparing alternative approaches [@SimulationStudies]. 
 
-Secondly, KeepDelta also applied to remote sensing. Sensing technologies are employed across diverse scientific and engineering domains, enabling continuous monitoring and analysis of dynamic environments. It is common for these systems to utilize an set of sensors to capture real-time data, which is essential for studying systems behaviors, informed decision-making, and system optimization [@RemotePhysiologicalandEnvironmentalMonitoring] [@agricultureIoT].
+Secondly, KeepDelta also applied to remote sensing. Sensing technologies are employed across diverse scientific and engineering domains, enabling continuous monitoring and analysis of dynamic environments. It is common for these systems to utilize a set of sensors to capture real-time data, which is essential for studying systems behaviors, informed decision-making, and system optimization [@RemotePhysiologicalandEnvironmentalMonitoring] [@agricultureIoT].
 
 Both simulations and sensing require mechanisms to track and store evolving states of data structures over time. In simulations, the naive approach of saving full snapshots at every timestep leads to excessive storage demands, while recalculating states from scratch is computationally expensive. Similarly, in sensing applications, continuously storing or transmitting full data snapshots is impractical, particularly in bandwidth-limited and remote environments. Instead of relying on these easy-to-implement but inefficient methods, KeepDelta introduces an optimized middle ground by saving only the _deltas_ (changes) between states, significantly reducing storage and computation overhead. This Delta Encoding technique has been successfully applied in other domains where managing evolving data efficiently is critical, such as web development [@DeltaEncodingInHTTP] and software version management [@NaiveDifferencesOfExecutableCode].
 
