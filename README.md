@@ -23,7 +23,7 @@
 
 ![Header Image](https://raw.githubusercontent.com/aslan-ng/keepdelta/refs/heads/main/assets/header.png)
 
-*KeepDelta* is a lightweight Python library designed to efficiently track and manage changes (deltas) between Python built-in types. It is applicable to various scenarios  that require dynamic data management, especially when incremental numerical changes are present, such as simulations and sensing. Unlike binary-level tools, KeepDelta emphasizes human-readable delta encoding, facilitating debugging and analysis for Python developers and researchers across multiple domains.
+*KeepDelta* is a lightweight Python library designed to efficiently track and manage changes (deltas) between Python built-in types. It is applicable to various scenarios  that require dynamic data management, especially when incremental numerical changes are present, such as simulations and sensing. While many alternative tools operate at the binary level, KeepDelta emphasizes human-readable delta encoding, facilitating debugging and analysis for Python developers and researchers across multiple domains.
 
 ## What is Delta Encoding?
 In many computational scenarios, efficiently managing evolving data states is crucial. Traditional methods that rely on full-state encoding, which means storing and/or transmitting complete snapshots at each step, can be inefficient due to the large size of the snapshots. Delta encoding addresses this challenge by capturing and applying only the changes (deltas) between successive states of data structures, resulting in significantly smaller and more manageable data.
@@ -35,11 +35,11 @@ In many computational scenarios, efficiently managing evolving data states is cr
 </div>
 
 ## Features
-* Generate compact and human-readable differences between two Python variables.
-* Apply delta to a variable to reconstruct the updated version.
+* Generates compact and human-readable differences between two Python variables.
+* Applies delta to a variable to reconstruct the updated version.
 * Supports common Python built-in data types.
 * Handles deeply nested and mixed data structures efficiently.
-* No external dependencies.
+* Requires no external dependencies.
 
 ## Installation
 Install the package using pip:
