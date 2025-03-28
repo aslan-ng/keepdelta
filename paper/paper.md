@@ -38,7 +38,7 @@ bibliography: paper.bib
 Efficiently managing evolving data is crucial in applications like computational simulations and sensing, where dynamic data tracking and processing are essential. In simulations, traditional methods of storing complete snapshots (full-state encoding) at each step can be highly storage intensive; in contrast, recalculating states from scratch is computationally expensive. Similarly, in sensing, continuously transmitting full data snapshots is inefficient, leading to increased bandwidth consumption and latency.
 _KeepDelta_ addresses this challenge by providing a lightweight Python library that captures and applies only the changes (deltas) between successive states of complex, nested Python data structures. Designed for clarity and ease of use, `KeepDelta` produces human-readable outputs, facilitating debugging and analysis in research applications.
 
-![KeepDelta logo.](./assets/logo.png){width=20%}
+![KeepDelta logo](./assets/logo.png){width=15%}
 
 
 # Statement of need
