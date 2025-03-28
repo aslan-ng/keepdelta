@@ -21,8 +21,8 @@ class TestReservedNamesSet(unittest.TestCase):
                 True,
             }
             delta = {
-                "add": {"hello"},
-                "remove": {conflict}
+                keys["add to set"]: {"hello"},
+                keys["remove from set"]: {conflict}
             }
             self.assertEqual(kd.create(old, new), delta)
             self.assertEqual(kd.apply(old, delta), new)

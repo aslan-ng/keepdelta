@@ -10,11 +10,15 @@ try:
 except:
     from assertEqual import TolerantTestCase
 from keepdelta.types.collections import DeltaTuple
+from keepdelta.config import keys
 
 
 class TestDeltaTuple(TolerantTestCase):
 
     def test_change(self):
+        """
+        All elements change
+        """
         old = (
             False,  # bool
             1 + 1j,  # complex
@@ -40,6 +44,9 @@ class TestDeltaTuple(TolerantTestCase):
         self.assertTupleAlmostEqual(DeltaTuple.apply(old, delta), new)
 
     def test_no_change(self):
+        """
+        No elements change
+        """
         old = (
             False,  # bool
             1 + 1j,  # complex
@@ -55,6 +62,52 @@ class TestDeltaTuple(TolerantTestCase):
             "hello",  # str
         )
         delta = {}
+        self.assertDictEqual(DeltaTuple.create(old, new), delta)
+        self.assertTupleEqual(DeltaTuple.apply(old, delta), new)
+
+    def test_add(self):
+        """
+        Add a new element
+        """
+        old = (
+            False,  # bool
+            1 + 1j,  # complex
+            1.1,  # float
+            1,  # int
+        )
+        new = (
+            False,  # bool
+            1 + 1j,  # complex
+            1.1,  # float
+            1,  # int
+            "hello",  # str
+        )
+        delta = {
+            4: "hello",
+        }
+        self.assertDictEqual(DeltaTuple.create(old, new), delta)
+        self.assertTupleEqual(DeltaTuple.apply(old, delta), new)
+
+    def test_delete(self):
+        """
+        Delete an old element
+        """
+        old = (
+            False,  # bool
+            1 + 1j,  # complex
+            1.1,  # float
+            1,  # int
+            "hello",  # str
+        )
+        new = (
+            False,  # bool
+            1 + 1j,  # complex
+            1.1,  # float
+            1,  # int
+        )
+        delta = {
+            4: keys["delete"],
+        }
         self.assertDictEqual(DeltaTuple.create(old, new), delta)
         self.assertTupleEqual(DeltaTuple.apply(old, delta), new)
 

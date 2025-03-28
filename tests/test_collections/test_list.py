@@ -65,9 +65,32 @@ class TestDeltaList(TolerantTestCase):
         self.assertDictEqual(DeltaList.create(old, new), delta)
         self.assertListEqual(DeltaList.apply(old, delta), new)
 
-    def test_size_change(self):
+    def test_add(self):
         """
-        Change in size
+        Add a new element
+        """
+        old = [
+            False,  # bool
+            1 + 1j,  # complex
+            1.1,  # float
+            1,  # int
+        ]
+        new = [
+            False,  # bool
+            1 + 1j,  # complex
+            1.1,  # float
+            1,  # int
+            "hello",  # str
+        ]
+        delta = {
+            4: "hello",
+        }
+        self.assertDictEqual(DeltaList.create(old, new), delta)
+        self.assertListEqual(DeltaList.apply(old, delta), new)
+
+    def test_delete(self):
+        """
+        Delete an old element
         """
         old = [
             False,  # bool

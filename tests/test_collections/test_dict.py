@@ -10,11 +10,15 @@ try:
 except:
     from assertEqual import TolerantTestCase
 from keepdelta.types.collections import DeltaDict
+from keepdelta.config import keys
 
 
 class TestDeltaDict(TolerantTestCase):
 
     def test_change(self):
+        """
+        All elements change
+        """
         old = {
             "bool": False,  # bool
             "complex": 1 + 1j,  # complex
@@ -40,6 +44,9 @@ class TestDeltaDict(TolerantTestCase):
         self.assertDictAlmostEqual(DeltaDict.apply(old, delta), new)
 
     def test_no_change(self):
+        """
+        No elements change
+        """
         old = {
             "bool": False,  # bool
             "complex": 1 + 1j,  # complex
@@ -55,6 +62,38 @@ class TestDeltaDict(TolerantTestCase):
             "str": "hello",  # str
         }
         delta = {}
+        self.assertDictEqual(DeltaDict.create(old, new), delta)
+        self.assertDictEqual(DeltaDict.apply(old, delta), new)
+
+    def test_add(self):
+        """
+        Add a new element
+        """
+        old = {
+            "one": 1,
+            "two": 2,
+        }
+        new = {
+            "one": 1,
+        }
+        delta = {"two": keys["delete"]}
+        self.assertDictEqual(DeltaDict.create(old, new), delta)
+        self.assertDictEqual(DeltaDict.apply(old, delta), new)
+
+    def test_delete(self):
+        """
+        Delete an old element
+        """
+        old = {
+            "one": 1,
+            "two": 2,
+        }
+        new = {
+            "one": 1,
+            "two": 2,
+            "three": 3,
+        }
+        delta = {"three": 3}
         self.assertDictEqual(DeltaDict.create(old, new), delta)
         self.assertDictEqual(DeltaDict.apply(old, delta), new)
 

@@ -10,6 +10,8 @@ class TolerantTestCase(unittest.TestCase):
         """
         Asserts that two dictionaries are equal, with tolerance for float comparisons.
         """
+        if not isinstance(dict1, dict) or not isinstance(dict2, dict):
+            raise ValueError("Both arguments must be dicts.")
         self.assertEqual(
             set(dict1.keys()), set(dict2.keys()), msg or "Keys do not match."
         )
@@ -53,6 +55,8 @@ class TolerantTestCase(unittest.TestCase):
         Asserts that two lists are equal, with tolerance for float comparisons.
         """
         self.assertEqual(len(list1), len(list2), msg or "List lengths do not match.")
+        if not isinstance(list1, list) or not isinstance(list2, list):
+            raise ValueError("Both arguments must be lists.")
         for i, (val1, val2) in enumerate(zip(list1, list2)):
             if isinstance(val1, float) and isinstance(val2, float):
                 self.assertAlmostEqual(
@@ -83,6 +87,8 @@ class TolerantTestCase(unittest.TestCase):
         Asserts that two tuples are equal, with tolerance for float comparisons.
         """
         self.assertEqual(len(tuple1), len(tuple2), msg or "Tuple lengths do not match.")
+        if not isinstance(tuple1, tuple) or not isinstance(tuple2, tuple):
+            raise ValueError("Both arguments must be tuples.")
         for i, (val1, val2) in enumerate(zip(tuple1, tuple2)):
             if isinstance(val1, float) and isinstance(val2, float):
                 self.assertAlmostEqual(
