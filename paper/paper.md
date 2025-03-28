@@ -61,5 +61,4 @@ xdelta3 [@xdelta3] and its predecessor, xdelta [@xdelta], are tools that perform
 deepdiff [@deepdiff] is a contemporary library that facilitates the identification of differences between complex Python data structures, including dictionaries, lists, and sets. It extends support to external libraries like NumPy [@numpy], enhancing its versatility. However, this integration can lead to outputs that are less human-readable compared to KeepDelta. Additionally, deepdiff introduces weighty dependencies that may not be necessary for all projects.
 In contrast to these alternatives, KeepDelta is a lightweight Python library optimized for simulations, focusing on efficient delta management for native Python data structures. It operates directly on Python’s native data types, producing human-readable outputs that facilitate debugging and research applications. Implemented in pure Python, KeepDelta eliminates external dependencies, making it an ideal choice for Python-centric workflows, particularly in simulations and data analysis tasks.
 
-
 # References
