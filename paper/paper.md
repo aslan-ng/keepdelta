@@ -25,7 +25,7 @@ authors:
   
 affiliations:
   - index: 1
-    name: Carnegie Mellon University, Pittsburgh, PA, USA
+    name: Mechanical Engineering Department, Carnegie Mellon University, USA
     ror: 05x2bcf33
 
 date: 28 March 2025
