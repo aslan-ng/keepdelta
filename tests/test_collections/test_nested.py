@@ -13,7 +13,9 @@ from keepdelta.config import keys
 
 
 class TestDeltaNested(TolerantTestCase):
-
+    """
+    All elements change in a nested data structure
+    """
     def test_dict_top(self):
         """
         Top level is dict
@@ -349,6 +351,528 @@ class TestDeltaNested(TolerantTestCase):
                     1,  # int
                     1.1,  # float
                     1 + 1j,  # complex
+                    "hello",  # str
+                },
+            },
+        }
+        self.assertDictAlmostEqual(Delta.create(old, new), delta)
+        self.assertTupleAlmostEqual(Delta.apply(old, delta), new)
+
+class TestDeltaNestedAdd(TolerantTestCase):
+    """
+    Add a new element to a nested data structure
+    """
+    def test_dict_top(self):
+        """
+        Top level is dict
+        """
+        old = {
+            "dict": {
+                "bool": False,
+                "int": 1,
+                "float": 1.1,
+                "complex": 1 + 1j,
+            },
+            "list": [
+                False,  # bool
+                1,  # int
+                1.1,  # float
+                1 + 1j,  # complex
+            ],
+            "tuple": (
+                False,  # bool
+                1,  # int
+                1.1,  # float
+                1 + 1j,  # complex
+            ),
+            "set": {
+                False,  # bool
+                1,  # int
+                1.1,  # float
+                1 + 1j,  # complex
+            },
+        }
+        new = {
+            "dict": {
+                "bool": False,
+                "int": 1,
+                "float": 1.1,
+                "complex": 1 + 1j,
+                "str": "hello",
+            },
+            "list": [
+                False,  # bool
+                1,  # int
+                1.1,  # float
+                1 + 1j,  # complex
+                "hello",  # str
+            ],
+            "tuple": (
+                False,  # bool
+                1,  # int
+                1.1,  # float
+                1 + 1j,  # complex
+                "hello",  # str
+            ),
+            "set": {
+                False,  # bool
+                1,  # int
+                1.1,  # float
+                1 + 1j,  # complex
+                "hello",  # str
+            },
+        }
+        delta = {
+            "dict": {
+                "str": "hello",  # str
+            },
+            "list": {
+                4: "hello",  # str
+            },
+            "tuple": {
+                4: "hello",  # str
+            },
+            "set": {
+                keys["add to set"]: {
+                    "hello",  # str
+                },
+            },
+        }
+        self.assertDictAlmostEqual(Delta.create(old, new), delta)
+        self.assertDictAlmostEqual(Delta.apply(old, delta), new)
+
+    def test_list_top(self):
+        """
+        Top level is list
+        """
+        old = [
+            # dict
+            {
+                "bool": False,
+                "int": 1,
+                "float": 1.1,
+                "complex": 1 + 1j,
+            },
+            # list
+            [
+                False,  # bool
+                1,  # int
+                1.1,  # float
+                1 + 1j,  # complex
+            ],
+            # tuple
+            (
+                False,  # bool
+                1,  # int
+                1.1,  # float
+                1 + 1j,  # complex
+            ),
+            # set
+            {
+                False,  # bool
+                1,  # int
+                1.1,  # float
+                1 + 1j,  # complex
+            },
+        ]
+        new = [
+            # dict
+            {
+                "bool": False,
+                "int": 1,
+                "float": 1.1,
+                "complex": 1 + 1j,
+                "str": "hello",
+            },
+            # list
+            [
+                False,  # bool
+                1,  # int
+                1.1,  # float
+                1 + 1j,  # complex
+                "hello",  # str
+            ],
+            # tuple
+            (
+                False,  # bool
+                1,  # int
+                1.1,  # float
+                1 + 1j,  # complex
+                "hello",  # str
+            ),
+            # set
+            {
+                False,  # bool
+                1,  # int
+                1.1,  # float
+                1 + 1j,  # complex
+                "hello",  # str
+            },
+        ]
+        delta = {
+            # dict
+            0: {
+                "str": "hello",  # str
+            },
+            # list
+            1: {
+                4: "hello",  # str
+            },
+            # tuple
+            2: {
+                4: "hello",  # str
+            },
+            # set
+            3: {
+                keys["add to set"]: {
+                    "hello",  # str
+                },
+            },
+        }
+        self.assertDictAlmostEqual(Delta.create(old, new), delta)
+        self.assertListAlmostEqual(Delta.apply(old, delta), new)
+
+    def test_tuple_top(self):
+        """
+        Top level is tuple
+        """
+        old = (
+            # dict
+            {
+                "bool": False,
+                "int": 1,
+                "float": 1.1,
+                "complex": 1 + 1j,
+            },
+            # list
+            [
+                False,  # bool
+                1,  # int
+                1.1,  # float
+                1 + 1j,  # complex
+            ],
+            # tuple
+            (
+                False,  # bool
+                1,  # int
+                1.1,  # float
+                1 + 1j,  # complex
+            ),
+            # set
+            {
+                False,  # bool
+                1,  # int
+                1.1,  # float
+                1 + 1j,  # complex
+            },
+        )
+        new = (
+            # dict
+            {
+                "bool": False,
+                "int": 1,
+                "float": 1.1,
+                "complex": 1 + 1j,
+                "str": "hello",
+            },
+            # list
+            [
+                False,  # bool
+                1,  # int
+                1.1,  # float
+                1 + 1j,  # complex
+                "hello",  # str
+            ],
+            # tuple
+            (
+                False,  # bool
+                1,  # int
+                1.1,  # float
+                1 + 1j,  # complex
+                "hello",  # str
+            ),
+            # set
+            {
+                False,  # bool
+                1,  # int
+                1.1,  # float
+                1 + 1j,  # complex
+                "hello",  # str
+            },
+        )
+        delta = {
+            # dict
+            0: {
+                "str": "hello",  # str
+            },
+            # list
+            1: {
+                4: "hello",  # str
+            },
+            # tuple
+            2: {
+                4: "hello",  # str
+            },
+            # set
+            3: {
+                keys["add to set"]: {
+                    "hello",  # str
+                },
+            },
+        }
+        self.assertDictAlmostEqual(Delta.create(old, new), delta)
+        self.assertTupleAlmostEqual(Delta.apply(old, delta), new)
+
+class TestDeltaNested(TolerantTestCase):
+    """
+    Remove an old element from a nested data structure
+    """
+    def test_dict_top(self):
+        """
+        Top level is dict
+        """
+        old = {
+            "dict": {
+                "bool": False,
+                "int": 1,
+                "float": 1.1,
+                "complex": 1 + 1j,
+                "str": "hello",
+            },
+            "list": [
+                False,  # bool
+                1,  # int
+                1.1,  # float
+                1 + 1j,  # complex
+                "hello",  # str
+            ],
+            "tuple": (
+                False,  # bool
+                1,  # int
+                1.1,  # float
+                1 + 1j,  # complex
+                "hello",  # str
+            ),
+            "set": {
+                False,  # bool
+                1,  # int
+                1.1,  # float
+                1 + 1j,  # complex
+                "hello",  # str
+            },
+        }
+        new = {
+            "dict": {
+                "bool": False,
+                "int": 1,
+                "float": 1.1,
+                "complex": 1 + 1j,
+            },
+            "list": [
+                False,  # bool
+                1,  # int
+                1.1,  # float
+                1 + 1j,  # complex
+            ],
+            "tuple": (
+                False,  # bool
+                1,  # int
+                1.1,  # float
+                1 + 1j,  # complex
+            ),
+            "set": {
+                False,  # bool
+                1,  # int
+                1.1,  # float
+                1 + 1j,  # complex
+            },
+        }
+        delta = {
+            "dict": {
+                "str": keys["delete"],  # str
+            },
+            "list": {
+                4: keys["delete"],  # str
+            },
+            "tuple": {
+                4: keys["delete"],  # str
+            },
+            "set": {
+                keys["remove from set"]: {
+                    "hello",  # str
+                },
+            },
+        }
+        self.assertDictAlmostEqual(Delta.create(old, new), delta)
+        self.assertDictAlmostEqual(Delta.apply(old, delta), new)
+        
+    def test_list_top(self):
+        """
+        Top level is list
+        """
+        old = [
+            # dict
+            {
+                "bool": False,
+                "int": 1,
+                "float": 1.1,
+                "complex": 1 + 1j,
+                "str": "hello",
+            },
+            # list
+            [
+                False,  # bool
+                1,  # int
+                1.1,  # float
+                1 + 1j,  # complex
+                "hello",  # str
+            ],
+            # tuple
+            (
+                False,  # bool
+                1,  # int
+                1.1,  # float
+                1 + 1j,  # complex
+                "hello",  # str
+            ),
+            # set
+            {
+                False,  # bool
+                1,  # int
+                1.1,  # float
+                1 + 1j,  # complex
+                "hello",  # str
+            },
+        ]
+        new = [
+            # dict
+            {
+                "bool": False,
+                "int": 1,
+                "float": 1.1,
+                "complex": 1 + 1j,
+            },
+            # list
+            [
+                False,  # bool
+                1,  # int
+                1.1,  # float
+                1 + 1j,  # complex
+            ],
+            # tuple
+            (
+                False,  # bool
+                1,  # int
+                1.1,  # float
+                1 + 1j,  # complex
+            ),
+            # set
+            {
+                False,  # bool
+                1,  # int
+                1.1,  # float
+                1 + 1j,  # complex
+            },
+        ]
+        delta = {
+            0: {
+                "str": keys["delete"],  # str
+            },
+            1: {
+                4: keys["delete"],  # str
+            },
+            2: {
+                4: keys["delete"],  # str
+            },
+            3: {
+                keys["remove from set"]: {
+                    "hello",  # str
+                },
+            },
+        }
+        self.assertDictAlmostEqual(Delta.create(old, new), delta)
+        self.assertListAlmostEqual(Delta.apply(old, delta), new)
+
+    def test_tuple_top(self):
+        """
+        Top level is tuple
+        """
+        old = (
+            # dict
+            {
+                "bool": False,
+                "int": 1,
+                "float": 1.1,
+                "complex": 1 + 1j,
+                "str": "hello",
+            },
+            # list
+            [
+                False,  # bool
+                1,  # int
+                1.1,  # float
+                1 + 1j,  # complex
+                "hello",  # str
+            ],
+            # tuple
+            (
+                False,  # bool
+                1,  # int
+                1.1,  # float
+                1 + 1j,  # complex
+                "hello",  # str
+            ),
+            # set
+            {
+                False,  # bool
+                1,  # int
+                1.1,  # float
+                1 + 1j,  # complex
+                "hello",  # str
+            },
+        )
+        new = (
+            # dict
+            {
+                "bool": False,
+                "int": 1,
+                "float": 1.1,
+                "complex": 1 + 1j,
+            },
+            # list
+            [
+                False,  # bool
+                1,  # int
+                1.1,  # float
+                1 + 1j,  # complex
+            ],
+            # tuple
+            (
+                False,  # bool
+                1,  # int
+                1.1,  # float
+                1 + 1j,  # complex
+            ),
+            # set
+            {
+                False,  # bool
+                1,  # int
+                1.1,  # float
+                1 + 1j,  # complex
+            },
+        )
+        delta = {
+            0: {
+                "str": keys["delete"],  # str
+            },
+            1: {
+                4: keys["delete"],  # str
+            },
+            2: {
+                4: keys["delete"],  # str
+            },
+            3: {
+                keys["remove from set"]: {
                     "hello",  # str
                 },
             },

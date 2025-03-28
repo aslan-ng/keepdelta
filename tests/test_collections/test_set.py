@@ -13,7 +13,7 @@ class TestDeltaSet(unittest.TestCase):
 
     def test_change(self):
         """
-        All elements are changed
+        All elements change
         """
         old = {
             False,  # bool
@@ -50,7 +50,7 @@ class TestDeltaSet(unittest.TestCase):
 
     def test_no_change(self):
         """
-        No elements are changed
+        No elements change
         """
         old = {
             False,  # bool
@@ -70,9 +70,9 @@ class TestDeltaSet(unittest.TestCase):
         self.assertDictEqual(DeltaSet.create(old, new), delta)
         self.assertSetEqual(DeltaSet.apply(old, delta), new)
 
-    def test_increase_size(self):
+    def test_add(self):
         """
-        New element added
+        Add a new element
         """
         old = {
             2,  # int
@@ -95,9 +95,9 @@ class TestDeltaSet(unittest.TestCase):
         self.assertDictEqual(DeltaSet.create(old, new), delta)
         self.assertSetEqual(DeltaSet.apply(old, delta), new)
 
-    def test_decrease_size(self):
+    def test_delete(self):
         """
-        Old element removed
+        Delete an old element
         """
         old = {
             False,  # bool
