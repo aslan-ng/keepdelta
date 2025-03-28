@@ -4,13 +4,14 @@ title: 'KeepDelta: A Python Library for Human-Readable Data Differencing'
 tags:
   - python
   - simulation
-  - remote sensing
-  - iot
-  - internet of things
+  - sensing
+  - data structures
   - delta encoding
   - delta compression
   - data differencing
   - differential compression
+  - change tracking
+  - human-readable
 
 authors:
   - name: Aslan Noorghasemi 
