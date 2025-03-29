@@ -11,21 +11,15 @@
     Efficient Data Differencing for Python Data Structures
 </h3>
 
-<p align="center">
-    <img src="https://img.shields.io/badge/python-≥3.7-blue" alt="Python Version" style="margin-right:6px;"><!--
-    --><a href="https://pypi.org/project/keepdelta/"><!--
-        --><img src="https://img.shields.io/pypi/v/keepdelta.svg" alt="PyPI Version"  style="margin-right:6px;"><!--
-    --></a><!--
-    --><a href="https://github.com/aslan-ng/keepdelta"><!--
-        --><img src="https://img.shields.io/badge/github-30363f?logo=github&logoColor=white" alt="GitHub" style="margin-right:6px;"><!--
-    --></a><!--
-    --><a href='https://coveralls.io/github/aslan-ng/keepdelta?branch=main'><!--
-        --><img src="https://coveralls.io/repos/github/aslan-ng/keepdelta/badge.svg?branch=main" alt="Coverage Status" style="margin-right:6px;"><!--
-    --></a><!--
-    --><a href="https://opensource.org/licenses/MIT"><!--
-        --><img src="https://img.shields.io/badge/License-MIT-yellow.svg" alt="License: MIT"><!--
-    --></a>
-</p>
+<div align="center">
+
+![Python Version](https://img.shields.io/badge/python-≥3.7-blue)
+[![PyPI Version](https://img.shields.io/pypi/v/keepdelta.svg)](https://pypi.org/project/keepdelta/)
+[![GitHub](https://img.shields.io/badge/github-30363f?logo=github&logoColor=white)](https://github.com/aslan-ng/keepdelta)
+[![Coverage Status](https://coveralls.io/repos/github/aslan-ng/keepdelta/badge.svg?branch=main)](https://coveralls.io/github/aslan-ng/keepdelta?branch=main)
+[![License: MIT](https://img.shields.io/badge/license-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
+
+</div>
 
 ![Header Image](https://raw.githubusercontent.com/aslan-ng/keepdelta/refs/heads/main/assets/header.png)
 
