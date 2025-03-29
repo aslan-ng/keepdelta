@@ -1,18 +1,16 @@
 ---
 title: 'KeepDelta: A Python Library for Human-Readable Data Differencing'
-
 tags:
   - python
   - simulation
   - sensing
   - data structures
+  - data differencing
   - delta encoding
   - delta compression
-  - data differencing
   - differential compression
   - change tracking
   - human-readable
-
 authors:
   - name: Aslan Noorghasemi 
     orcid: 0009-0004-3387-4502
@@ -22,16 +20,13 @@ authors:
     orcid: 0000-0002-5024-7701
     affiliation: '1'
     corresponding: false
-  
 affiliations:
   - index: 1
     name: Department of Mechanical Engineering, Carnegie Mellon University, USA
     ror: 05x2bcf33
-
 date: 28 March 2025
 bibliography: paper.bib
 ---
-
 
 # Summary
 
@@ -39,7 +34,6 @@ Efficiently managing evolving data is crucial in applications like computational
 _KeepDelta_ addresses this challenge by providing a lightweight Python library that captures and applies only the changes (deltas) between successive states of complex, nested Python data structures. Designed for clarity and ease of use, `KeepDelta` produces human-readable outputs, facilitating debugging and analysis in research applications.
 
 ![KeepDelta logo](./assets/logo.png){width=15%}
-
 
 # Statement of need
 
@@ -55,13 +49,11 @@ Human-readability is crucial for debugging and development in both simulation an
 
 ![Comparison of data management approaches in evolving systems. Full-state encoding incurs high storage and bandwidth costs, while delta encoding saves only changes for efficiency. Rerunning reduces storage but increases computation and is often impractical for sensing real-world data. The bottom gradients illustrate trade-offs: storage/bandwidth decrease left to right, while data loading time increases.](./assets/comparison.png)
 
-
 # Comparison to Existing Tools
 
 In the landscape of Python libraries designed for delta encoding, several notable tools have emerged, each with distinct features and applications.
 `xdelta3` [@xdelta3] and its predecessor, `xdelta` [@xdelta], are tools that perform delta encoding at the binary level. These utilities are particularly effective for binary file differencing and are widely used in version control systems and data synchronization tasks. However, both are considered outdated and are no longer actively maintained. Their operation at the binary level results in outputs that are not human-readable, and they are not tailored for Python data structures, limiting their applicability in Python-centric workflows.
 `deepdiff` [@deepdiff] is a contemporary library that facilitates the identification of differences between complex Python data structures, including dictionaries, lists, and sets. It extends support to external libraries like `NumPy` [@numpy], enhancing its versatility. However, this integration can lead to outputs that are less human-readable compared to `KeepDelta`. Additionally, deepdiff introduces weighty dependencies that may not be necessary for all projects.
 In contrast to these alternatives, `KeepDelta` is a lightweight Python library optimized for simulations, focusing on efficient delta management for native Python data structures. It operates directly on Python’s native data types, producing human-readable outputs that facilitate debugging and research applications. Implemented in pure Python, `KeepDelta` eliminates external dependencies, making it an ideal choice for Python-centric workflows, particularly in simulations and data analysis tasks.
-
 
 # References
