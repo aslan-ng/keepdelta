@@ -12,15 +12,15 @@
 </h3>
 
 <p align="center">
-    <img src="https://img.shields.io/badge/python-≥3.7-blue" alt="Python Version"><!--
+    <img src="https://img.shields.io/badge/python-≥3.7-blue" alt="Python Version" style="margin-right:6px;"><!--
     --><a href="https://pypi.org/project/keepdelta/"><!--
-        --><img src="https://img.shields.io/pypi/v/keepdelta.svg" alt="PyPI Version"><!--
+        --><img src="https://img.shields.io/pypi/v/keepdelta.svg" alt="PyPI Version"  style="margin-right:6px;"><!--
     --></a><!--
     --><a href="https://github.com/aslan-ng/keepdelta"><!--
-        --><img src="https://img.shields.io/badge/github-30363f?logo=github&logoColor=white" alt="GitHub"><!--
+        --><img src="https://img.shields.io/badge/github-30363f?logo=github&logoColor=white" alt="GitHub" style="margin-right:6px;"><!--
     --></a><!--
     --><a href='https://coveralls.io/github/aslan-ng/keepdelta?branch=main'><!--
-        --><img src='https://coveralls.io/repos/github/aslan-ng/keepdelta/badge.svg?branch=main' alt='Coverage Status'><!--
+        --><img src="https://coveralls.io/repos/github/aslan-ng/keepdelta/badge.svg?branch=main" alt="Coverage Status" style="margin-right:6px;"><!--
     --></a><!--
     --><a href="https://opensource.org/licenses/MIT"><!--
         --><img src="https://img.shields.io/badge/License-MIT-yellow.svg" alt="License: MIT"><!--
