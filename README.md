@@ -1,11 +1,10 @@
 <h1 align="center">
-  <br>
-  <a href="https://github.com/aslan-ng/keepdelta">
-  <img src="https://raw.githubusercontent.com/aslan-ng/keepdelta/refs/heads/main/assets/logo.png" alt="KeepDelta" width="120">
-  </a>
-  <br>
-  KeepDelta
-  <br>
+    <br>
+    <a href="https://github.com/aslan-ng/keepdelta">
+        <img src="https://raw.githubusercontent.com/aslan-ng/keepdelta/refs/heads/main/assets/logo.png" alt="KeepDelta" width="120">
+    </a>
+    <br>
+    KeepDelta
 </h1>
 
 <h3 align="center">
@@ -13,15 +12,18 @@
 </h3>
 
 <p align="center">
-    <img src="https://img.shields.io/badge/python-%E2%89%A53.7-blue" alt="Python Version">
+    <img src="https://img.shields.io/badge/python-≥3.7-blue" alt="Python Version">
     <a href="https://pypi.org/project/keepdelta/">
         <img src="https://img.shields.io/pypi/v/keepdelta.svg" alt="PyPI Version">
     </a>
     <a href="https://github.com/aslan-ng/keepdelta">
-        <img src="https://img.shields.io/badge/GitHub-30363f?logo=github&logoColor=white" alt="GitHub" />
+        <img src="https://img.shields.io/badge/github-30363f?logo=github&logoColor=white" alt="GitHub" />
     </a>
     <a href='https://coveralls.io/github/aslan-ng/keepdelta?branch=main'>
         <img src='https://coveralls.io/repos/github/aslan-ng/keepdelta/badge.svg?branch=main' alt='Coverage Status' />
+    </a>
+    <a href="https://opensource.org/licenses/MIT">
+        <img src="https://img.shields.io/badge/License-MIT-yellow.svg" alt="License: MIT">
     </a>
 </p>
 
