@@ -25,7 +25,7 @@ authors:
   
 affiliations:
   - index: 1
-    name: Mechanical Engineering Department, Carnegie Mellon University, USA
+    name: Department of Mechanical Engineering, Carnegie Mellon University, USA
     ror: 05x2bcf33
 
 date: 28 March 2025
