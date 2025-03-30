@@ -13,14 +13,16 @@ readme = "README.md"
 license = {text = "MIT"}
 authors = [
     { name = "Aslan Noorghasemi", email = "aslann@cmu.edu" },
-    { name = "Christopher McComb", email = "ccm@cmu.edu" }
+    { name = "Christopher McComb", email = "ccm@cmu.edu" },
 ]
 dependencies = []
 requires-python = ">=3.7"
 classifiers = [
     "Programming Language :: Python :: 3",
     "License :: OSI Approved :: MIT License",
-    "Operating System :: OS Independent"
+    "Operating System :: OS Independent",
+    "Topic :: Software Development :: Libraries :: Python Modules",
+    "Topic :: Scientific/Engineering :: Information Analysis",
 ]
 
 [project.urls]
