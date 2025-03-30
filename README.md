@@ -24,7 +24,7 @@
 *KeepDelta* is a lightweight Python library designed to efficiently track and manage changes (deltas) between Python built-in types. It is applicable to various scenarios  that require dynamic data management, especially when incremental numerical changes are present, such as simulations and sensing. While many alternative tools operate at the binary level, KeepDelta emphasizes human-readable delta encoding, facilitating debugging and analysis for Python developers and researchers across multiple domains.
 
 ## What is Delta Encoding?
-In many computational scenarios, efficiently managing evolving data states is crucial. Traditional methods that rely on full-state encoding, which means storing and/or transmitting complete snapshots at each step, can be inefficient due to the large size of the snapshots. Delta encoding addresses this challenge by capturing and applying only the changes (deltas) between successive states of data structures, resulting in significantly smaller and more manageable data.
+In many computational scenarios, efficiently managing evolving data is crucial. Traditional methods, that rely on full-state encoding — which means storing and/or transmitting complete snapshots at each step — can be inefficient due to the large size of the snapshots. Delta encoding addresses this challenge by capturing and applying only the changes (deltas) between successive states of data structures, resulting in significantly smaller and more manageable data.
 
 <div align="center">
     <img src="https://raw.githubusercontent.com/aslan-ng/keepdelta/refs/heads/main/assets/delta_encoding.png" alt="Comparison between traditional data management method and delta encoding." width="500">
