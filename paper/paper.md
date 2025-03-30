@@ -19,7 +19,6 @@ authors:
   - name: Christopher McComb
     orcid: 0000-0002-5024-7701
     affiliation: '1'
-    corresponding: false
 affiliations:
   - index: 1
     name: Department of Mechanical Engineering, Carnegie Mellon University, USA
