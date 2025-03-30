@@ -29,9 +29,7 @@ In many computational scenarios, efficiently managing evolving data is crucial. 
 <div align="center">
     <img src="https://raw.githubusercontent.com/aslan-ng/keepdelta/refs/heads/main/assets/delta_encoding.png" alt="Comparison between traditional data management method and delta encoding." width="500">
     </br>
-    <span style="color:gray; font-size:95%;">
-        Managing evolving data structures: full-state encoding (left) vs. delta encoding (right).
-    </span>
+    Managing evolving data structures: full-state encoding (left) vs. delta encoding (right).
 </div>
 
 ## Features
