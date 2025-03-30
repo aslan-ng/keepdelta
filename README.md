@@ -1,8 +1,6 @@
 <h1 align="center">
     <br>
-    <a href="https://github.com/aslan-ng/keepdelta">
-        <img src="https://raw.githubusercontent.com/aslan-ng/keepdelta/refs/heads/main/assets/logo.png" alt="KeepDelta" width="120">
-    </a>
+    <img src="https://raw.githubusercontent.com/aslan-ng/keepdelta/refs/heads/main/assets/logo.png" alt="KeepDelta" width="120">
     <br>
     KeepDelta
 </h1>
