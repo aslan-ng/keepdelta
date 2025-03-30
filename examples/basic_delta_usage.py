@@ -6,44 +6,32 @@ import keepdelta as kd
 
 # Profile of a person
 profile = {
-    "info": {
-        "name": "Alice",
-        "age": 30,
-        "is_student": True,
-        "grades": [85.5, 90.0, 78],
-        "preferences": (
-            "chocolate",
-            {"sports": {"football", "tennis"}},
-        ),
-    },
-    "meta": {
-        "attributes": [{"id": 1, "value": "active"}, {"id": 2, "value": "inactive"}],
-        "settings": {"dark_mode": True, "font_size": 14, "scale": 1.25},
+    "name": "Alice",
+    "age": 20,
+    "is_student": True,
+    "grades": [85.5, 90.0, 78],
+    "preferences": {
+        "drink": "soda",
+        "sports": {"football", "tennis"},
     },
 }
 
 # Profile of that person one year later
 profile_new = {
-    "info": {
-        "name": "Alice",
-        "age": 31,
-        "is_student": False,
-        "grades": [85.5, 90.0, 78],
-        "preferences": (
-            "coffee",
-            {"sports": {"football", "bodybuilding"}},
-        ),
-    },
-    "meta": {
-        "attributes": [{"id": 1, "value": "inactive"}, {"id": 2, "value": "inactive"}],
-        "settings": {"dark_mode": True, "font_size": 14, "scale": 1.25},
+    "name": "Alice",
+    "age": 25,
+    "is_student": False,
+    "grades": [85.5, 90.0, 78, 92],
+    "preferences": {
+        "drink": "coffee",
+        "sports": {"football", "bodybuilding"},
     },
 }
 
 # Create delta
 delta = kd.create(profile, profile_new)
-print("Delta:", delta)
+print("Delta:\n", delta)
 
 # Apply delta
 profile_reconstructed = kd.apply(profile, delta)
-print("Reconstruction is successful:", profile_reconstructed == profile_new)
+print("\nReconstruction is successful:", profile_reconstructed == profile_new)
