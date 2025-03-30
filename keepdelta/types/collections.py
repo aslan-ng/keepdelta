@@ -25,9 +25,7 @@ class Delta:
         type_old = type(old)  # Avoid multiple calls to type()
         if type_old == type_new:  # Same type
             if old != new:  # Unequal and same type
-                if old is None:  # none
-                    delta = new
-                elif type_new is bool:  # bool
+                if type_new is bool:  # bool
                     delta = DeltaBool.create(old, new)
                 elif type_new is complex:  # complex
                     delta = DeltaComplex.create(old, new)
@@ -56,26 +54,26 @@ class Delta:
                 delta = keys["nothing"]
         else:  # Not same type
             # Check `old`
-            if type_old is str:
+            if type_old is str:  # str
                 CheckConflict.check_str(old)
-            elif type_old is dict:
+            elif type_old is dict:  # dict
                 CheckConflict.check_dict(old)
-            elif type_old is list:
+            elif type_old is list:  # list
                 CheckConflict.check_list(old)
-            elif type_old is set:
+            elif type_old is set:  # set
                 CheckConflict.check_set(old)
-            elif type_old is tuple:
+            elif type_old is tuple:  # tuple
                 CheckConflict.check_tuple(old)
             # Check `new`
-            if type_new is str:
+            if type_new is str:  # str
                 CheckConflict.check_str(new)
-            elif type_new is dict:
+            elif type_new is dict:  # dict
                 CheckConflict.check_dict(new)
-            elif type_new is list:
+            elif type_new is list:  # list
                 CheckConflict.check_list(new)
-            elif type_new is set:
+            elif type_new is set:  # set
                 CheckConflict.check_set(new)
-            elif type_new is tuple:
+            elif type_new is tuple:  # tuple
                 CheckConflict.check_tuple(new)
             delta = new  # Rewrite type
         return delta
@@ -290,7 +288,7 @@ class DeltaSet:
 if __name__ == "__main__":
     old_var = {"a": 1, "b": 2, "c": {"d": 5, "e": 2}}
     new_var = {"a": 3, "c": {"d": 5, "e": 3}}
-    expected_delta = {"a": 2, "b": "D3L373", "c": {"e": 1}}
+    expected_delta = {"a": 2, "b": keys["delete"], "c": {"e": 1}}
 
     # Create delta
     delta = Delta.create(old_var, new_var)
