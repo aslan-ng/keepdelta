@@ -4,6 +4,10 @@ build-backend = "setuptools.build_meta"
 
 [tool.setuptools]
 packages = ["keepdelta"]
+include-package-data = true
+
+[tool.setuptools.package-data]
+keepdelta = ["py.typed"]
 
 [project]
 name = "keepdelta"
@@ -23,6 +27,7 @@ classifiers = [
     "Operating System :: OS Independent",
     "Topic :: Software Development :: Libraries :: Python Modules",
     "Topic :: Scientific/Engineering :: Information Analysis",
+    "Typing :: Typed",
 ]
 
 [project.urls]
