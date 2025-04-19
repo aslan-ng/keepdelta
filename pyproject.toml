@@ -3,8 +3,10 @@ requires = ["setuptools>=64", "wheel"]
 build-backend = "setuptools.build_meta"
 
 [tool.setuptools]
-packages = ["keepdelta"]
 include-package-data = true
+
+[tool.setuptools.packages.find]
+include = ["keepdelta", "keepdelta.*"]
 
 [tool.setuptools.package-data]
 keepdelta = ["py.typed"]
