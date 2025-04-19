@@ -110,15 +110,135 @@ For more usage examples, refer to the [`examples`](https://github.com/aslan-ng/K
 ## Surpported Formats
 KeepDelta supports common native Python data structures, ensuring compatibility and flexibility when working with a wide variety of data types. The currently supported structures include:
 
-* Primitive Types:
-	* bool – e.g., True, False
-    * str – e.g., "hello", "world"
-	* int – e.g., 42, -7
-	* float – e.g., 3.14, -0.001
-	* complex – e.g., 3+4j, -2j
-    * None
+### Primitive Types:
 
-* Collections:
+<details>
+<summary>
+Boolean (<code>bool</code>) – e.g., True, False
+</summary>
+#### Example:
+```python
+>>> import keepdelta as kd
+
+>>> # Initial data
+>>> old = False
+
+>>> # Updated data
+>>> new = True
+
+>>> # Create delta
+>>> delta = kd.create(old, new)
+>>> print(delta)
+True
+```
+</details>
+
+<details>
+<summary>
+String (<code>str</code>) – e.g., "hello", "world"
+</summary>
+#### Example:
+```python
+>>> import keepdelta as kd
+
+>>> # Initial data
+>>> old = "hello"
+
+>>> # Updated data
+>>> new = "bye"
+
+>>> # Create delta
+>>> delta = kd.create(old, new)
+>>> print(delta)
+bye
+```
+</details>
+
+<details>
+<summary>
+Integer (<code>int</code>) – e.g., 42, -7
+</summary>
+#### Example:
+```python
+>>> import keepdelta as kd
+
+>>> # Initial data
+>>> old = 42
+
+>>> # Updated data
+>>> new = 45
+
+>>> # Create delta
+>>> delta = kd.create(old, new)
+>>> print(delta)
+3
+```
+</details>
+
+<details>
+<summary>
+Float (<code>float</code>) – e.g., 3.14, -0.001
+</summary>
+#### Example:
+```python
+>>> import keepdelta as kd
+
+>>> # Initial data
+>>> old = 3
+
+>>> # Updated data
+>>> new = 3.14
+
+>>> # Create delta
+>>> delta = kd.create(old, new)
+>>> print(delta)
+0.14
+```
+</details>
+
+<details>
+<summary>
+Complex (<code>complex</code>) – e.g., 3+4j, -2j
+</summary>
+#### Example:
+```python
+>>> import keepdelta as kd
+
+>>> # Initial data
+>>> old = 3+4j
+
+>>> # Updated data
+>>> new = 1+5j
+
+>>> # Create delta
+>>> delta = kd.create(old, new)
+>>> print(delta)
+(-2+1j)
+```
+</details>
+
+<details>
+<summary>
+(<code>None</code>)
+</summary>
+#### Example:
+```python
+>>> import keepdelta as kd
+
+>>> # Initial data
+>>> old = 1.62
+
+>>> # Updated data
+>>> new = None
+
+>>> # Create delta
+>>> delta = kd.create(old, new)
+>>> print(delta)
+None
+```
+</details>
+
+### Collections:
     * dict – e.g., {"location": "world", "age": 30}
     * list – e.g., [1, True, "hello"]
     * tuple – e.g., (2, {"location": "world"}, 3.14)
