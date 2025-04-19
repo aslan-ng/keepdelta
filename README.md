@@ -48,8 +48,9 @@ pip install keepdelta
 ## Usage
 There are two core methods corresponding to the creation and application of delta encodings:
 
-1. `create(old, new)`:
+### 1. `create(old, new)`
 The `create` function compares the `old` and `new` variables to generate `delta` that captures the differences between two data structures. It produces a compact data structure containing only these differences, and its high human readability greatly aids debugging during development.
+
 #### Example:
 ```python
 >>> import keepdelta as kd
@@ -77,8 +78,10 @@ The `create` function compares the `old` and `new` variables to generate `delta`
 }
 ```
 
-2. `apply(old, delta)`:
+### 2. `apply(old, delta)`
+
 The `apply` function takes the `old` variable and the `delta`, then applies the `delta` to recreate the updated, `new` variable.
+
 #### Example:
 ```python
 >>> import keepdelta as kd
@@ -105,6 +108,7 @@ The `apply` function takes the `old` variable and the `delta`, then applies the 
     "is_student": False
 }
 ```
+
 For more usage examples, refer to the [`examples`](https://github.com/aslan-ng/KeepDelta/tree/main/examples) folder in the project repository.
 
 ## Surpported Formats
@@ -114,8 +118,10 @@ KeepDelta supports common native Python data structures, ensuring compatibility 
 
 <details>
 <summary>
-Boolean (<code>bool</code>) – e.g., True, False
+    <b>Boolean</b> (<code>bool</code>)
 </summary>
+Since booleans aren’t numeric, the delta is simply the new state (True or False).
+
 #### Example:
 ```python
 >>> import keepdelta as kd
@@ -131,12 +137,14 @@ Boolean (<code>bool</code>) – e.g., True, False
 >>> print(delta)
 True
 ```
+<br>
 </details>
 
 <details>
 <summary>
-String (<code>str</code>) – e.g., "hello", "world"
+    <b>String</b> (<code>str</code>)
 </summary>
+
 #### Example:
 ```python
 >>> import keepdelta as kd
@@ -156,8 +164,9 @@ bye
 
 <details>
 <summary>
-Integer (<code>int</code>) – e.g., 42, -7
+    <b>Integer</b> (<code>int</code>)
 </summary>
+
 #### Example:
 ```python
 >>> import keepdelta as kd
@@ -177,8 +186,9 @@ Integer (<code>int</code>) – e.g., 42, -7
 
 <details>
 <summary>
-Float (<code>float</code>) – e.g., 3.14, -0.001
+    <b>Float</b> (<code>float</code>)
 </summary>
+
 #### Example:
 ```python
 >>> import keepdelta as kd
@@ -198,8 +208,9 @@ Float (<code>float</code>) – e.g., 3.14, -0.001
 
 <details>
 <summary>
-Complex (<code>complex</code>) – e.g., 3+4j, -2j
+    <b>Complex</b> (<code>complex</code>)
 </summary>
+
 #### Example:
 ```python
 >>> import keepdelta as kd
@@ -219,8 +230,9 @@ Complex (<code>complex</code>) – e.g., 3+4j, -2j
 
 <details>
 <summary>
-(<code>None</code>)
+    <b>NoneType</b> (<code>None</code>)
 </summary>
+
 #### Example:
 ```python
 >>> import keepdelta as kd
@@ -239,10 +251,122 @@ None
 </details>
 
 ### Collections:
-    * dict – e.g., {"location": "world", "age": 30}
-    * list – e.g., [1, True, "hello"]
-    * tuple – e.g., (2, {"location": "world"}, 3.14)
-    * set – e.g., {1, 2, "apple"}
+<details>
+<summary>
+    <b>Dictionary</b> (<code>dict</code>)
+</summary>
+
+#### Example:
+```python
+>>> import keepdelta as kd
+
+>>> # Initial data
+>>> old = {
+        "location": "earth",
+        "age": 20
+    }
+
+>>> # Updated data
+>>> new = {
+        "location": "mars",
+        "age": 30
+    }
+
+>>> # Create delta
+>>> delta = kd.create(old, new)
+>>> print(delta)
+{
+    "location": "mars",
+    "age": 10
+}
+```
+</details>
+
+<details>
+<summary>
+    <b>List</b> (<code>list</code>)
+</summary>
+
+The delta for a list is a dictionary where each key is a list index and each value describes the change applied at that position; including a numerical offset (to adjust the original element) or __delete__ (to remove it).
+
+#### Example:
+```python
+>>> import keepdelta as kd
+
+>>> # Initial data
+>>> old = [2, 3, 5, 7]
+
+>>> # Updated data
+>>> new = [2, 3, 4]
+
+>>> # Create delta
+>>> delta = kd.create(old, new)
+>>> print(delta)
+{
+    2: -1,
+    3: '__delete__'
+}
+```
+</details>
+
+<details>
+<summary>
+    <b>Tuple</b> (<code>tuple</code>)
+</summary>
+<br>
+
+The delta for a tuple is a dictionary where each key is a list index and each value describes the change applied at that position; including a numerical offset (to adjust the original element) or __delete__ (to remove it).
+
+#### Example:
+```python
+>>> import keepdelta as kd
+
+>>> # Initial data
+>>> old = (2, 3, 5, 7)
+
+>>> # Updated data
+>>> new = (2, 3, 4)
+
+>>> # Create delta
+>>> delta = kd.create(old, new)
+>>> print(delta)
+{
+    2: -1,
+    3: '__delete__'
+}
+```
+<br>
+</details>
+
+<details>
+<summary>
+    <b>Set</b> (<code>set</code>)
+</summary>
+<br>
+
+For sets, the delta is a dict with two special keys: `__add__` for items to add and `__remove__` for items to drop.
+
+#### Example:
+```python
+>>> import keepdelta as kd
+
+>>> # Initial data
+>>> old = {1, 2, 3}
+
+>>> # Updated data
+>>> new = {2, 3, 5, 7}
+
+>>> # Create delta
+>>> delta = kd.create(old, new)
+>>> print(delta)
+{
+    '__add__': {5, 7},
+    '__remove__': {1}
+}
+```
+</details>
+
+<br>
 
 KeepDelta supports deeply nested combinations of variables, enabling structures like dictionaries of dictionaries, lists of sets, and other complex, interwoven data types.
 
