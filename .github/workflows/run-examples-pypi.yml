@@ -7,18 +7,16 @@ on:
     paths:
       - keepdelta/**
       - examples/**
-      - setup.py
       - pyproject.toml
-      - .github/workflows/run-examples.yml
+      - .github/workflows/run-examples-pypi.yml
   pull_request:
     branches:
       - main
     paths:
       - keepdelta/**
       - examples/**
-      - setup.py
       - pyproject.toml
-      - .github/workflows/run-examples.yml
+      - .github/workflows/run-examples-pypi.yml
 
 jobs:
   run-examples:

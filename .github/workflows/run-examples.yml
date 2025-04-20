@@ -7,7 +7,6 @@ on:
     paths:
       - keepdelta/**
       - examples/**
-      - setup.py
       - pyproject.toml
       - .github/workflows/run-examples.yml
   pull_request:
@@ -16,7 +15,6 @@ on:
     paths:
       - keepdelta/**
       - examples/**
-      - setup.py
       - pyproject.toml
       - .github/workflows/run-examples.yml
 

@@ -7,18 +7,16 @@ on:
     paths:
       - keepdelta/**
       - tests/**
-      - setup.py
       - pyproject.toml
-      - .github/workflows/run-tests.yml
+      - .github/workflows/run-tests-pypi.yml
   pull_request:
     branches:
       - main
     paths:
       - keepdelta/**
       - tests/**
-      - setup.py
       - pyproject.toml
-      - .github/workflows/run-tests.yml
+      - .github/workflows/run-tests-pypi.yml
 
 jobs:
   test:
