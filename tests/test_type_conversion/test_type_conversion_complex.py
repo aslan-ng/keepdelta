@@ -3,7 +3,7 @@ import unittest
 import keepdelta as kd
 
 
-class TestChangeTypeComplex(unittest.TestCase):
+class TestTypeConversionComplex(unittest.TestCase):
 
     def test_complex_to_bool(self):
         old = 1 + 1j

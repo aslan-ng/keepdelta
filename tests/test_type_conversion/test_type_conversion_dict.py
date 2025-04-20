@@ -3,25 +3,25 @@ import unittest
 import keepdelta as kd
 
 
-class TestChangeTypeSet(unittest.TestCase):
+class TestTypeConversionDict(unittest.TestCase):
 
-    def test_none_to_set(self):
+    def test_none_to_dict(self):
         old = None
         new = {
-            "hello",
-            True,
+            "str": "hello",
+            "bool": True,
         }
         delta = {
-            "hello",
-            True,
+            "str": "hello",
+            "bool": True,
         }
         self.assertEqual(kd.create(old, new), delta)
         self.assertEqual(kd.apply(old, delta), new)
 
-    def test_set_to_none(self):
+    def test_dict_to_none(self):
         old = {
-            "hello",
-            True,
+            "str": "hello",
+            "bool": True,
         }
         new = None
         delta = None

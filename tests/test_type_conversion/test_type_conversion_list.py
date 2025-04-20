@@ -3,7 +3,7 @@ import unittest
 import keepdelta as kd
 
 
-class TestChangeTypeList(unittest.TestCase):
+class TestTypeConversionList(unittest.TestCase):
 
     def test_none_to_list(self):
         old = None

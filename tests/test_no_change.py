@@ -8,9 +8,9 @@ import keepdelta as kd
 from keepdelta.config import keys
 
 
-class TestSimilar(unittest.TestCase):
+class TestNoChange(unittest.TestCase):
 
-    def test_equal(self):
+    def test_no_change(self):
         old = 1
         new = 1
         delta = keys["nothing"]

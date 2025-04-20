@@ -3,7 +3,7 @@ import unittest
 import keepdelta as kd
 
 
-class TestChangeTypeNone(unittest.TestCase):
+class TestTypeConversionNone(unittest.TestCase):
 
     def test_none_to_bool(self):
         old = None
