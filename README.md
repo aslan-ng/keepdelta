@@ -16,6 +16,8 @@
 [![GitHub](https://img.shields.io/badge/github-30363f?logo=github&logoColor=white)](https://github.com/aslan-ng/keepdelta)
 [![Coverage Status](https://coveralls.io/repos/github/aslan-ng/keepdelta/badge.svg?branch=main)](https://coveralls.io/github/aslan-ng/keepdelta?branch=main)
 [![License: MIT](https://img.shields.io/badge/license-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
+<br/>
+[![status](https://joss.theoj.org/papers/fe9cc7429528b344b4b6561fdf674f45/status.svg)](https://joss.theoj.org/papers/fe9cc7429528b344b4b6561fdf674f45)
 
 </div>
 
