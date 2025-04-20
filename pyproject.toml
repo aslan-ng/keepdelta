@@ -13,7 +13,7 @@ keepdelta = ["py.typed"]
 
 [project]
 name = "keepdelta"
-version = "0.1.4"
+version = "0.1.5"
 description = "Efficient Data Differencing for Python Data Structures"
 readme = "README.md"
 license = {text = "MIT"}
