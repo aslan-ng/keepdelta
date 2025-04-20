@@ -210,7 +210,7 @@ For floats, the delta is computed as subtraction of values, yielding the offset 
 >>> import keepdelta as kd
 
 >>> # Initial data
->>> old = 3
+>>> old = 3.13
 
 >>> # Updated data
 >>> new = 3.14
@@ -218,7 +218,7 @@ For floats, the delta is computed as subtraction of values, yielding the offset 
 >>> # Create delta
 >>> delta = kd.create(old, new)
 >>> print(delta)
-0.14
+0.01
 ```
 <br>
 </details>
