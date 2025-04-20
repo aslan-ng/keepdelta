@@ -1,0 +1,57 @@
+name: Run Tests PyPI
+
+on:
+  push:
+    branches:
+      - main
+    paths:
+      - keepdelta/**
+      - tests/**
+      - setup.py
+      - pyproject.toml
+      - .github/workflows/run-tests.yml
+  pull_request:
+    branches:
+      - main
+    paths:
+      - keepdelta/**
+      - tests/**
+      - setup.py
+      - pyproject.toml
+      - .github/workflows/run-tests.yml
+
+jobs:
+  test:
+    runs-on: ubuntu-22.04
+
+    strategy:
+      fail-fast: false
+      matrix:
+        python-version:
+          - "3.7"
+          - "3.8"
+          - "3.9"
+          - "3.10"
+          - "3.11"
+          - "3.12"
+          - "3.13"
+
+    steps:
+    - name: Check out the repository
+      uses: actions/checkout@v3
+
+    - name: Set up Python
+      uses: actions/setup-python@v4
+      with:
+        python-version: ${{ matrix.python-version }}
+
+    - name: Display Python version
+      run: python --version
+
+    - name: Install keepdelta
+      run: |
+        pip install --upgrade pip
+        pip install keepdelta
+  
+    - name: Run tests
+      run: python tests/tests.py
