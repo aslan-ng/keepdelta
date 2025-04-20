@@ -9,6 +9,7 @@ on:
       - examples/**
       - pyproject.toml
       - .github/workflows/run-examples.yml
+
   pull_request:
     branches:
       - main

@@ -1,19 +1,20 @@
 name: Run Tests PyPI
 
 on:
+  workflow_dispatch:
+
   push:
     branches:
       - main
     paths:
-      - keepdelta/**
       - tests/**
       - pyproject.toml
       - .github/workflows/run-tests-pypi.yml
+      
   pull_request:
     branches:
       - main
     paths:
-      - keepdelta/**
       - tests/**
       - pyproject.toml
       - .github/workflows/run-tests-pypi.yml

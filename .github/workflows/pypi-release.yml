@@ -30,3 +30,16 @@ jobs:
           TWINE_USERNAME: __token__
           TWINE_PASSWORD: ${{ secrets.PYPI_API_TOKEN }}
         run: twine upload --repository pypi dist/*
+
+      - name: Install KeepDelta from PyPI
+        run: pip install keepdelta
+
+      - name: Run unit tests
+        run: python tests/tests.py
+
+      - name: Run all example scripts
+        run: |
+          for script in examples/*.py; do
+            echo "Running $script"
+            python "$script"
+          done
