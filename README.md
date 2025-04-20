@@ -168,6 +168,7 @@ The delta for strings is simply the new string value.
 >>> print(delta)
 bye
 ```
+<br>
 </details>
 
 <details>
@@ -193,6 +194,7 @@ For integers, the delta is computed as subtraction of values, yielding the offse
 >>> print(delta)
 3
 ```
+<br>
 </details>
 
 <details>
@@ -218,6 +220,7 @@ For floats, the delta is computed as subtraction of values, yielding the offset 
 >>> print(delta)
 0.14
 ```
+<br>
 </details>
 
 <details>
@@ -243,6 +246,7 @@ For complex numbers, the delta is computed as subtraction of values, yielding th
 >>> print(delta)
 (-2+1j)
 ```
+<br>
 </details>
 
 <details>
@@ -268,6 +272,7 @@ Since KeepDelta supports type change, it is possible to track the changes from `
 >>> print(delta)
 None
 ```
+<br>
 </details>
 
 ### Collections:
@@ -309,6 +314,7 @@ When diffing dictionaries, key-value pairs in the inputs are compared. The key r
     "happy": True  # The newly added key
 }
 ```
+<br>
 </details>
 
 <details>
@@ -337,6 +343,7 @@ The delta for a list is a dictionary where each key is a list index and each val
     3: "__delete__"  # Fourth element has been deleted
 }
 ```
+<br>
 </details>
 
 <details>
@@ -452,6 +459,7 @@ KeepDelta supports deeply nested combinations of variables, enabling structures 
     "age": 5  # Increased by 5
 }
 ```
+<br>
 </details>
 
 ### Special Cases:
@@ -478,6 +486,7 @@ KeepDelta supports changing variables types. In that case, the delta is simply t
 >>> print(delta)
 3.14  # Type changed from string to float
 ```
+<br>
 </details>
 
 <details>
@@ -503,6 +512,7 @@ If no differences are found between the two inputs, KeepDelta returns the specia
 >>> print(delta)
 "__nothing__"  # Both inputs are identical
 ```
+<br>
 </details>
 
 
