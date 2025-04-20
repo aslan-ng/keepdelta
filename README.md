@@ -109,7 +109,7 @@ The `apply` function takes the `old` variable and the `delta`, then applies the 
 }
 ```
 
-For more usage examples, refer to the [`examples`](https://github.com/aslan-ng/KeepDelta/tree/main/examples) folder in the project repository, or continue to the next section, "[Supported Data Types & Behaviors](#supported-data-types-&-behaviors)”, for a detailed look at how each structure is handled.
+For more usage examples, refer to the [`examples`](https://github.com/aslan-ng/KeepDelta/tree/main/examples) folder in the project repository, or continue to the next section, "[Supported Data Types & Behaviors](#supported-data-types--behaviors)”, for a detailed look at how each structure is handled.
 
 
 ## Supported Data Types & Behaviors
