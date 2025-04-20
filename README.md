@@ -109,9 +109,10 @@ The `apply` function takes the `old` variable and the `delta`, then applies the 
 }
 ```
 
-For more usage examples, refer to the [`examples`](https://github.com/aslan-ng/KeepDelta/tree/main/examples) folder in the project repository.
+For more usage examples, refer to the [`examples`](https://github.com/aslan-ng/KeepDelta/tree/main/examples) folder in the project repository, or continue to the next section, "[Supported Data Types & Behaviors](#supported-data-types-&-behaviors)”, for a detailed look at how each structure is handled.
 
-## Supported Data Structures
+
+## Supported Data Types & Behaviors
 KeepDelta supports common native Python data structures, ensuring compatibility and flexibility when working with a wide variety of data types. The currently supported structures are listed below. Click any item to see how it’s handled and view a quick example:
 
 
@@ -450,8 +451,6 @@ KeepDelta supports deeply nested combinations of variables, enabling structures 
 }
 ```
 </details>
-
-<br>
 
 KeepDelta supports changing variables types. For example, changing string (like "hello") to float (like 3.14). In that case, the delta is simply the new value.
 
