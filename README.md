@@ -111,16 +111,18 @@ The `apply` function takes the `old` variable and the `delta`, then applies the 
 
 For more usage examples, refer to the [`examples`](https://github.com/aslan-ng/KeepDelta/tree/main/examples) folder in the project repository.
 
-## Surpported Formats
-KeepDelta supports common native Python data structures, ensuring compatibility and flexibility when working with a wide variety of data types. The currently supported structures include:
+## Supported Data Structures
+KeepDelta supports common native Python data structures, ensuring compatibility and flexibility when working with a wide variety of data types. The currently supported structures are listed below. Click any item to see how it’s handled and view a quick example:
+
 
 ### Primitive Types:
-
 <details>
 <summary>
     <b>Boolean</b> (<code>bool</code>)
 </summary>
-Since booleans aren’t numeric, the delta is simply the new state (True or False).
+<br>
+
+Since booleans have only two states, the delta is simply the new state (True or False).
 
 #### Example:
 ```python
@@ -144,6 +146,9 @@ True
 <summary>
     <b>String</b> (<code>str</code>)
 </summary>
+<br>
+
+The delta for strings is simply the new string value.
 
 #### Example:
 ```python
@@ -166,6 +171,9 @@ bye
 <summary>
     <b>Integer</b> (<code>int</code>)
 </summary>
+<br>
+
+For integers, the delta is computed as subtraction of values, yielding the offset to apply during reconstruction.
 
 #### Example:
 ```python
@@ -188,6 +196,9 @@ bye
 <summary>
     <b>Float</b> (<code>float</code>)
 </summary>
+<br>
+
+For floats, the delta is computed as subtraction of values, yielding the offset to apply during reconstruction.
 
 #### Example:
 ```python
@@ -210,6 +221,9 @@ bye
 <summary>
     <b>Complex</b> (<code>complex</code>)
 </summary>
+<br>
+
+For complex numbers, the delta is computed as subtraction of values, yielding the offset to apply during reconstruction.
 
 #### Example:
 ```python
@@ -232,6 +246,9 @@ bye
 <summary>
     <b>NoneType</b> (<code>None</code>)
 </summary>
+<br>
+
+Since KeepDelta supports type change, it is possible to track the changes from `None` to other types or vise versa.
 
 #### Example:
 ```python
@@ -255,6 +272,9 @@ None
 <summary>
     <b>Dictionary</b> (<code>dict</code>)
 </summary>
+<br>
+
+When diffing dictionaries, key-value pairs in the inputs are compared. The key removal is marked with the special token `__delete__`.
 
 #### Example:
 ```python
@@ -262,22 +282,28 @@ None
 
 >>> # Initial data
 >>> old = {
-        "location": "earth",
-        "age": 20
-    }
+...     "location": "earth",
+...     "age": 20,
+...     "snacks": ["chocolate", "bananas"],
+...     "student": True,  # Will be removed.
+... }
 
 >>> # Updated data
 >>> new = {
-        "location": "mars",
-        "age": 30
-    }
+...     "location": "mars",
+...     "age": 30,
+...     "snacks": ["chocolate", "bananas"],
+...     "happy": True,  # The newly added key
+... }
 
 >>> # Create delta
 >>> delta = kd.create(old, new)
 >>> print(delta)
 {
     "location": "mars",
-    "age": 10
+    "age": 10,
+    "student": "__delete__",  # The removed key
+    "happy": True  # The newly added key
 }
 ```
 </details>
@@ -286,8 +312,9 @@ None
 <summary>
     <b>List</b> (<code>list</code>)
 </summary>
+<br>
 
-The delta for a list is a dictionary where each key is a list index and each value describes the change applied at that position; including a numerical offset (to adjust the original element) or __delete__ (to remove it).
+The delta for a list is a dictionary where each key is a list index and each value describes the change applied at that position; including a numerical offset (to adjust the original element) or `__delete__` (to remove it).
 
 #### Example:
 ```python
@@ -303,8 +330,8 @@ The delta for a list is a dictionary where each key is a list index and each val
 >>> delta = kd.create(old, new)
 >>> print(delta)
 {
-    2: -1,
-    3: '__delete__'
+    2: -1,  # Third element has been decreased by 1.
+    3: "__delete__"  # Fourth element has been deleted.
 }
 ```
 </details>
@@ -315,7 +342,7 @@ The delta for a list is a dictionary where each key is a list index and each val
 </summary>
 <br>
 
-The delta for a tuple is a dictionary where each key is a list index and each value describes the change applied at that position; including a numerical offset (to adjust the original element) or __delete__ (to remove it).
+The delta for a tuple is a dictionary where each key is a list index and each value describes the change applied at that position; including a numerical offset (to adjust the original element) or `__delete__` (to remove it).
 
 #### Example:
 ```python
@@ -331,8 +358,8 @@ The delta for a tuple is a dictionary where each key is a list index and each va
 >>> delta = kd.create(old, new)
 >>> print(delta)
 {
-    2: -1,
-    3: '__delete__'
+    2: -1,  # Third element has been decreased by 1.
+    3: "__delete__"  # Fourth element has been deleted.
 }
 ```
 <br>
@@ -360,17 +387,76 @@ For sets, the delta is a dict with two special keys: `__add__` for items to add 
 >>> delta = kd.create(old, new)
 >>> print(delta)
 {
-    '__add__': {5, 7},
-    '__remove__': {1}
+    "__add__": {5, 7},
+    "__remove__": {1}
+}
+```
+<br>
+</details>
+
+<details>
+<summary>
+    <b>Nested & Composite Structures</b>
+</summary>
+<br>
+
+KeepDelta supports deeply nested combinations of variables, enabling structures like dictionaries of dictionaries, lists of sets, and other complex, interwoven data types.
+
+#### Example:
+```python
+>>> import keepdelta as kd
+
+>>> # Initial data
+>>> old = {
+...     "name": "Alice",
+...     "age": 20,
+...     "is_student": True,
+...     "grades": [85.5, 90.0, 78],
+...     "preferences": {
+...         "drink": "soda",
+...         "sports": {"football", "tennis"},
+...     },
+... }
+
+>>> # Updated data
+>>> new = {
+...     "name": "Alice",
+...     "age": 25,
+...     "is_student": False,
+...     "grades": [87, 90.0, 78, 92],
+...     "preferences": {
+...         "drink": "coffee",
+...         "sports": {"football", "bodybuilding"},
+...     },
+... }
+
+>>> # Create delta
+>>> delta = kd.create(old, new)
+>>> print(delta)
+{
+    "is_student": False,
+    "grades": {
+        0: 87,
+        3: 92
+    },
+    "preferences": {
+        "drink": "coffee",
+        'sports': {
+            "__add__": {"bodybuilding"},
+            "__remove__": {"tennis"}
+        }
+    },
+    "age": 5
 }
 ```
 </details>
 
 <br>
 
-KeepDelta supports deeply nested combinations of variables, enabling structures like dictionaries of dictionaries, lists of sets, and other complex, interwoven data types.
+KeepDelta supports changing variables types. For example, changing string (like "hello") to float (like 3.14). In that case, the delta is simply the new value.
 
-Additionally, changing variables types are also supported. For example, changing string (like "hello") to float (like 3.14).
+Additionally, if no differences are found between the two inputs, KeepDelta returns the special token `__nothing__`, indicating that no changes are needed.
+
 
 ## Supported Python Versions
 KeepDelta has been tested and verified to work with Python versions **3.7** to **3.13**. While it is expected to work with older versions, they have not been tested and are not officially supported.
