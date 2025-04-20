@@ -452,9 +452,56 @@ KeepDelta supports deeply nested combinations of variables, enabling structures 
 ```
 </details>
 
-KeepDelta supports changing variables types. For example, changing string (like "hello") to float (like 3.14). In that case, the delta is simply the new value.
+### Special Cases:
+<details>
+<summary>
+    <b>Type Conversion</b>
+</summary>
+<br>
 
-Additionally, if no differences are found between the two inputs, KeepDelta returns the special token `__nothing__`, indicating that no changes are needed.
+KeepDelta supports changing variables types. In that case, the delta is simply the new value.
+
+#### Example:
+```python
+>>> import keepdelta as kd
+
+>>> # Initial data
+>>> old = "hello"
+
+>>> # Updated data
+>>> new = 3.14
+
+>>> # Create delta
+>>> delta = kd.create(old, new)
+>>> print(delta)
+3.14  # Type changed from string to float
+```
+</details>
+
+<details>
+<summary>
+    <b>No‑Change Cases</b>
+</summary>
+<br>
+
+If no differences are found between the two inputs, KeepDelta returns the special token `__nothing__`, indicating that no changes are needed.
+
+#### Example:
+```python
+>>> import keepdelta as kd
+
+>>> # Initial data
+>>> old = "hello"
+
+>>> # Updated data
+>>> new = "hello"
+
+>>> # Create delta
+>>> delta = kd.create(old, new)
+>>> print(delta)
+"__nothing__"  # Both inputs are identical
+```
+</details>
 
 
 ## Supported Python Versions
