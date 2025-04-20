@@ -118,7 +118,7 @@ For more usage examples, refer to the [`examples`](https://github.com/aslan-ng/K
 KeepDelta supports common native Python data structures, ensuring compatibility and flexibility when working with a wide variety of data types. The currently supported structures are listed below. Click any item to see how it’s handled and view a quick example:
 
 
-### Primitive Types:
+### 🔸 Primitive Types:
 <details>
 <summary>
     <b>Boolean</b> (<code>bool</code>)
@@ -275,7 +275,7 @@ None
 <br>
 </details>
 
-### Collections:
+### 🔸 Collections:
 <details>
 <summary>
     <b>Dictionary</b> (<code>dict</code>)
@@ -462,7 +462,7 @@ KeepDelta supports deeply nested combinations of variables, enabling structures 
 <br>
 </details>
 
-### Special Cases:
+### 🔸 Special Cases:
 <details>
 <summary>
     <b>Type Conversion</b>
