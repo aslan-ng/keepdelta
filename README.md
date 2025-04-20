@@ -48,7 +48,7 @@ pip install keepdelta
 ## Usage
 There are two core methods corresponding to the creation and application of delta encodings:
 
-### 1. `create(old, new)`
+### 1. `create(old, new)`:
 The `create` function compares the `old` and `new` variables to generate `delta` that captures the differences between two data structures. It produces a compact data structure containing only these differences, and its high human readability greatly aids debugging during development.
 
 #### Example:
@@ -78,7 +78,7 @@ The `create` function compares the `old` and `new` variables to generate `delta`
 }
 ```
 
-### 2. `apply(old, delta)`
+### 2. `apply(old, delta)`:
 
 The `apply` function takes the `old` variable and the `delta`, then applies the `delta` to recreate the updated, `new` variable.
 
@@ -286,7 +286,7 @@ When diffing dictionaries, key-value pairs in the inputs are compared. The key r
 ...     "location": "earth",
 ...     "age": 20,
 ...     "snacks": ["chocolate", "bananas"],
-...     "student": True,  # Will be removed.
+...     "student": True,
 ... }
 
 >>> # Updated data
@@ -294,15 +294,15 @@ When diffing dictionaries, key-value pairs in the inputs are compared. The key r
 ...     "location": "mars",
 ...     "age": 30,
 ...     "snacks": ["chocolate", "bananas"],
-...     "happy": True,  # The newly added key
+...     "happy": True,
 ... }
 
 >>> # Create delta
 >>> delta = kd.create(old, new)
 >>> print(delta)
 {
-    "location": "mars",
-    "age": 10,
+    "location": "mars",  # Location changed from "earth" → "mars"
+    "age": 10,  # Age increased by 10
     "student": "__delete__",  # The removed key
     "happy": True  # The newly added key
 }
@@ -331,8 +331,8 @@ The delta for a list is a dictionary where each key is a list index and each val
 >>> delta = kd.create(old, new)
 >>> print(delta)
 {
-    2: -1,  # Third element has been decreased by 1.
-    3: "__delete__"  # Fourth element has been deleted.
+    2: -1,  # Third element has been decreased by 1
+    3: "__delete__"  # Fourth element has been deleted
 }
 ```
 </details>
@@ -359,8 +359,8 @@ The delta for a tuple is a dictionary where each key is a list index and each va
 >>> delta = kd.create(old, new)
 >>> print(delta)
 {
-    2: -1,  # Third element has been decreased by 1.
-    3: "__delete__"  # Fourth element has been deleted.
+    2: -1,  # Third element has been decreased by 1
+    3: "__delete__"  # Fourth element has been deleted
 }
 ```
 <br>
@@ -388,8 +388,8 @@ For sets, the delta is a dict with two special keys: `__add__` for items to add 
 >>> delta = kd.create(old, new)
 >>> print(delta)
 {
-    "__add__": {5, 7},
-    "__remove__": {1}
+    "__add__": {5, 7},  # Numbers added
+    "__remove__": {1}  # Numbers removed
 }
 ```
 <br>
@@ -435,19 +435,19 @@ KeepDelta supports deeply nested combinations of variables, enabling structures 
 >>> delta = kd.create(old, new)
 >>> print(delta)
 {
-    "is_student": False,
+    "is_student": False,  # Changed from True → False
     "grades": {
-        0: 87,
-        3: 92
+        0: 87,  # Updated from 85.5 → 87
+        3: 92  # New grade appended
     },
     "preferences": {
-        "drink": "coffee",
-        'sports': {
-            "__add__": {"bodybuilding"},
-            "__remove__": {"tennis"}
+        "drink": "coffee",  # Switched from “soda” → "coffee"
+        "sports": {
+            "__add__": {"bodybuilding"},  # Sport added
+            "__remove__": {"tennis"}  # Sport removed
         }
     },
-    "age": 5
+    "age": 5  # Increased by 5
 }
 ```
 </details>
