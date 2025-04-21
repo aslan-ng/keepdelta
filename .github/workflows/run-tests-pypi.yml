@@ -3,6 +3,9 @@ name: Run Tests PyPI
 on:
   workflow_dispatch:
 
+  release:
+    types: [published]
+
   push:
     branches:
       - main
