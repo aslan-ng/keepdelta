@@ -16,7 +16,7 @@ profile = {
     },
 }
 
-# Profile of that person one year later
+# Profile of that person five years later
 profile_new = {
     "name": "Alice",
     "age": 25,
