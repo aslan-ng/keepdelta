@@ -1,6 +1,6 @@
 import keepdelta as kd
 
-
+# (a) previous state
 home_state = {
     "owner": "Alice",
     "temperature": {
@@ -18,6 +18,7 @@ home_state = {
     "alerts": None
 }
 
+# (b) updated state
 home_state_new = {
     "owner": "Alice",
     "temperature": {
@@ -35,11 +36,16 @@ home_state_new = {
     "alerts": {"low-battery"}
 }
 
+# (c) delta
 delta = kd.create(home_state, home_state_new)
 print(delta)
 
 
-# To generate view:
+"""
+To generate view:
+"""
+
+# (a) previous state
 
 {
     "owner": "Alice",
@@ -61,6 +67,8 @@ print(delta)
     "alerts": None
 }
 
+# (b) updated state
+
 {
     "owner": "Alice",
     "temperature": {
@@ -81,6 +89,8 @@ print(delta)
     ),
     "alerts": {"low-battery"}
 }
+
+# (c) delta
 
 {
     "temperature": {
