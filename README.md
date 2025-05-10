@@ -33,7 +33,7 @@ In many computational scenarios, efficiently managing evolving data is crucial. 
     </br>
     <blockquote>
         <em>
-        Managing evolving data structures: full-state encoding (left) stores the entire system state at each timestep,represented by colored blocks. In contrast, delta encoding (right) records only the differences between states, highlighted by colored arrows and identified by Δ, providing a more efficient solution for storage and computation.
+        Managing evolving data structures: full-state encoding (left) stores the entire system state at each timestep, represented by colored blocks. In contrast, delta encoding (right) records only the differences between states, highlighted by colored arrows and identified by Δ, providing a more efficient solution for storage and computation.
         </em>
     </blockquote>
 </div>
