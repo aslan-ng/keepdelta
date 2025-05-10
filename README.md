@@ -530,4 +530,4 @@ Contributions are welcome! Feel free to:
 * Create pull requests.
 
 ## License
-Distributed under the MIT License. See `LICENSE.txt` for more information.
+Distributed under the MIT License. See [`LICENSE.txt`](https://github.com/aslan-ng/keepdelta/blob/main/LICENSE) for more information.
