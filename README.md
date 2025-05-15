@@ -26,6 +26,7 @@
 *KeepDelta* is a lightweight Python library designed to efficiently track and manage changes (deltas) between Python built-in types. It is applicable to various scenarios  that require dynamic data management, especially when incremental numerical changes are present, such as simulations and sensing. While many alternative tools operate at the binary level, KeepDelta emphasizes human-readable delta encoding, facilitating debugging and analysis for Python developers and researchers across multiple domains.
 
 ## What is Delta Encoding?
+
 In many computational scenarios, efficiently managing evolving data is crucial. Traditional methods, that rely on full-state encoding — which means storing and/or transmitting complete snapshots at each step — can be inefficient due to the large size of the snapshots. Delta encoding addresses this challenge by capturing and applying only the changes (deltas) between successive states of data structures, resulting in significantly smaller and more manageable data.
 
 <div align="center">
@@ -39,6 +40,7 @@ In many computational scenarios, efficiently managing evolving data is crucial. 
 </div>
 
 ## Features
+
 * Generates compact and human-readable differences between two Python variables.
 * Applies delta to a variable to reconstruct the updated version.
 * Supports common Python built-in data types.
@@ -46,18 +48,22 @@ In many computational scenarios, efficiently managing evolving data is crucial. 
 * Requires no external dependencies.
 
 ## Installation
+
 Install the package using pip:
 ```sh
 pip install keepdelta
 ```
 
 ## Usage
+
 There are two core methods corresponding to the creation and application of delta encodings:
 
 ### 1. `create(old, new)`:
+
 The `create` function compares the `old` and `new` variables to generate `delta` that captures the differences between two data structures. It produces a compact data structure containing only these differences, and its high human readability greatly aids debugging during development.
 
 #### Example:
+
 ```python
 >>> import keepdelta as kd
 
@@ -89,6 +95,7 @@ The `create` function compares the `old` and `new` variables to generate `delta`
 The `apply` function takes the `old` variable and the `delta`, then applies the `delta` to recreate the updated, `new` variable.
 
 #### Example:
+
 ```python
 >>> import keepdelta as kd
 
@@ -117,12 +124,12 @@ The `apply` function takes the `old` variable and the `delta`, then applies the 
 
 For more usage examples, refer to the [`examples`](https://github.com/aslan-ng/KeepDelta/tree/main/examples) folder in the project repository, or continue to the next section, "[Supported Data Types & Behaviors](#supported-data-types--behaviors)”, for a detailed look at how each structure is handled.
 
-
 ## Supported Data Types & Behaviors
+
 KeepDelta supports common native Python data structures, ensuring compatibility and flexibility when working with a wide variety of data types. The currently supported structures are listed below. Click any item to see how it’s handled and view a quick example:
 
-
 ### 🔸 Primitive Types:
+
 <details>
 <summary>
     <b>Boolean</b> (<code>bool</code>)
@@ -132,6 +139,7 @@ KeepDelta supports common native Python data structures, ensuring compatibility 
 Since booleans have only two states, the delta is simply the new state (True or False).
 
 #### Example:
+
 ```python
 >>> import keepdelta as kd
 
@@ -158,6 +166,7 @@ True
 The delta for strings is simply the new string value.
 
 #### Example:
+
 ```python
 >>> import keepdelta as kd
 
@@ -184,6 +193,7 @@ bye
 For integers, the delta is computed as subtraction of values, yielding the offset to apply during reconstruction.
 
 #### Example:
+
 ```python
 >>> import keepdelta as kd
 
@@ -210,6 +220,7 @@ For integers, the delta is computed as subtraction of values, yielding the offse
 For floats, the delta is computed as subtraction of values, yielding the offset to apply during reconstruction.
 
 #### Example:
+
 ```python
 >>> import keepdelta as kd
 
@@ -236,6 +247,7 @@ For floats, the delta is computed as subtraction of values, yielding the offset 
 For complex numbers, the delta is computed as subtraction of values, yielding the offset to apply during reconstruction.
 
 #### Example:
+
 ```python
 >>> import keepdelta as kd
 
@@ -262,6 +274,7 @@ For complex numbers, the delta is computed as subtraction of values, yielding th
 Since KeepDelta supports type change, it is possible to track the changes from `None` to other types or vise versa.
 
 #### Example:
+
 ```python
 >>> import keepdelta as kd
 
@@ -280,6 +293,7 @@ None
 </details>
 
 ### 🔸 Collections:
+
 <details>
 <summary>
     <b>Dictionary</b> (<code>dict</code>)
@@ -289,6 +303,7 @@ None
 When diffing dictionaries, key-value pairs in the inputs are compared. The key removal is marked with the special token `__delete__`.
 
 #### Example:
+
 ```python
 >>> import keepdelta as kd
 
@@ -330,6 +345,7 @@ When diffing dictionaries, key-value pairs in the inputs are compared. The key r
 The delta for a list is a dictionary where each key is a list index and each value describes the change applied at that position; including a numerical offset (to adjust the original element) or `__delete__` (to remove it).
 
 #### Example:
+
 ```python
 >>> import keepdelta as kd
 
@@ -359,6 +375,7 @@ The delta for a list is a dictionary where each key is a list index and each val
 The delta for a tuple is a dictionary where each key is a list index and each value describes the change applied at that position; including a numerical offset (to adjust the original element) or `__delete__` (to remove it).
 
 #### Example:
+
 ```python
 >>> import keepdelta as kd
 
@@ -388,6 +405,7 @@ The delta for a tuple is a dictionary where each key is a list index and each va
 For sets, the delta is a dict with two special keys: `__add__` for items to add and `__remove__` for items to drop.
 
 #### Example:
+
 ```python
 >>> import keepdelta as kd
 
@@ -417,6 +435,7 @@ For sets, the delta is a dict with two special keys: `__add__` for items to add 
 KeepDelta supports deeply nested combinations of variables, enabling structures like dictionaries of dictionaries, lists of sets, and other complex, interwoven data types.
 
 #### Example:
+
 ```python
 >>> import keepdelta as kd
 
@@ -467,6 +486,7 @@ KeepDelta supports deeply nested combinations of variables, enabling structures 
 </details>
 
 ### 🔸 Special Cases:
+
 <details>
 <summary>
     <b>Type Conversion</b>
@@ -476,6 +496,7 @@ KeepDelta supports deeply nested combinations of variables, enabling structures 
 KeepDelta supports changing variables types. In that case, the delta is simply the new value.
 
 #### Example:
+
 ```python
 >>> import keepdelta as kd
 
@@ -502,6 +523,7 @@ KeepDelta supports changing variables types. In that case, the delta is simply t
 If no differences are found between the two inputs, KeepDelta returns the special token `__nothing__`, indicating that no changes are needed.
 
 #### Example:
+
 ```python
 >>> import keepdelta as kd
 
@@ -519,15 +541,17 @@ If no differences are found between the two inputs, KeepDelta returns the specia
 <br>
 </details>
 
-
 ## Supported Python Versions
+
 KeepDelta has been tested and verified to work with Python versions **3.7** to **3.13**. While it is expected to work with older versions, they have not been tested and are not officially supported.
 
 ## Contributing
+
 Contributions are welcome! Feel free to:
 * Report issues.
 * Submit feature requests.
 * Create pull requests.
 
 ## License
+
 Distributed under the MIT License. See [`LICENSE.txt`](https://github.com/aslan-ng/keepdelta/blob/main/LICENSE) for more information.
