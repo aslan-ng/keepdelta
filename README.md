@@ -6,7 +6,7 @@
 </h1>
 
 <h3 align="center">
-    Efficient Data Differencing for Python Data Structures
+    A Python Library for Human-Readable Data Differencing
 </h3>
 
 <div align="center">
@@ -23,7 +23,7 @@
 
 ![Header Image](https://raw.githubusercontent.com/aslan-ng/keepdelta/refs/heads/main/assets/header.png)
 
-*KeepDelta* is a lightweight Python library designed to efficiently track and manage changes (deltas) between Python built-in types. It is applicable to various scenarios  that require dynamic data management, especially when incremental numerical changes are present, such as simulations and sensing. While many alternative tools operate at the binary level, KeepDelta emphasizes human-readable delta encoding, facilitating debugging and analysis for Python developers and researchers across multiple domains.
+*KeepDelta* is a lightweight Python library designed to efficiently track and manage changes (deltas) between Python built-in types. It is applicable to various scenarios that require dynamic data management, especially when incremental numerical changes are present, such as simulations and sensing. While many alternative tools operate at the binary level, KeepDelta emphasizes human-readable delta encoding, facilitating debugging and analysis for Python developers and researchers across multiple domains.
 
 ## What is Delta Encoding?
 
