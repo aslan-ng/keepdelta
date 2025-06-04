@@ -545,6 +545,39 @@ If no differences are found between the two inputs, KeepDelta returns the specia
 
 KeepDelta has been tested and verified to work with Python versions **3.7** to **3.13**. While it is expected to work with older versions, they have not been tested and are not officially supported.
 
+## Citing KeepDelta
+
+If you use KeepDelta in your work, please cite our [paper](https://joss.theoj.org/papers/10.21105/joss.08075).
+
+You can either:
+
+- **Click the “Cite this repository” button** at the top of this GitHub page and copy the generated APA or BibTeX.
+
+**Or**
+
+- Copy one of the entries below:
+
+### BibTeX:
+```bibtex
+@article{Noorghasemi_KeepDelta_A_Python_2025,
+author = {Noorghasemi, Aslan and McComb, Christopher},
+doi = {10.21105/joss.08075},
+journal = {Journal of Open Source Software},
+month = jun,
+number = {110},
+pages = {8075},
+title = {{KeepDelta: A Python Library for Human-Readable Data Differencing}},
+url = {https://joss.theoj.org/papers/10.21105/joss.08075},
+volume = {10},
+year = {2025}
+}
+```
+
+### APA:
+```
+Noorghasemi, A., & McComb, C. (2025). KeepDelta: A Python Library for Human-Readable Data Differencing. Journal of Open Source Software, 10(110), 8075. https://doi.org/10.21105/joss.08075
+```
+
 ## Contributing
 
 Contributions are welcome! Feel free to:
