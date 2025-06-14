@@ -551,7 +551,7 @@ If you use KeepDelta in your work, please cite our [paper](https://joss.theoj.or
 
 You can either:
 
-- **Click the “Cite this repository” button** at the top of this GitHub page and copy the generated APA or BibTeX.
+- **Click the “Cite this repository” button** at the top of the GitHub page and copy the generated APA or BibTeX.
 
 **Or**
 
